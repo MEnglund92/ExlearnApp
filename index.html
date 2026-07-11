@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anna's Education — Exlearn Advanced English</title>
+<style>
+@keyframes neonPulse{0%,100%{box-shadow:0 0 14px rgba(192,132,252,0.25),0 0 40px rgba(192,132,252,0.1)}50%{box-shadow:0 0 30px rgba(192,132,252,0.6),0 0 70px rgba(192,132,252,0.2),0 0 120px rgba(192,132,252,0.08)}}
+@keyframes textPulse{0%,100%{text-shadow:0 0 8px rgba(192,132,252,0.15)}50%{text-shadow:0 0 28px rgba(192,132,252,0.6)}}
+@keyframes namePlatePulse{0%,100%{text-shadow:0 0 8px rgba(192,132,252,0.12),0 0 20px rgba(192,132,252,0.06);box-shadow:0 0 14px rgba(192,132,252,0.18),0 0 40px rgba(192,132,252,0.08)}50%{text-shadow:0 0 18px rgba(192,132,252,0.45),0 0 40px rgba(192,132,252,0.2),0 0 70px rgba(192,132,252,0.08);box-shadow:0 0 24px rgba(192,132,252,0.38),0 0 55px rgba(192,132,252,0.15),0 0 90px rgba(192,132,252,0.06)}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+body{background:#0a0a14;color:#e0e0e0;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+.container{width:100%;max-width:960px;padding:16px;margin:0 auto}
+header{text-align:center;padding:16px 0}
+header h1{margin:0}
+.header-name-plate{display:inline-block;padding:10px 32px;border-radius:40px;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);font-size:1.4rem;font-weight:700;color:#fff;animation:namePlatePulse 3s ease-in-out infinite}
+.header-glass{background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(192,132,252,0.12);border-radius:16px;padding:24px 20px;box-shadow:0 0 14px rgba(192,132,252,0.18),0 0 40px rgba(192,132,252,0.08),0 0 80px rgba(192,132,252,0.04);display:flex;flex-direction:column;align-items:center;gap:8px}
+.header-pill{padding:4px 14px;border-radius:20px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.15);color:#c084fc;font-size:0.65rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+.header-sub-pill{padding:6px 18px;border-radius:20px;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);color:#c084fc;font-size:0.85rem;animation:textPulse 3s ease-in-out infinite}
+.header-divider{width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(192,132,252,0.4),transparent);margin-top:4px}
+.tabs{display:flex;gap:4px;background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(192,132,252,0.08);border-radius:12px;padding:4px;margin:16px 0}
+.tab{flex:1;padding:10px 8px;border:none;border-radius:8px;background:transparent;color:#888;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.tab:hover{color:#ccc}
+.tab.active{background:rgba(192,132,252,0.12);color:#fff;box-shadow:0 0 20px rgba(192,132,252,0.35);animation:neonPulse 2.5s ease-in-out infinite}
+.tab-panel{opacity:0;transition:opacity .2s ease, transform .2s ease;position:absolute;pointer-events:none;width:100%;transform:translateY(6px)}
+.tab-panel.active{opacity:1;position:relative;pointer-events:auto;transform:translateY(0)}
+.tab-container{position:relative}
+
+/* Browse */
+.search-box{width:100%;padding:12px 16px;border-radius:10px;border:1px solid rgba(192,132,252,0.12);background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#e0e0e0;font-size:0.9rem;margin-bottom:12px;outline:none;transition:all .25s}
+.search-box:focus{border-color:#c084fc;box-shadow:0 0 20px rgba(192,132,252,0.3)}
+.filter-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.filter-btn{padding:6px 16px;border-radius:20px;border:1px solid rgba(192,132,252,0.12);background:transparent;color:#888;font-size:0.78rem;cursor:pointer;transition:all .25s}
+.filter-btn:hover{border-color:rgba(192,132,252,0.3);color:#ccc}
+.filter-btn.active{background:#c084fc;border-color:#c084fc;color:#fff;animation:neonPulse 2s ease-in-out infinite}
+.count-label{color:#888;font-size:0.8rem;margin-bottom:12px}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.card-grid{grid-template-columns:1fr}}
+.vocab-card{background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px;padding:16px;border:1px solid rgba(192,132,252,0.12);transition:all .25s;position:relative;box-shadow:0 0 14px rgba(192,132,252,0.18),0 0 40px rgba(192,132,252,0.08),0 0 80px rgba(192,132,252,0.04)}
+.vocab-card:hover{border-color:rgba(192,132,252,0.3);transform:translateY(-3px);box-shadow:0 0 22px rgba(192,132,252,0.4),0 0 55px rgba(192,132,252,0.16),0 0 100px rgba(192,132,252,0.07)}
+.vocab-card .phrase{font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px}
+.vocab-card .cat-tag{display:inline-block;font-size:0.65rem;padding:2px 8px;border-radius:10px;font-weight:600;margin-bottom:6px}
+.cat-phrasal{background:#1a3a4a;color:#4fc3f7}
+.cat-expression{background:#1a3a2a;color:#81c784}
+.cat-vocab{background:#3a1a3a;color:#f48fb1}
+.vocab-card .meaning{font-size:0.82rem;color:#ccc;margin-bottom:4px;line-height:1.4}
+.vocab-card .translation{font-size:0.75rem;color:#666}
+.vocab-card .synonyms{font-size:0.72rem;color:#f48fb1;margin-top:4px}
+
+/* Empty state */
+.empty-state{text-align:center;padding:40px 20px;grid-column:1/-1}
+.empty-state .empty-icon{font-size:2.5rem;margin-bottom:12px;opacity:0.4}
+.empty-state .empty-text{color:#888;font-size:0.95rem}
+.empty-state .empty-sub{color:#555;font-size:0.8rem;margin-top:4px}
+
+/* Flashcards */
+.flash-controls{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.flash-controls label{font-size:0.8rem;color:#888}
+.flash-controls select{padding:8px 12px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#e0e0e0;font-size:0.85rem;outline:none;cursor:pointer;transition:all .25s}
+.flash-controls select:focus{border-color:#c084fc;box-shadow:0 0 16px rgba(192,132,252,0.3)}
+.flash-wrapper{display:flex;flex-direction:column;align-items:center}
+.flash-progress{width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#888}
+.flash-progress .bar-wrap{flex:1;height:4px;background:rgba(192,132,252,0.06);border-radius:2px;margin:0 12px}
+.flash-progress .bar-fill{height:100%;background:#c084fc;border-radius:2px;transition:width .3s;animation:neonPulse 2s ease-in-out infinite}
+.flash-card{width:100%;max-width:500px;min-height:220px;background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;cursor:pointer;perspective:1200px;position:relative;border:1px solid rgba(192,132,252,0.12);box-shadow:0 0 18px rgba(192,132,252,0.22),0 0 45px rgba(192,132,252,0.1),0 0 90px rgba(192,132,252,0.05)}
+.flash-card-inner{position:relative;width:100%;min-height:220px;transition:transform .4s;transform-style:preserve-3d}
+.flash-card.flipped .flash-card-inner{transform:rotateY(180deg)}
+.flash-front,.flash-back{position:absolute;top:0;left:0;width:100%;min-height:220px;backface-visibility:hidden;padding:32px 28px;border-radius:16px;display:flex;flex-direction:column;justify-content:center;background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.08)}
+.flash-front{align-items:center;text-align:center}
+.flash-front .phrase{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px}
+.flash-front .category{font-size:0.75rem;color:#888}
+.flash-back{transform:rotateY(180deg)}
+.flash-back .meaning{font-size:0.95rem;color:#e0e0e0;margin-bottom:8px;line-height:1.5}
+.flash-back .russian{font-size:1.1rem;color:#4fc3f7;font-weight:600}
+.flash-back .synonyms{font-size:0.8rem;color:#f48fb1;margin-top:4px}
+.flash-hint{color:#555;font-size:0.75rem;margin-top:12px}
+.flash-nav{display:flex;gap:12px;margin-top:16px}
+.flash-nav button{padding:10px 28px;border:1px solid rgba(192,132,252,0.15);border-radius:10px;background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#e0e0e0;cursor:pointer;font-size:0.9rem;transition:all .25s}
+.flash-nav button:hover{background:rgba(192,132,252,0.12);transform:translateY(-2px);box-shadow:0 0 18px rgba(192,132,252,0.28),0 0 40px rgba(192,132,252,0.1)}
+.flash-nav button:disabled{opacity:.3;cursor:default;transform:none;box-shadow:none}
+.flash-nav .shuffle-btn{background:#c084fc;color:#fff;border-color:#c084fc}
+.flash-nav .shuffle-btn:hover{background:#a855f7;border-color:#a855f7}
+
+/* Quiz */
+.quiz-controls{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.quiz-controls label{font-size:0.8rem;color:#888}
+.quiz-controls select{padding:8px 12px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#e0e0e0;font-size:0.85rem;outline:none;transition:all .25s}
+.quiz-controls select:focus{border-color:#c084fc;box-shadow:0 0 16px rgba(192,132,252,0.3)}
+.quiz-rus-btn{padding:8px 16px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#888;font-size:0.78rem;cursor:pointer;transition:all .25s;margin-left:auto}
+.quiz-rus-btn:hover{border-color:rgba(192,132,252,0.3);color:#ccc;transform:translateY(-1px)}
+.quiz-rus-btn.active{background:rgba(79,195,247,0.1);border-color:#4fc3f7;color:#4fc3f7}
+
+.quiz-progress{width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:0.8rem;color:#888}
+.quiz-progress .bar-wrap{flex:1;height:4px;background:rgba(192,132,252,0.06);border-radius:2px;margin:0 12px}
+.quiz-progress .bar-fill{height:100%;background:#c084fc;border-radius:2px;transition:width .3s;animation:neonPulse 2s ease-in-out infinite}
+.quiz-question{text-align:center;margin-bottom:20px;padding:20px;background:rgba(192,132,252,0.04);border-radius:12px;border:1px solid rgba(192,132,252,0.08);box-shadow:0 0 14px rgba(192,132,252,0.14),0 0 35px rgba(192,132,252,0.06)}
+.quiz-question .q-label{font-size:0.75rem;color:#888;margin-bottom:6px}
+.quiz-question .q-phrase{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px}
+.quiz-question .q-category{font-size:0.75rem;color:#888}
+.quiz-options{display:flex;flex-direction:column;gap:8px;max-width:500px;margin:0 auto}
+.quiz-opt{padding:14px 18px;border-radius:12px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#e0e0e0;font-size:0.9rem;cursor:pointer;transition:all .25s;text-align:left;position:relative;border-left:3px solid rgba(192,132,252,0.2)}
+.quiz-opt:hover{border-color:rgba(192,132,252,0.35);background:rgba(192,132,252,0.1);transform:translateY(-2px);box-shadow:0 0 22px rgba(192,132,252,0.38),0 0 50px rgba(192,132,252,0.16),0 0 90px rgba(192,132,252,0.07)}
+.quiz-opt .opt-letter{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:6px;background:rgba(192,132,252,0.12);color:#c084fc;font-size:0.75rem;font-weight:700;margin-right:12px}
+.quiz-opt.correct{border-color:#4caf50;border-left-color:#4caf50;background:rgba(76,175,80,0.1);color:#81c784;box-shadow:0 0 16px rgba(76,175,80,0.15)}
+.quiz-opt.correct .opt-letter{background:rgba(76,175,80,0.2);color:#81c784}
+.quiz-opt.wrong{border-color:rgba(192,132,252,0.15);border-left-color:#c084fc;background:rgba(192,132,252,0.08);color:#c084fc}
+.quiz-opt.wrong .opt-letter{background:rgba(192,132,252,0.15);color:#c084fc}
+.quiz-opt.reveal{border-color:#4caf50;border-left-color:#4caf50;background:rgba(76,175,80,0.1);color:#81c784}
+.quiz-opt.reveal .opt-letter{background:rgba(76,175,80,0.2);color:#81c784}
+.quiz-opt .sub{display:none;font-size:0.7rem;color:#4fc3f7;margin-top:4px;line-height:1.3}
+.quiz-opt .sub.show{display:block}
+.quiz-opt:disabled{cursor:default;transform:none !important;box-shadow:none !important}
+.quiz-next{padding:12px 36px;border:1px solid rgba(192,132,252,0.25);border-radius:10px;background:#c084fc;color:#fff;font-size:0.9rem;font-weight:600;cursor:pointer;display:block;margin:20px auto 0;transition:all .25s}
+.quiz-next:hover{background:#a855f7;transform:translateY(-2px);box-shadow:0 0 20px rgba(192,132,252,0.4),0 0 45px rgba(192,132,252,0.15)}
+.quiz-next:disabled{opacity:.3;cursor:default;transform:none;box-shadow:none}
+.quiz-result{text-align:center;padding:24px}
+.quiz-result h2{font-size:1.5rem;margin-bottom:8px;color:#fff}
+.quiz-result .score{font-size:2.5rem;font-weight:800;color:#c084fc;margin-bottom:8px}
+.quiz-result p{color:#888;margin-bottom:16px}
+.quiz-result button{padding:12px 36px;border:1px solid rgba(192,132,252,0.25);border-radius:10px;background:#c084fc;color:#fff;font-size:0.9rem;cursor:pointer;transition:all .25s}
+.quiz-result button:hover{background:#a855f7;transform:translateY(-2px);box-shadow:0 0 20px rgba(192,132,252,0.4),0 0 45px rgba(192,132,252,0.15)}
+
+/* Match */
+.match-controls{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.match-controls label{font-size:0.8rem;color:#888}
+.match-controls select{padding:8px 12px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#e0e0e0;font-size:0.85rem;outline:none;transition:all .25s}
+.match-controls select:focus{border-color:#c084fc;box-shadow:0 0 16px rgba(192,132,252,0.3)}
+.match-rus-btn{padding:8px 16px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#888;font-size:0.78rem;cursor:pointer;transition:all .25s;margin-left:auto}
+.match-rus-btn:hover{border-color:rgba(192,132,252,0.3);color:#ccc;transform:translateY(-1px)}
+.match-rus-btn.active{background:rgba(79,195,247,0.1);border-color:#4fc3f7;color:#4fc3f7}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:600px;margin:0 auto}
+.match-col{display:flex;flex-direction:column;gap:6px}
+.match-col h3{font-size:0.75rem;color:#666;margin-bottom:4px;text-align:center}
+.match-item{padding:12px 14px;border-radius:10px;border:1px solid rgba(192,132,252,0.12);background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#e0e0e0;font-size:0.8rem;cursor:pointer;transition:all .25s;user-select:none;text-align:center;box-shadow:0 0 12px rgba(192,132,252,0.12),0 0 30px rgba(192,132,252,0.06)}
+.match-item:hover{border-color:rgba(192,132,252,0.3);background:rgba(192,132,252,0.1);transform:translateY(-2px);box-shadow:0 0 20px rgba(192,132,252,0.32),0 0 45px rgba(192,132,252,0.14),0 0 85px rgba(192,132,252,0.06)}
+.match-item.selected{border-color:#c084fc;background:rgba(192,132,252,0.12);box-shadow:0 0 22px rgba(192,132,252,0.42),0 0 55px rgba(192,132,252,0.2),0 0 100px rgba(192,132,252,0.08);animation:neonPulse 2s ease-in-out infinite}
+.match-item.matched{border-color:#4caf50;background:rgba(76,175,80,0.1);color:#81c784;cursor:default;transform:none}
+.match-item.wrong{border-color:rgba(192,132,252,0.15);background:rgba(192,132,252,0.08);box-shadow:0 0 12px rgba(192,132,252,0.15)}
+.match-item .sub{display:none;font-size:0.7rem;color:#4fc3f7;margin-top:3px}
+.match-item .sub.show{display:block}
+.match-status{margin-top:16px;text-align:center;font-size:0.85rem;color:#888}
+
+/* Confetti */
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}100%{opacity:0;transform:translateY(120px) rotate(720deg) scale(0.3)}}
+.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:9999;animation:confettiFall 1.2s ease-out forwards}
+
+/* Result messages */
+.result-msg{margin-top:12px;padding:14px;border-radius:10px;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.12);font-size:0.9rem;color:#e0e0e0;line-height:1.5;text-align:center;max-width:500px;margin-left:auto;margin-right:auto}
+
+/* Quiz review */
+.quiz-review{margin-top:16px;max-width:500px;margin-left:auto;margin-right:auto}
+.review-title{font-size:0.82rem;color:#e94560;margin-bottom:10px;font-weight:600}
+.review-card{background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.12);border-radius:10px;padding:12px 14px;margin-bottom:8px;text-align:left}
+.review-card .r-phrase{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:2px}
+.review-card .r-meaning{font-size:0.8rem;color:#ccc;margin-bottom:2px}
+.review-card .r-translation{font-size:0.75rem;color:#4fc3f7}
+
+/* Dashboard */
+.dashboard-grid{display:flex;flex-direction:column;gap:14px}
+.dash-card{background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(192,132,252,0.12);border-radius:12px;padding:18px;box-shadow:0 0 14px rgba(192,132,252,0.18),0 0 40px rgba(192,132,252,0.08);}
+.dash-card h3{font-size:0.85rem;color:#c084fc;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.dash-row{display:flex;justify-content:space-between;padding:6px 0;font-size:0.85rem;color:#ccc;border-bottom:1px solid rgba(192,132,252,0.06)}
+.dash-row:last-child{border:none}
+.dash-row .dash-val{color:#fff;font-weight:600}
+.dash-reset-btn{margin-top:10px;padding:10px 20px;border:1px solid rgba(192,132,252,0.2);border-radius:8px;background:rgba(192,132,252,0.06);color:#c084fc;font-size:0.8rem;cursor:pointer;transition:all .25s}
+.dash-reset-btn:hover{background:rgba(192,132,252,0.12);transform:translateY(-1px)}
+.match-result-overlay{display:none;text-align:center;padding:20px}
+.match-result-overlay.show{display:block}
+.match-result-overlay .score{font-size:2rem;font-weight:800;color:#c084fc;margin-bottom:8px}
+
+/* A-Z Index */
+.az-bar{display:flex;flex-wrap:wrap;gap:2px;margin-bottom:12px;justify-content:center}
+.az-item{padding:4px 8px;border-radius:6px;border:1px solid rgba(192,132,252,0.1);background:transparent;color:#888;font-size:0.72rem;cursor:pointer;transition:all .2s;min-width:24px;text-align:center;font-weight:600}
+.az-item:hover{border-color:rgba(192,132,252,0.3);color:#ccc;background:rgba(192,132,252,0.06)}
+.az-item.active{background:#c084fc;border-color:#c084fc;color:#fff;animation:neonPulse 2s ease-in-out infinite}
+
+/* Topic Tags */
+.vocab-card .topic-tag{display:inline-block;font-size:0.62rem;padding:2px 7px;border-radius:8px;font-weight:500;margin-left:4px;background:rgba(255,255,255,0.06);color:#aaa;border:1px solid rgba(255,255,255,0.06)}
+
+/* Topic Filter Row */
+.topic-filter-row{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.topic-btn{padding:4px 10px;border-radius:14px;border:1px solid rgba(192,132,252,0.08);background:transparent;color:#777;font-size:0.7rem;cursor:pointer;transition:all .25s}
+.topic-btn:hover{border-color:rgba(192,132,252,0.25);color:#aaa}
+.topic-btn.active{background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.25);color:#c084fc;font-weight:600}
+
+/* Study Tab */
+.study-mode-toggle{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.study-mode-btn{padding:8px 18px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:transparent;color:#888;font-size:0.8rem;cursor:pointer;transition:all .25s}
+.study-mode-btn:hover{border-color:rgba(192,132,252,0.3);color:#ccc}
+.study-mode-btn.active{background:rgba(192,132,252,0.1);border-color:#c084fc;color:#c084fc}
+.study-due{display:flex;gap:16px;margin-bottom:12px;flex-wrap:wrap;font-size:0.8rem;color:#888}
+.study-due span strong{color:#c084fc;font-weight:700}
+.study-progress{width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#888}
+.study-progress .bar-wrap{flex:1;height:4px;background:rgba(192,132,252,0.06);border-radius:2px;margin:0 12px}
+.study-progress .bar-fill{height:100%;background:#4fc3f7;border-radius:2px;transition:width .3s}
+.study-card{width:100%;max-width:500px;min-height:220px;background:rgba(192,132,252,0.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:16px;cursor:pointer;perspective:1200px;position:relative;border:1px solid rgba(192,132,252,0.12);margin:0 auto}
+.study-card-inner{position:relative;width:100%;min-height:220px;transition:transform .4s;transform-style:preserve-3d}
+.study-card.flipped .study-card-inner{transform:rotateY(180deg)}
+.study-front,.study-back{position:absolute;top:0;left:0;width:100%;min-height:220px;backface-visibility:hidden;padding:32px 28px;border-radius:16px;display:flex;flex-direction:column;justify-content:center;background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.08)}
+.study-front{align-items:center;text-align:center}
+.study-front .phrase{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:6px}
+.study-front .category{font-size:0.75rem;color:#888}
+.study-back{transform:rotateY(180deg)}
+.study-back .meaning{font-size:0.95rem;color:#e0e0e0;margin-bottom:8px;line-height:1.5}
+.study-back .synonyms{font-size:0.8rem;color:#f48fb1;margin-bottom:6px}
+.study-back .russian{font-size:1.1rem;color:#4fc3f7;font-weight:600}
+.study-btns{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.study-btns button{padding:10px 22px;border-radius:10px;border:1px solid rgba(192,132,252,0.2);background:rgba(192,132,252,0.06);color:#e0e0e0;cursor:pointer;font-size:0.85rem;transition:all .25s;font-weight:600}
+.study-btns button:hover{transform:translateY(-2px)}
+.study-hard{border-color:#e94560 !important;color:#e94560 !important;box-shadow:0 0 12px rgba(233,69,96,0.15)}
+.study-hard:hover{background:rgba(233,69,96,0.1) !important}
+.study-good{border-color:#4fc3f7 !important;color:#4fc3f7 !important;box-shadow:0 0 12px rgba(79,195,247,0.15)}
+.study-good:hover{background:rgba(79,195,247,0.1) !important}
+.study-easy{border-color:#81c784 !important;color:#81c784 !important;box-shadow:0 0 12px rgba(129,199,132,0.15)}
+.study-easy:hover{background:rgba(76,175,80,0.1) !important}
+.study-empty{text-align:center;padding:40px;color:#888;font-size:0.95rem}
+
+/* Typing Quiz */
+.typing-input{width:100%;max-width:500px;padding:14px 18px;border-radius:10px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);color:#e0e0e0;font-size:0.95rem;outline:none;transition:all .25s;display:block;margin:16px auto;text-align:center}
+.typing-input:focus{border-color:#c084fc;box-shadow:0 0 20px rgba(192,132,252,0.3)}
+.typing-input::placeholder{color:#555}
+.typing-check-btn{display:block;margin:0 auto;padding:12px 32px;border:1px solid rgba(192,132,252,0.25);border-radius:10px;background:#c084fc;color:#fff;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all .25s}
+.typing-check-btn:hover{background:#a855f7;transform:translateY(-2px);box-shadow:0 0 20px rgba(192,132,252,0.4)}
+.typing-check-btn:disabled{opacity:.3;cursor:default;transform:none;box-shadow:none}
+.typing-feedback{text-align:center;margin-top:12px;font-size:0.9rem;padding:10px;border-radius:8px;max-width:500px;margin-left:auto;margin-right:auto}
+.typing-feedback.correct{color:#81c784;background:rgba(76,175,80,0.1);border:1px solid rgba(76,175,80,0.2)}
+.typing-feedback.wrong{color:#e94560;background:rgba(233,69,96,0.1);border:1px solid rgba(233,69,96,0.2)}
+.typing-feedback .expected{color:#aaa;font-size:0.8rem;margin-top:4px}
+
+/* iPhone / mobile responsive */
+@media(max-width:480px){
+  .tab{flex:1 1 auto;font-size:0.72rem;padding:10px 6px}
+  .card-grid{gap:10px}
+  .card{padding:14px}
+  .card-phrase{font-size:1rem}
+  .card-meaning{font-size:0.8rem}
+  .card-synonyms,.card-topic{font-size:0.7rem}
+  .filter-row{flex-wrap:wrap;gap:5px}
+  .filter-btn{font-size:0.7rem;padding:6px 10px}
+  .alpha-index{overflow-x:auto;white-space:nowrap;padding:6px 0}
+  .alpha-index a{font-size:0.75rem;padding:4px 5px;display:inline-block}
+  .flash-card{padding:20px;min-height:180px}
+  .flash-phrase{font-size:1.1rem}
+  .flash-meaning{font-size:0.85rem}
+  .flash-navigation{flex-wrap:wrap;gap:8px}
+  .flash-nav-btn{font-size:0.75rem;padding:10px 18px}
+  .quiz-options{grid-template-columns:1fr 1fr;gap:6px}
+  .quiz-opt{font-size:0.8rem;padding:12px 10px}
+  .study-mode-tabs{flex-wrap:wrap}
+  .study-mode-btn{font-size:0.7rem;padding:8px 10px}
+  .study-card{padding:16px}
+  .study-phrase{font-size:1rem}
+  .study-meaning{font-size:0.8rem}
+  .study-rating{flex-wrap:wrap;gap:6px}
+  .study-rating-btn{font-size:0.75rem;padding:10px 22px;flex:1}
+  .dashboard-grid{grid-template-columns:1fr;gap:10px}
+  .dash-stat{padding:16px}
+  .dash-stat .num{font-size:1.4rem}
+  .dash-stat .label{font-size:0.7rem}
+  .dash-section h3{font-size:0.9rem}
+  .typing-input{font-size:0.85rem;padding:12px 14px}
+  .typing-check-btn{font-size:0.8rem;padding:10px 24px}
+  .quiz-match-grid{grid-template-columns:1fr;gap:8px}
+  *{-webkit-tap-highlight-color:transparent}
+}
+</style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Exlearn">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="header-glass">
+    <span class="header-pill">Exam Vocabulary</span>
+    <h1><span class="header-name-plate">Anna's Education</span></h1>
+    <span class="header-sub-pill">Exlearn Advanced English</span>
+    <div class="header-divider"></div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" data-tab="browse">📖 Browse</button>
+  <button class="tab" data-tab="flash">🎴 Flashcards</button>
+  <button class="tab" data-tab="quiz">📝 Quiz</button>
+  <button class="tab" data-tab="match">🔗 Match</button>
+  <button class="tab" data-tab="study">🧠 Study</button>
+  <button class="tab" data-tab="dashboard">📊 Dashboard</button>
+</div>
+
+<div class="tab-container">
+
+<div class="tab-panel active" id="tab-browse">
+  <input type="text" class="search-box" id="searchBox" placeholder="Search vocabulary...">
+  <div class="filter-row">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="phrasal">Phrasal Verbs</button>
+    <button class="filter-btn" data-filter="expression">Fixed Expressions</button>
+    <button class="filter-btn" data-filter="vocab">General Vocab</button>
+  </div>
+  <div class="topic-filter-row" id="topicFilterRow"></div>
+  <div class="az-bar" id="azBar"></div>
+  <div class="count-label" id="countLabel">Showing 853 items</div>
+  <div class="card-grid" id="cardGrid"></div>
+</div>
+
+<div class="tab-panel" id="tab-flash">
+  <div class="flash-controls">
+    <label for="flashCount">Cards:</label>
+    <select id="flashCount"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="0" selected>All</option></select>
+  </div>
+  <div class="flash-wrapper">
+    <div class="flash-progress">
+      <span id="flashIdx">1</span>
+      <div class="bar-wrap"><div class="bar-fill" id="flashBar" style="width:0.12%"></div></div>
+      <span id="flashTotal">853</span>
+    </div>
+    <div class="flash-card" id="flashCard">
+      <div class="flash-card-inner">
+        <div class="flash-front">
+          <div class="phrase" id="fPhrase"></div>
+          <div class="category" id="fCategory"></div>
+        </div>
+        <div class="flash-back">
+          <div class="meaning" id="fMeaning"></div>
+          <div class="synonyms" id="fSynonyms"></div>
+          <div class="russian" id="fRussian"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-hint">Tap card to flip</div>
+    <div class="flash-nav">
+      <button id="prevBtn">← Prev</button>
+      <button id="shuffleBtn" class="shuffle-btn">Shuffle</button>
+      <button id="nextBtn">Next →</button>
+    </div>
+  </div>
+</div>
+
+<div class="tab-panel" id="tab-quiz">
+  <div class="quiz-controls">
+    <label for="quizCount">Questions:</label>
+    <select id="quizCount"><option value="3">3</option><option value="5" selected>5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="0">All</option></select>
+    <button class="quiz-rus-btn" id="quizRusBtn">Show Russian</button>
+    <button class="quiz-rus-btn" id="quizTypeBtn">✍ Type Mode</button>
+  </div>
+  <div id="quizArea">
+    <div class="quiz-progress">
+      <span id="quizIdx">1</span>
+      <div class="bar-wrap"><div class="bar-fill" id="quizBar" style="width:0%"></div></div>
+      <span id="quizTotal">5</span>
+    </div>
+    <div class="quiz-question">
+      <div class="q-label" id="qLabel">Choose the correct meaning:</div>
+      <div class="q-phrase" id="qPhrase"></div>
+      <div class="q-category" id="qCategory"></div>
+    </div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div id="quizTypingArea" style="display:none">
+      <input type="text" class="typing-input" id="typingInput" placeholder="Type the meaning..." autocomplete="off">
+      <button class="typing-check-btn" id="typingCheck">Check ✓</button>
+      <div class="typing-feedback" id="typingFeedback"></div>
+    </div>
+    <button class="quiz-next" id="quizNext" disabled>Next →</button>
+  </div>
+  <div class="quiz-result" id="quizResult" style="display:none">
+    <h2>Quiz Complete!</h2>
+    <div class="score" id="finalScore">0/0</div>
+    <p id="finalPct">0%</p>
+    <div class="result-msg" id="quizMsg"></div>
+    <div class="quiz-review" id="quizReview"></div>
+    <button id="quizRestart">Try Again</button>
+  </div>
+</div>
+
+<div class="tab-panel" id="tab-match">
+  <div class="match-controls">
+    <label for="matchSize">Pairs:</label>
+    <select id="matchSize"><option value="3">3</option><option value="5" selected>5</option><option value="10">10</option></select>
+    <button class="match-rus-btn" id="matchRusBtn">Show Russian</button>
+  </div>
+  <div class="match-setup" id="matchSetup">Match each phrase with its meaning</div>
+  <div class="match-grid" id="matchGrid">
+    <div class="match-col" id="matchLeft"><h3>Phrases</h3></div>
+    <div class="match-col" id="matchRight"><h3>Meanings</h3></div>
+  </div>
+  <div class="match-status" id="matchStatus">0 / 5 matched</div>
+  <div class="match-result-overlay" id="matchResult">
+    <div class="score" id="matchScore">0/0</div>
+    <div class="result-msg" id="matchMsg"></div>
+    <button class="quiz-next" id="matchNext" style="display:inline-block;margin-top:14px">Next Round</button>
+  </div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-study">
+  <div class="study-due" id="studyDue"></div>
+  <div class="study-mode-toggle">
+    <button class="study-mode-btn active" data-smode="all">All Words</button>
+    <button class="study-mode-btn" data-smode="new">New Words</button>
+    <button class="study-mode-btn" data-smode="due">Due for Review</button>
+    <button class="study-mode-btn" data-smode="struggling">Struggling</button>
+  </div>
+  <div id="studyArea">
+    <div class="study-progress">
+      <span id="studyIdx">0</span>
+      <div class="bar-wrap"><div class="bar-fill" id="studyBar" style="width:0%"></div></div>
+      <span id="studyTotal">0</span>
+    </div>
+    <div class="study-card" id="studyCard">
+      <div class="study-card-inner">
+        <div class="study-front">
+          <div class="phrase" id="sPhrase"></div>
+          <div class="category" id="sCategory"></div>
+        </div>
+        <div class="study-back">
+          <div class="meaning" id="sMeaning"></div>
+          <div class="synonyms" id="sSynonyms"></div>
+          <div class="russian" id="sRussian"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-hint">Tap card to flip, then rate yourself</div>
+    <div class="study-btns" id="studyBtns">
+      <button class="study-hard" id="studyHard">😓 Hard</button>
+      <button class="study-good" id="studyGood">🙂 Good</button>
+      <button class="study-easy" id="studyEasy">😎 Easy</button>
+    </div>
+  </div>
+  <div class="study-empty" id="studyEmpty" style="display:none">No words to study right now! Try changing the mode or adding new vocabulary.</div>
+</div>
+
+<div class="tab-panel" id="tab-dashboard">
+  <div class="dashboard-grid" id="dashGrid"></div>
+</div>
+</div>
+
+<script>
+const data = [
+{phrase:"To account for",meaning:"To explain the cause of something, or to form a specific proportion",translation:"Объяснять, составлять какую-то долю/процент",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To attribute [sth] to",meaning:"To state that something is the result of a specific cause",translation:"Приписывать что-то чему-то, объяснять чем-либо",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To back down",meaning:"To concede defeat or withdraw a position in an argument",translation:"Отступать, идти на попятную",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To bring about",meaning:"To cause something to happen; to engineer change",translation:"Повлечь за собой, вызывать, осуществлять",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To brush up on",meaning:"To improve your knowledge of something you used to know but have partly forgotten",translation:"Освежить в памяти, подтянуть знания",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To call [sth] off",meaning:"To cancel an event, match, or planned operation",translation:"Отменять, прекращать",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To clear up",meaning:"To clarify a misunderstanding, or to cure a minor illness/infection",translation:"Прояснить ситуацию, пройти о болезни",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To come down to",meaning:"To be dependent on a single, most important factor or core point",translation:"Сводиться к чему-либо, упираться в",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To come up against",meaning:"To encounter or be faced with a major obstacle or opposition",translation:"Сталкиваться с трудностями, сопротивлением",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To crop up",meaning:"To appear or happen completely unexpectedly (usually a problem)",translation:"Внезапно возникать, всплывать",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To dawn on [someone]",meaning:"To suddenly realize something or understand a truth",translation:"Осенить, дойти до кого-либо, стать понятным",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To drop out",meaning:"To abandon a course of study, competition, or society prematurely",translation:"Бросить учебу, выбыть из соревнований",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To dry up",meaning:"To diminish or disappear completely (used for funds, resources, or conversation)",translation:"Иссякать, закончиться",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To fall through",meaning:"To fail to happen or be completed (about a plan, deal, or project)",translation:"Сорваться, провалиться о планах, сделках",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To gloss over [sth]",meaning:"To deliberately minimize, avoid discussing, or beautify an unpleasant fact, problem, flaw, or mistake",translation:"Заминать, намеренно обходить стороной, приукрашивать",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To iron out",meaning:"To resolve minor details, problems, or disagreements",translation:"Улаживать разногласия, устранять шероховатости",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To layout [sth]",meaning:"To explain, design, or arrange details clearly and systematically",translation:"Излагать, подробно объяснять, представлять",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To lead up to",meaning:"To happen or exist as a preparation for a major event",translation:"Предшествовать, вести к чему-либо",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To look back on",meaning:"To reflect on or think about a past event or period in life",translation:"Оглядываться назад в прошлое, вспоминать",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To look into",meaning:"To investigate, research, or examine a matter thoroughly",translation:"Расследовать, изучать, разбираться в вопросе",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To narrow [sth] down",meaning:"To reduce the number of options or possibilities",translation:"Сузить выбор, круг подозреваемых, варианты",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To pick up on",meaning:"To notice something subtle, or return to a point made earlier",translation:"Заметить, уловить, обратить внимание на деталь",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To put up with",meaning:"To tolerate an unpleasant situation or behavior without complaining",translation:"Мириться с чем-то, терпеть",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To rule out",meaning:"To eliminate a possibility or potential explanation",translation:"Исключать вероятность, сбрасывать со счетов",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To set [sth] apart",meaning:"To make someone or something distinct, unique, or noticeably superior",translation:"Выделять, отличать от других",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To single [someone/sth] out",meaning:"To choose one person or thing from a group for special praise, attention, or critique",translation:"Выделять, выбирать из толпы/коллектива",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To slip up",meaning:"To make a careless, minor mistake",translation:"Оговариваться, совершить оплошность, ошибиться",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To stand in for",meaning:"To temporarily take someone else's place or perform their duties",translation:"Заменять кого-либо, подменять",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To stand up to",meaning:"To remain valid or withstand scrutiny, criticism, or hard use",translation:"Выдерживать критику, противостоять, оставаться в силе",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To step down",meaning:"To resign or leave an important position or job",translation:"Уйти в отставку, сложить полномочия",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To trigger off",meaning:"To suddenly cause an intense reaction, event, or series of events",translation:"Спровоцировать, дать толчок цепной реакции",topic:"",category:"phrasal",synonyms:""},
+{phrase:"To turn out",meaning:"To yield a specific result, or to attend an event in large numbers",translation:"Оказываться в итоге, приходить, собираться",topic:"",category:"phrasal",synonyms:""},
+{phrase:"Against all odds",meaning:"Achieving success despite facing overwhelming difficulties",translation:"Вопреки всему, несмотря ни на что",topic:"",category:"expression",synonyms:""},
+{phrase:"At a standstill",meaning:"A situation in which all activity or movement has completely stopped",translation:"В тупике, мертвая точка, без движения",topic:"",category:"expression",synonyms:""},
+{phrase:"At the expense of",meaning:"To the detriment or harm of someone or something else",translation:"За счет чего-либо, в ущерб чему-либо",topic:"",category:"expression",synonyms:""},
+{phrase:"By leaps and bounds",meaning:"Rapidly, or making immense progress in a short time",translation:"Семимильными шагами, стремительно",topic:"",category:"expression",synonyms:""},
+{phrase:"By no means",meaning:"Absolutely not; in no way whatsoever (used for strong emphasis)",translation:"Никоим образом не, отнюдь не",topic:"",category:"expression",synonyms:""},
+{phrase:"In accordance with",meaning:"In a manner conforming with a specific rule, law, or request",translation:"В соответствии с, согласно",topic:"",category:"expression",synonyms:""},
+{phrase:"In due course",meaning:"At the correct, natural, or appropriate time in the future",translation:"В свое время, должным образом",topic:"",category:"expression",synonyms:""},
+{phrase:"In high spirits",meaning:"Being exceptionally cheerful, energetic, and optimistic",translation:"В приподнятом настроении, в восторге",topic:"",category:"expression",synonyms:""},
+{phrase:"In stark contrast to",meaning:"Used to show that two things are diametrically opposed",translation:"В разительном контрасте с, в отличие от",topic:"",category:"expression",synonyms:""},
+{phrase:"In the light of [sth]",meaning:"Because of or relative to newly revealed facts",translation:"В свете чего-либо, с учетом открывшихся фактов",topic:"",category:"expression",synonyms:""},
+{phrase:"In the long run",meaning:"Over a long period of time; ultimately in the end",translation:"В долгосрочной перспективе, в конечном счете",topic:"",category:"expression",synonyms:""},
+{phrase:"It goes without saying",meaning:"Something so completely obvious that it doesn't need stating",translation:"Само собой разумеется",topic:"",category:"expression",synonyms:""},
+{phrase:"On account of",meaning:"By reason of; because of a specific factor",translation:"По причине, из-за, вследствие",topic:"",category:"expression",synonyms:""},
+{phrase:"On the brink of",meaning:"Crucially close to a major, often dangerous, turning point",translation:"На грани, на порогу чего-то масштабного",topic:"",category:"expression",synonyms:""},
+{phrase:"On the grounds that",meaning:"For the explicit reason that (used to introduce a formal justification)",translation:"На том основании, что; из-за того, что",topic:"",category:"expression",synonyms:""},
+{phrase:"On the verge of [sth]",meaning:"Very close to experiencing a significant event or state",translation:"На грани, на пороге чего-либо",topic:"",category:"expression",synonyms:""},
+{phrase:"To a certain extent",meaning:"Partly, but not completely true or applicable",translation:"В некоторой степени, до известной степени",topic:"",category:"expression",synonyms:""},
+{phrase:"To be at a loss for words",meaning:"To be so completely surprised or shocked that you cannot speak",translation:"Потерять дар речи, не находить слов",topic:"",category:"expression",synonyms:""},
+{phrase:"To be cut out for",meaning:"To possess the natural qualities, talent, or character required for a task",translation:"Быть созданным для чего-либо",topic:"",category:"expression",synonyms:""},
+{phrase:"To be in two minds",meaning:"To be completely unable to choose between two options",translation:"Колебаться, сомневаться, не мочь решиться",topic:"",category:"expression",synonyms:""},
+{phrase:"To bear in mind",meaning:"To remember or consider a specific piece of information",translation:"Иметь в виду, учитывать",topic:"",category:"expression",synonyms:""},
+{phrase:"To err on the side of caution",meaning:"To act with an excess of care or safety to avoid risks",translation:"Проявлять излишнюю осторожность, перестраховаться",topic:"",category:"expression",synonyms:""},
+{phrase:"To keep a low profile",meaning:"To avoid attracting public attention or scrutiny",translation:"Не привлекать к себе внимания, держаться в тени",topic:"",category:"expression",synonyms:""},
+{phrase:"To keep at bay",meaning:"To prevent someone or something from approaching or harming you",translation:"Удерживать на расстоянии, не подпускать близко",topic:"",category:"expression",synonyms:""},
+{phrase:"To pull one's weight",meaning:"To do one's fair share of work or responsibility in a joint effort",translation:"Честно выполнять свою долю работы",topic:"",category:"expression",synonyms:""},
+{phrase:"To put [sth] into perspective",meaning:"To view a situation objectively within its broader context",translation:"Позволить взглянуть на вещи объективно",topic:"",category:"expression",synonyms:""},
+{phrase:"To read between the lines",meaning:"To discover a hidden or implied meaning behind a statement",translation:"Читать между строк",topic:"",category:"expression",synonyms:""},
+{phrase:"To take [sth] for granted",meaning:"To assume something is guaranteed without giving it true value",translation:"Принимать как должное",topic:"",category:"expression",synonyms:""},
+{phrase:"To take [sth] into account",meaning:"To consider a particular fact when making a judgment or plan",translation:"Принимать во внимание, учитывать",topic:"",category:"expression",synonyms:""},
+{phrase:"To take exception to",meaning:"To object strongly to something; to be highly offended by it",translation:"Возражать против, обижаться на",topic:"",category:"expression",synonyms:""},
+{phrase:"Under the circumstances",meaning:"Considering the specific, often difficult facts of a situation",translation:"При данных обстоятельствах, учитывая ситуацию",topic:"",category:"expression",synonyms:""},
+{phrase:"Under the illusion",meaning:"Believing something to be true or real when it is completely false",translation:"Находиться в иллюзии",topic:"",category:"expression",synonyms:""},
+{phrase:"With a view to [doing sth]",meaning:"With the strict intention or objective of doing something",translation:"С целью, ради того чтобы, с намерением",topic:"",category:"expression",synonyms:""},
+{phrase:"120 degrees [Fahrenheit]",meaning:"49 degrees Celsius",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"A&R",meaning:"abbrev. artists and repertoire (signing new artists)",translation:"",synonyms:"talent scouting, artist development",topic:"general",category:"vocab"},
+{phrase:"A-line dress",meaning:"dress which fits closely at the hips and gradually widens towards the hem",translation:"",synonyms:"flared dress",topic:"military",category:"vocab"},
+{phrase:"accommodating",meaning:"helpful, easy to work with",translation:"",synonyms:"cooperative, obliging, adaptable",topic:"general",category:"vocab"},
+{phrase:"accompany",meaning:"formal go with, escort",translation:"",synonyms:"attend, conduct, usher",topic:"society",category:"vocab"},
+{phrase:"accomplish",meaning:"achieve, do",translation:"",synonyms:"fulfill, realize, execute",topic:"general",category:"vocab"},
+{phrase:"adobe",meaning:"building material made with sun-dried earth and straw",translation:"",synonyms:"mudbrick, clay",topic:"body_health",category:"vocab"},
+{phrase:"adorn",meaning:"decorate",translation:"",synonyms:"embellish, ornament, beautify",topic:"general",category:"vocab"},
+{phrase:"advance",meaning:"here try to reach",translation:"",synonyms:"progress, proceed, move forward",topic:"general",category:"vocab"},
+{phrase:"advent (of)",meaning:"here arrival, coming into existence",translation:"",synonyms:"emergence, dawn, onset",topic:"general",category:"vocab"},
+{phrase:"adversary",meaning:"enemy, opponent",translation:"",synonyms:"rival, foe, antagonist",topic:"general",category:"vocab"},
+{phrase:"aflame",meaning:"in flames, burning / literary showing strong emotion; on fire",translation:"",synonyms:"blazing, alight, impassioned",topic:"science",category:"vocab"},
+{phrase:"agility",meaning:"ability to move quickly and easily",translation:"",synonyms:"nimbleness, dexterity, swiftness",topic:"general",category:"vocab"},
+{phrase:"agriculture",meaning:"farming",translation:"",synonyms:"cultivation, husbandry, agronomy",topic:"body_health",category:"vocab"},
+{phrase:"alliance",meaning:"union, pact between countries",translation:"",synonyms:"coalition, treaty, partnership",topic:"society",category:"vocab"},
+{phrase:"Ames",meaning:"NASA centre in Silicon Valley, California",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"amino acid",meaning:"one of the substances in the body that combine to make proteins",translation:"",synonyms:"protein building block",topic:"science",category:"vocab"},
+{phrase:"ancestor",meaning:"family member who lived a long time ago",translation:"",synonyms:"forebear, forefather, progenitor",topic:"society",category:"vocab"},
+{phrase:"annihilate",meaning:"destroy",translation:"",synonyms:"obliterate, eradicate, wipe out",topic:"general",category:"vocab"},
+{phrase:"anticipation",meaning:"expectation",translation:"",synonyms:"eagerness, hope, foresight",topic:"emotions",category:"vocab"},
+{phrase:"antique",meaning:"extremely old",translation:"",synonyms:"vintage, relic, ancient",topic:"general",category:"vocab"},
+{phrase:"approbation",meaning:"formal approval, support",translation:"",synonyms:"endorsement, praise, consent",topic:"general",category:"vocab"},
+{phrase:"Arlington",meaning:"a military cemetery in the US",translation:"",synonyms:"",topic:"history",category:"vocab"},
+{phrase:"artillery",meaning:"big heavy weapons",translation:"",synonyms:"ordnance, cannons, munitions",topic:"military",category:"vocab"},
+{phrase:"as it were",meaning:"in a way, so to speak",translation:"",synonyms:"in a manner of speaking, virtually",topic:"general",category:"vocab"},
+{phrase:"aspiration",meaning:"ambition, goal",translation:"",synonyms:"desire, objective, aim",topic:"sports",category:"vocab"},
+{phrase:"at right angles",meaning:"at an angle of 90 degrees",translation:"",synonyms:"perpendicular, orthogonal",topic:"science",category:"vocab"},
+{phrase:"attainable",meaning:"possible, achievable",translation:"",synonyms:"reachable, feasible, accessible",topic:"general",category:"vocab"},
+{phrase:"attentions",meaning:"here romantic or sexual interest",translation:"",synonyms:"advances, courtship, wooing",topic:"general",category:"vocab"},
+{phrase:"aurora",meaning:"natural electrical phenomenon with lights in the sky",translation:"",synonyms:"polar lights, northern lights",topic:"nature",category:"vocab"},
+{phrase:"back and fro",meaning:"repeatedly backward and forward",translation:"",synonyms:"to and fro, back and forth",topic:"military",category:"vocab"},
+{phrase:"bad bush",meaning:"Nigerian English evil part of the forest",translation:"",synonyms:"cursed forest, forbidden woods",topic:"nature",category:"vocab"},
+{phrase:"bag",meaning:"informal succeed in killing or catching an animal",translation:"",synonyms:"capture, snag, catch",topic:"nature",category:"vocab"},
+{phrase:"Baggie",meaning:"trademark clear plastic bag used to store food",translation:"",synonyms:"zip-top bag, sandwich bag",topic:"food",category:"vocab"},
+{phrase:"baked",meaning:"here hot and dry",translation:"",synonyms:"scorched, parched, roasted",topic:"food",category:"vocab"},
+{phrase:"balk at",meaning:"refuse to do something",translation:"",synonyms:"resist, recoil from, hesitate over",topic:"general",category:"vocab"},
+{phrase:"band",meaning:"here musical group",translation:"",synonyms:"ensemble, group, troupe",topic:"society",category:"vocab"},
+{phrase:"banjolin",meaning:"guitar-like musical instrument",translation:"",synonyms:"",topic:"general",category:"vocab"},
+{phrase:"batch",meaning:"an amount of something",translation:"",synonyms:"group, set, lot",topic:"general",category:"vocab"},
+{phrase:"bear (bore, borne)",meaning:"endure, tolerate",translation:"",synonyms:"withstand, suffer, stomach",topic:"body_health",category:"vocab"},
+{phrase:"beat-up",meaning:"informal old and in bad condition",translation:"",synonyms:"battered, dilapidated, run-down",topic:"food",category:"vocab"},
+{phrase:"beefcake",meaning:"informal attractive man with large muscles",translation:"",synonyms:"hunk, muscleman",topic:"food",category:"vocab"},
+{phrase:"been-to",meaning:"Nigerian English well travelled",translation:"",synonyms:"worldly, globetrotter",topic:"general",category:"vocab"},
+{phrase:"bestow",meaning:"formal give",translation:"",synonyms:"confer, grant, present",topic:"general",category:"vocab"},
+{phrase:"beverage",meaning:"formal drink",translation:"",synonyms:"refreshment, liquid, draught",topic:"food",category:"vocab"},
+{phrase:"bisect",meaning:"here intersect, cross",translation:"",synonyms:"halve, divide, split",topic:"general",category:"vocab"},
+{phrase:"blade",meaning:"here long thin leaf of grass",translation:"",synonyms:"frond, leaf, shoot",topic:"nature",category:"vocab"},
+{phrase:"blast",meaning:"here force something to move quickly and loudly in a certain direction",translation:"",synonyms:"blow, propel, erupt",topic:"science",category:"vocab"},
+{phrase:"bleach",meaning:"strong chemical used to clean or colour things white",translation:"",synonyms:"whitener, lightener",topic:"science",category:"vocab"},
+{phrase:"blond",meaning:"with fair/light hair (male)",translation:"",synonyms:"fair-haired, flaxen",topic:"body_health",category:"vocab"},
+{phrase:"blonde",meaning:"with fair/light hair (female)",translation:"",synonyms:"fair-haired, flaxen",topic:"body_health",category:"vocab"},
+{phrase:"board",meaning:"here stay at; pay for accommodation",translation:"",synonyms:"lodge, house, room",topic:"nature",category:"vocab"},
+{phrase:"boarded up",meaning:"covered with wooden boards",translation:"",synonyms:"sealed off, closed up",topic:"nature",category:"vocab"},
+{phrase:"boar",meaning:"wild pig",translation:"",synonyms:"swine, wild hog",topic:"nature",category:"vocab"},
+{phrase:"bobbi",meaning:"Nigerian English breast",translation:"",synonyms:"bosom, bust",topic:"general",category:"vocab"},
+{phrase:"boil down to",meaning:"be the main reason for something",translation:"",synonyms:"come down to, amount to",topic:"food",category:"vocab"},
+{phrase:"bolt",meaning:"lock",translation:"",synonyms:"latch, secure, fasten",topic:"general",category:"vocab"},
+{phrase:"bonfire",meaning:"large open-air fire, blaze",translation:"",synonyms:"camp fire, pyre",topic:"nature",category:"vocab"},
+{phrase:"bonnet",meaning:"hat worn by a woman with ribbons tied under the chin",translation:"",synonyms:"cap, headgear",topic:"clothing",category:"vocab"},
+{phrase:"bottom power",meaning:"Nigerian English influence gained through sexual favours",translation:"",synonyms:"seductive influence",topic:"general",category:"vocab"},
+{phrase:"boulder-stone",meaning:"large smooth rock",translation:"",synonyms:"rock, slab",topic:"general",category:"vocab"},
+{phrase:"bound",meaning:"run or jump with large steps",translation:"",synonyms:"leap, spring, vault",topic:"sports",category:"vocab"},
+{phrase:"boundless",meaning:"without an end",translation:"",synonyms:"limitless, infinite, endless",topic:"general",category:"vocab"},
+{phrase:"brassiere",meaning:"formal bra",translation:"",synonyms:"undergarment",topic:"clothing",category:"vocab"},
+{phrase:"brave",meaning:"here endure, face up to",translation:"",synonyms:"confront, weather, withstand",topic:"general",category:"vocab"},
+{phrase:"breed",meaning:"here type, sort",translation:"",synonyms:"variety, strain, kind",topic:"general",category:"vocab"},
+{phrase:"briefs",meaning:"underpants",translation:"",synonyms:"knickers, underwear",topic:"clothing",category:"vocab"},
+{phrase:"bulge",meaning:"swell, stick out",translation:"",synonyms:"protrude, swell, project",topic:"general",category:"vocab"},
+{phrase:"bulrush",meaning:"BrE tall plant that grows near water",translation:"",synonyms:"cattail, reed",topic:"clothing",category:"vocab"},
+{phrase:"burgeoning",meaning:"growing, flourishing",translation:"",synonyms:"thriving, expanding, sprouting",topic:"nature",category:"vocab"},
+{phrase:"C.S.A.",meaning:"Confederate States Army",translation:"",synonyms:"",topic:"history",category:"vocab"},
+{phrase:"cache",meaning:"a (hidden) store of things",translation:"",synonyms:"hoard, stash, reserve",topic:"general",category:"vocab"},
+{phrase:"cage",meaning:"put in a cage/prison",translation:"",synonyms:"confine, imprison, incarcerate",topic:"law",category:"vocab"},
+{phrase:"caked",meaning:"thickly covered / here cover in a dry hard mass",translation:"",synonyms:"crusted, coated, encrusted",topic:"general",category:"vocab"},
+{phrase:"canvas",meaning:"cloth used to make tents, sails etc.",translation:"",synonyms:"tarpaulin, sailcloth",topic:"science",category:"vocab"},
+{phrase:"cap gun",meaning:"toy pistol",translation:"",synonyms:"pop gun, toy gun",topic:"military",category:"vocab"},
+{phrase:"captivity",meaning:"imprisonment, confinement",translation:"",synonyms:"incarceration, detention",topic:"law",category:"vocab"},
+{phrase:"carbon",meaning:"chemical element found in coal, oil and all living things",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"case and point = case in point",meaning:"an example that illustrates a point",translation:"",synonyms:"prime example, illustration",topic:"clothing",category:"vocab"},
+{phrase:"casing",meaning:"covering, case",translation:"",synonyms:"shell, wrapper, housing",topic:"religion",category:"vocab"},
+{phrase:"casting",meaning:"shaped object",translation:"",synonyms:"mold, sculpture",topic:"general",category:"vocab"},
+{phrase:"castoff",meaning:"BrE old item of clothing passed on to someone else",translation:"",synonyms:"hand-me-down, reject",topic:"clothing",category:"vocab"},
+{phrase:"casualties",meaning:"people hurt or killed",translation:"",synonyms:"victims, fatalities, losses",topic:"clothing",category:"vocab"},
+{phrase:"cause",meaning:"here aim, principle",translation:"",synonyms:"purpose, movement, belief",topic:"general",category:"vocab"},
+{phrase:"cavalry",meaning:"soldiers on horseback",translation:"",synonyms:"mounted troops, horsemen",topic:"military",category:"vocab"},
+{phrase:"cavernous",meaning:"giving an impression of vast dark depths",translation:"",synonyms:"hollow, echoing, immense",topic:"general",category:"vocab"},
+{phrase:"cease",meaning:"formal stop",translation:"",synonyms:"halt, conclude, end",topic:"general",category:"vocab"},
+{phrase:"char",meaning:"partially burned material",translation:"",synonyms:"scorch, sear, singe",topic:"general",category:"vocab"},
+{phrase:"charcoal",meaning:"black substance from burnt wood",translation:"",synonyms:"carbon, briquette",topic:"general",category:"vocab"},
+{phrase:"charter",meaning:"official document describing laws and rights",translation:"",synonyms:"constitution, mandate, permit",topic:"society",category:"vocab"},
+{phrase:"choke up",meaning:"here (probably) cough up, spit out",translation:"",synonyms:"gag, heave",topic:"general",category:"vocab"},
+{phrase:"circuit",meaning:"here network, pathway",translation:"",synonyms:"route, loop, track",topic:"general",category:"vocab"},
+{phrase:"citizenship",meaning:"belonging to a country",translation:"",synonyms:"nationality, status",topic:"society",category:"vocab"},
+{phrase:"claw",meaning:"sharp nail on the end of some animals’ toes",translation:"",synonyms:"talon, nail",topic:"body_health",category:"vocab"},
+{phrase:"clinker",meaning:"stony residue from burnt coal",translation:"",synonyms:"cinder, slag",topic:"general",category:"vocab"},
+{phrase:"clipboard",meaning:"portable writing board",translation:"",synonyms:"writing board",topic:"nature",category:"vocab"},
+{phrase:"clipping",meaning:"article or picture cut from a newspaper",translation:"",synonyms:"cutting, extract, snippet",topic:"general",category:"vocab"},
+{phrase:"clod",meaning:"lump",translation:"",synonyms:"chunk, mass, wad",topic:"nature",category:"vocab"},
+{phrase:"clogged",meaning:"blocked, filled",translation:"",synonyms:"congested, obstructed, choked",topic:"general",category:"vocab"},
+{phrase:"coast",meaning:"here move without using power",translation:"",synonyms:"glide, drift, cruise",topic:"religion",category:"vocab"},
+{phrase:"coax",meaning:"gently push, urge",translation:"",synonyms:"persuade, wheedle, entice",topic:"general",category:"vocab"},
+{phrase:"coil",meaning:"curl, twist",translation:"",synonyms:"loop, spiral, wind",topic:"food",category:"vocab"},
+{phrase:"cold store",meaning:"cold room or building for preserving food",translation:"",synonyms:"cooler, refrigerator",topic:"food",category:"vocab"},
+{phrase:"commodity",meaning:"something basic to be bought and sold",translation:"",synonyms:"product, good, material",topic:"society",category:"vocab"},
+{phrase:"common",meaning:"here general, shared",translation:"",synonyms:"mutual, collective, universal",topic:"military",category:"vocab"},
+{phrase:"commute",meaning:"travel regularly to and from work",translation:"",synonyms:"travel, shuttle",topic:"general",category:"vocab"},
+{phrase:"company",meaning:"here unit/group of soldiers",translation:"",synonyms:"squadron, troop, battalion",topic:"military",category:"vocab"},
+{phrase:"concrete",meaning:"building material made with sand, cement, small stones and water",translation:"",synonyms:"cement",topic:"nature",category:"vocab"},
+{phrase:"conduct",meaning:"arrange, carry out",translation:"",synonyms:"manage, direct, execute",topic:"general",category:"vocab"},
+{phrase:"Confederate",meaning:"belonging to the group of southern states that fought together in the American Civil War",translation:"",synonyms:"Southern (historical)",topic:"history",category:"vocab"},
+{phrase:"consequential",meaning:"formal important",translation:"",synonyms:"significant, crucial, momentous",topic:"general",category:"vocab"},
+{phrase:"conspire",meaning:"act together",translation:"",synonyms:"plot, scheme, collude",topic:"general",category:"vocab"},
+{phrase:"constituent",meaning:"part, component",translation:"",synonyms:"element, ingredient, piece",topic:"general",category:"vocab"},
+{phrase:"consume",meaning:"here use up",translation:"",synonyms:"deplete, exhaust, devour",topic:"general",category:"vocab"},
+{phrase:"converge",meaning:"meet, join",translation:"",synonyms:"intersect, merge, unite",topic:"general",category:"vocab"},
+{phrase:"converse (the)",meaning:"formal the opposite",translation:"",synonyms:"reverse, contrary, inverse",topic:"general",category:"vocab"},
+{phrase:"conviction",meaning:"belief",translation:"",synonyms:"certainty, principle, creed",topic:"religion",category:"vocab"},
+{phrase:"corduroy",meaning:"thick material with raised lines",translation:"",synonyms:"ribbed fabric",topic:"clothing",category:"vocab"},
+{phrase:"correlate",meaning:"formal establish a connection between two things; coordinate",translation:"",synonyms:"associate, link, connect",topic:"general",category:"vocab"},
+{phrase:"correspondent",meaning:"here newspaper reporter",translation:"",synonyms:"journalist, reporter, envoy",topic:"general",category:"vocab"},
+{phrase:"court disaster",meaning:"risk something unpleasant",translation:"",synonyms:"invite trouble, tempt fate",topic:"law",category:"vocab"},
+{phrase:"crack",meaning:"here make a sudden sharp sound; fire a gun, rifle etc.",translation:"",synonyms:"snap, pop, discharge",topic:"military",category:"vocab"},
+{phrase:"crazies",meaning:"here (individual) hairs growing out of control",translation:"",synonyms:"flyaways, strays",topic:"body_health",category:"vocab"},
+{phrase:"credulous",meaning:"formal naive, gullible",translation:"",synonyms:"trusting, unsuspecting, easily deceived",topic:"general",category:"vocab"},
+{phrase:"creed",meaning:"formal a set of beliefs",translation:"",synonyms:"doctrine, ideology, faith",topic:"religion",category:"vocab"},
+{phrase:"crimson",meaning:"deep red colour",translation:"",synonyms:"scarlet, ruby, maroon",topic:"general",category:"vocab"},
+{phrase:"critter",meaning:"AmE, informal creature",translation:"",synonyms:"animal, beast",topic:"food",category:"vocab"},
+{phrase:"crotch",meaning:"area between the legs at the bottom of the torso",translation:"",synonyms:"groin",topic:"body_health",category:"vocab"},
+{phrase:"crow",meaning:"say with pride or triumph",translation:"",synonyms:"boast, brag, gloat",topic:"emotions",category:"vocab"},
+{phrase:"crumpled",meaning:"crushed, creased",translation:"",synonyms:"wrinkled, rumpled, mangled",topic:"general",category:"vocab"},
+{phrase:"crush",meaning:"here crowd of people",translation:"",synonyms:"mob, throng, swarm",topic:"general",category:"vocab"},
+{phrase:"crusted",meaning:"having a hard outer layer",translation:"",synonyms:"caked, hardened, coated",topic:"general",category:"vocab"},
+{phrase:"Cullinan diamond",meaning:"the largest diamond ever found",translation:"",synonyms:"",topic:"general",category:"vocab"},
+{phrase:"cup",meaning:"here hold",translation:"",synonyms:"cradle, clasp, enclose",topic:"general",category:"vocab"},
+{phrase:"curse",meaning:"swear",translation:"",synonyms:"blaspheme, cuss, hex",topic:"body_health",category:"vocab"},
+{phrase:"custom",meaning:"here tradition, norm",translation:"",synonyms:"practice, habit, convention",topic:"society",category:"vocab"},
+{phrase:"dangle",meaning:"hang loosely",translation:"",synonyms:"swing, droop, suspend",topic:"general",category:"vocab"},
+{phrase:"dare",meaning:"have the courage to do something",translation:"",synonyms:"risk, hazard, venture",topic:"emotions",category:"vocab"},
+{phrase:"dash",meaning:"run quickly",translation:"",synonyms:"sprint, dart, rush",topic:"sports",category:"vocab"},
+{phrase:"day of reckoning",meaning:"here judgement day, turning point",translation:"",synonyms:"showdown, moment of truth",topic:"law",category:"vocab"},
+{phrase:"deceased",meaning:"formal dead",translation:"",synonyms:"departed, late, lifeless",topic:"general",category:"vocab"},
+{phrase:"deceit",meaning:"dishonesty, tricking people",translation:"",synonyms:"deception, fraud, duplicity",topic:"society",category:"vocab"},
+{phrase:"decline (to)",meaning:"refuse, decide not to",translation:"",synonyms:"reject, turn down, pass",topic:"general",category:"vocab"},
+{phrase:"decline",meaning:"fall, weakening",translation:"",synonyms:"deterioration, slump, downturn",topic:"general",category:"vocab"},
+{phrase:"deliberation",meaning:"discussion, debate; consideration",translation:"",synonyms:"thought, reflection, consultation",topic:"general",category:"vocab"},
+{phrase:"delirium",meaning:"fever, hallucination",translation:"",synonyms:"madness, frenzy, hysteria",topic:"general",category:"vocab"},
+{phrase:"dense",meaning:"concentrated, thick",translation:"",synonyms:"compact, heavy, solid",topic:"general",category:"vocab"},
+{phrase:"density",meaning:"concentration, thickness",translation:"",synonyms:"mass, solidity, tightness",topic:"general",category:"vocab"},
+{phrase:"depot",meaning:"large building for storing things",translation:"",synonyms:"warehouse, storehouse, terminal",topic:"general",category:"vocab"},
+{phrase:"depression",meaning:"here low activity",translation:"",synonyms:"slump, recession, trough",topic:"general",category:"vocab"},
+{phrase:"derive",meaning:"get, obtain",translation:"",synonyms:"acquire, draw, extract",topic:"general",category:"vocab"},
+{phrase:"desalinate",meaning:"remove salt from (a liquid)",translation:"",synonyms:"purify, distill",topic:"science",category:"vocab"},
+{phrase:"desirable",meaning:"wanted, desired",translation:"",synonyms:"sought-after, attractive, appealing",topic:"emotions",category:"vocab"},
+{phrase:"despot",meaning:"tyrant",translation:"",synonyms:"dictator, autocrat, oppressor",topic:"society",category:"vocab"},
+{phrase:"destiny",meaning:"fate",translation:"",synonyms:"fortune, future, karma",topic:"general",category:"vocab"},
+{phrase:"detention",meaning:"keeping someone in a police station/prison and not allowing them to leave",translation:"",synonyms:"confinement, custody, holding",topic:"clothing",category:"vocab"},
+{phrase:"determine",meaning:"here affect, shape",translation:"",synonyms:"influence, decide, govern",topic:"general",category:"vocab"},
+{phrase:"devoted",meaning:"dedicated, enthusiastic",translation:"",synonyms:"committed, loyal, steadfast",topic:"emotions",category:"vocab"},
+{phrase:"digs",meaning:"informal rented accommodation",translation:"",synonyms:"lodgings, quarters, housing",topic:"home",category:"vocab"},
+{phrase:"dip",meaning:"slope, hollow",translation:"",synonyms:"depression, incline, drop",topic:"general",category:"vocab"},
+{phrase:"dirtbag",meaning:"informal unpleasant and dishonest person",translation:"",synonyms:"scumbag, sleazeball, scoundrel",topic:"general",category:"vocab"},
+{phrase:"disastrous",meaning:"extremely bad",translation:"",synonyms:"catastrophic, devastating, ruinous",topic:"general",category:"vocab"},
+{phrase:"discarded",meaning:"rejected, thrown away",translation:"",synonyms:"abandoned, junked, disposed of",topic:"sports",category:"vocab"},
+{phrase:"discord",meaning:"formal disagreement",translation:"",synonyms:"conflict, friction, hostility",topic:"general",category:"vocab"},
+{phrase:"disguise oneself (as)",meaning:"modify one's appearance",translation:"",synonyms:"camouflage, mask, conceal",topic:"body_health",category:"vocab"},
+{phrase:"disobey",meaning:"refuse to follow instructions, defy / not do what you are told",translation:"",synonyms:"rebel, contravene, violate",topic:"clothing",category:"vocab"},
+{phrase:"disposable",meaning:"throwaway; here discarding one product for another",translation:"",synonyms:"consumable, expendable, replaceable",topic:"sports",category:"vocab"},
+{phrase:"disproportion",meaning:"formal imbalance",translation:"",synonyms:"inequality, disparity, asymmetry",topic:"general",category:"vocab"},
+{phrase:"dissect",meaning:"here analyse in detail",translation:"",synonyms:"examine, scrutinize, break down",topic:"general",category:"vocab"},
+{phrase:"dissent",meaning:"strong disagreement with general opinion",translation:"",synonyms:"opposition, discord, nonconformity",topic:"military",category:"vocab"},
+{phrase:"dodge",meaning:"avoid with a quick movement",translation:"",synonyms:"evade, duck, sidestep",topic:"general",category:"vocab"},
+{phrase:"doer",meaning:"an active person who achieves things",translation:"",synonyms:"achiever, go-getter, executor",topic:"general",category:"vocab"},
+{phrase:"dogma",meaning:"belief, principle / blind/unquestioning faith in a certain (set of) principle(s)",translation:"",synonyms:"creed, doctrine, teaching",topic:"religion",category:"vocab"},
+{phrase:"downstream",meaning:"here at a later stage in the process",translation:"",synonyms:"subsequent, later, down the line",topic:"general",category:"vocab"},
+{phrase:"draft",meaning:"write",translation:"",synonyms:"compose, outline, formulate",topic:"general",category:"vocab"},
+{phrase:"drench",meaning:"soak, wet thoroughly",translation:"",synonyms:"saturate, inundate, drown",topic:"general",category:"vocab"},
+{phrase:"drifter",meaning:"person who doesn't stay in one place for long",translation:"",synonyms:"wanderer, vagabond, nomad",topic:"clothing",category:"vocab"},
+{phrase:"duress",meaning:"formal threat, force",translation:"",synonyms:"coercion, pressure, compulsion",topic:"science",category:"vocab"},
+{phrase:"duty officer",meaning:"officer on duty at a particular time",translation:"",synonyms:"officer in charge, supervisor",topic:"military",category:"vocab"},
+{phrase:"dye",meaning:"change the colour of clothing, hair etc.",translation:"",synonyms:"color, tint, stain",topic:"clothing",category:"vocab"},
+{phrase:"dystopian",meaning:"relating to a society with much suffering or injustice",translation:"",synonyms:"apocalyptic, grim, nightmarish",topic:"emotions",category:"vocab"},
+{phrase:"edible",meaning:"can be eaten",translation:"",synonyms:"consumable, palatable, safe to eat",topic:"food",category:"vocab"},
+{phrase:"effect a junction",meaning:"here, formal meet up",translation:"",synonyms:"connect, join, link up",topic:"general",category:"vocab"},
+{phrase:"egg albumin",meaning:"water-soluble protein found in egg white",translation:"",synonyms:"egg white protein",topic:"science",category:"vocab"},
+{phrase:"electric grid",meaning:"network for distributing electricity",translation:"",synonyms:"power grid, network",topic:"science",category:"vocab"},
+{phrase:"elope",meaning:"go away secretly to get married",translation:"",synonyms:"run away, abscond, slip away",topic:"general",category:"vocab"},
+{phrase:"emanate from",meaning:"formal come from",translation:"",synonyms:"originate, stem, derive",topic:"general",category:"vocab"},
+{phrase:"embankment",meaning:"wall of earth or stone",translation:"",synonyms:"bank, mound, levee",topic:"body_health",category:"vocab"},
+{phrase:"embedded",meaning:"fixed/set in a surrounding mass",translation:"",synonyms:"implanted, ingrained, entrenched",topic:"home",category:"vocab"},
+{phrase:"embody",meaning:"be a symbol of",translation:"",synonyms:"personify, represent, incorporate",topic:"body_health",category:"vocab"},
+{phrase:"empiricism",meaning:"the belief that ideas should be based on practical experience and experiments",translation:"",synonyms:"observation, pragmatism",topic:"science",category:"vocab"},
+{phrase:"enable",meaning:"allow, permit",translation:"",synonyms:"empower, facilitate, authorize",topic:"general",category:"vocab"},
+{phrase:"enchanted",meaning:"magical",translation:"",synonyms:"spellbound, bewitched, charmed",topic:"religion",category:"vocab"},
+{phrase:"endeavour",meaning:"formal try hard",translation:"",synonyms:"attempt, strive, undertake",topic:"general",category:"vocab"},
+{phrase:"enduring",meaning:"lasting",translation:"",synonyms:"permanent, persistent, abiding",topic:"general",category:"vocab"},
+{phrase:"engulf",meaning:"sweep over, cover",translation:"",synonyms:"swallow up, immerse, overwhelm",topic:"emotions",category:"vocab"},
+{phrase:"enrich",meaning:"make better by adding something",translation:"",synonyms:"enhance, improve, augment",topic:"general",category:"vocab"},
+{phrase:"enlist",meaning:"join an army",translation:"",synonyms:"sign up, volunteer, enroll",topic:"military",category:"vocab"},
+{phrase:"ensemble",meaning:"set of clothes, outfit",translation:"",synonyms:"getup, costume, attire",topic:"clothing",category:"vocab"},
+{phrase:"entitle someone to",meaning:"give someone the right to",translation:"",synonyms:"qualify, authorize, warrant",topic:"general",category:"vocab"},
+{phrase:"entwined",meaning:"twisted together",translation:"",synonyms:"interlaced, interwoven, braided",topic:"sports",category:"vocab"},
+{phrase:"envelop",meaning:"enclose, surround (completely)",translation:"",synonyms:"wrap, cloak, engulf",topic:"sports",category:"vocab"},
+{phrase:"envision",meaning:"imagine",translation:"",synonyms:"visualize, picture, foresee",topic:"general",category:"vocab"},
+{phrase:"espionage",meaning:"spying",translation:"",synonyms:"surveillance, intelligence gathering",topic:"general",category:"vocab"},
+{phrase:"estimated",meaning:"guessed, reckoned",translation:"",synonyms:"approximated, assessed, projected",topic:"general",category:"vocab"},
+{phrase:"exceed",meaning:"go beyond",translation:"",synonyms:"surpass, outdo, transcend",topic:"general",category:"vocab"},
+{phrase:"exhale",meaning:"breathe out",translation:"",synonyms:"blow out, puff, breathe",topic:"food",category:"vocab"},
+{phrase:"exotic",meaning:"here foreign",translation:"",synonyms:"alien, unfamiliar, striking",topic:"general",category:"vocab"},
+{phrase:"expendable",meaning:"disposable, of little importance",translation:"",synonyms:"dispensable, nonessential, replaceable",topic:"general",category:"vocab"},
+{phrase:"expedience",meaning:"formal doing what is easy rather than morally right",translation:"",synonyms:"convenience, pragmatism, practicality",topic:"clothing",category:"vocab"},
+{phrase:"exquisite",meaning:"very beautiful and delicate",translation:"",synonyms:"stunning, elegant, magnificent",topic:"general",category:"vocab"},
+{phrase:"extend",meaning:"formal offer",translation:"",synonyms:"proffer, present, give",topic:"general",category:"vocab"},
+{phrase:"fabricate",meaning:"construct, produce",translation:"",synonyms:"manufacture, assemble, build",topic:"clothing",category:"vocab"},
+{phrase:"faction",meaning:"minority group",translation:"",synonyms:"splinter group, bloc, clique",topic:"society",category:"vocab"},
+{phrase:"fad",meaning:"short-lived trend",translation:"",synonyms:"craze, passing fancy, trend",topic:"general",category:"vocab"},
+{phrase:"faint-hearted",meaning:"not brave",translation:"",synonyms:"timid, cowardly, fearful",topic:"body_health",category:"vocab"},
+{phrase:"fair play",meaning:"honest behaviour, fairness",translation:"",synonyms:"justice, equity, impartiality",topic:"nature",category:"vocab"},
+{phrase:"fallow",meaning:"bare, unused",translation:"",synonyms:"uncultivated, dormant, resting",topic:"general",category:"vocab"},
+{phrase:"far-flung",meaning:"widespread; far away",translation:"",synonyms:"distant, remote, widespread",topic:"body_health",category:"vocab"},
+{phrase:"far-reaching",meaning:"having a great effect",translation:"",synonyms:"extensive, sweeping, profound",topic:"food",category:"vocab"},
+{phrase:"fawn",meaning:"very young deer",translation:"",synonyms:"young deer",topic:"nature",category:"vocab"},
+{phrase:"feces",meaning:"formal, AmE sp. solid waste from the body",translation:"",synonyms:"excrement, stool, manure",topic:"science",category:"vocab"},
+{phrase:"federation",meaning:"union, association",translation:"",synonyms:"coalition, alliance, league",topic:"society",category:"vocab"},
+{phrase:"fern",meaning:"flowerless plant with leaves shaped like feathers",translation:"",synonyms:"frond plant",topic:"food",category:"vocab"},
+{phrase:"fibromyalgia",meaning:"medical condition that causes muscular pain and tiredness",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"fickle",meaning:"always changing your mind about who/what you like",translation:"",synonyms:"capricious, volatile, unpredictable",topic:"clothing",category:"vocab"},
+{phrase:"figure",meaning:"here body",translation:"",synonyms:"physique, shape, build",topic:"body_health",category:"vocab"},
+{phrase:"file",meaning:"collection of information (papers, documents etc.)",translation:"",synonyms:"dossier, folder, record",topic:"general",category:"vocab"},
+{phrase:"fill someone in (on)",meaning:"informal provide someone with facts/information",translation:"",synonyms:"brief, update, inform",topic:"general",category:"vocab"},
+{phrase:"filthy",meaning:"very dirty",translation:"",synonyms:"grimy, foul, unwashed",topic:"general",category:"vocab"},
+{phrase:"finale",meaning:"final part, climax",translation:"",synonyms:"conclusion, ending, culmination",topic:"general",category:"vocab"},
+{phrase:"finicky",meaning:"requiring or showing great attention to detail",translation:"",synonyms:"fussy, fastidious, picky",topic:"food",category:"vocab"},
+{phrase:"flap",meaning:"wave, shake",translation:"",synonyms:"flutter, beat, agitate",topic:"general",category:"vocab"},
+{phrase:"flare",meaning:"here make/become wider",translation:"",synonyms:"broaden, widen, expand",topic:"general",category:"vocab"},
+{phrase:"flicker",meaning:"shine unsteadily, twinkle",translation:"",synonyms:"glimmer, flutter, waver",topic:"sports",category:"vocab"},
+{phrase:"flinty",meaning:"containing flint (=hard grey stone)",translation:"",synonyms:"stony, rocky, hard",topic:"general",category:"vocab"},
+{phrase:"flip-flops",meaning:"rubber(-soled) sandals",translation:"",synonyms:"thongs, sandals",topic:"clothing",category:"vocab"},
+{phrase:"flourish",meaning:"develop and be successful",translation:"",synonyms:"thrive, prosper, bloom",topic:"nature",category:"vocab"},
+{phrase:"flow",meaning:"run freely",translation:"",synonyms:"stream, pour, gush",topic:"sports",category:"vocab"},
+{phrase:"flush",meaning:"blush, go red (in the face)",translation:"",synonyms:"redden, color, glow",topic:"body_health",category:"vocab"},
+{phrase:"foam",meaning:"soft rubber or plastic with small holes",translation:"",synonyms:"sponge, froth, suds",topic:"general",category:"vocab"},
+{phrase:"foe",meaning:"literary enemy",translation:"",synonyms:"adversary, opponent, rival",topic:"general",category:"vocab"},
+{phrase:"foghorn",meaning:"device that makes a sound to warn ships in fog",translation:"",synonyms:"siren, alarm",topic:"military",category:"vocab"},
+{phrase:"fondle",meaning:"here fiddle with, squeeze",translation:"",synonyms:"caress, stroke, handle",topic:"emotions",category:"vocab"},
+{phrase:"foray",meaning:"expedition, short journey",translation:"",synonyms:"excursion, raid, venture",topic:"general",category:"vocab"},
+{phrase:"forebears",meaning:"formal ancestors",translation:"",synonyms:"forefathers, predecessors",topic:"body_health",category:"vocab"},
+{phrase:"foresee (foresaw, foreseen)",meaning:"predict, expect",translation:"",synonyms:"anticipate, foretell, envision",topic:"general",category:"vocab"},
+{phrase:"forfeit",meaning:"here pay a penalty",translation:"",synonyms:"surrender, relinquish, yield",topic:"law",category:"vocab"},
+{phrase:"forge",meaning:"develop, create",translation:"",synonyms:"build, shape, form",topic:"food",category:"vocab"},
+{phrase:"foundation",meaning:"here basis, structure",translation:"",synonyms:"underpinning, bedrock, framework",topic:"general",category:"vocab"},
+{phrase:"Founding Fathers",meaning:"the people who made the US a country",translation:"",synonyms:"creators, framers",topic:"history",category:"vocab"},
+{phrase:"founding documents",meaning:"here historical papers relating to the creation of the US",translation:"",synonyms:"charters, constitutions",topic:"history",category:"vocab"},
+{phrase:"fount",meaning:"literary fountain, spring",translation:"",synonyms:"source, origin, wellspring",topic:"general",category:"vocab"},
+{phrase:"franchise",meaning:"here licence, permit",translation:"",synonyms:"authorization, warrant, concession",topic:"society",category:"vocab"},
+{phrase:"frown",meaning:"moving together of the eyebrows to show worry, irritation or concentration",translation:"",synonyms:"scowl, glower, glare",topic:"body_health",category:"vocab"},
+{phrase:"fulfilment",meaning:"feeling of happiness and satisfaction",translation:"",synonyms:"contentment, realization, achievement",topic:"emotions",category:"vocab"},
+{phrase:"fumble",meaning:"move your hands around clumsily",translation:"",synonyms:"grope, flounder, stumble",topic:"body_health",category:"vocab"},
+{phrase:"fundamental",meaning:"most important, central",translation:"",synonyms:"basic, core, essential",topic:"general",category:"vocab"},
+{phrase:"fuzzy",meaning:"tightly curled",translation:"",synonyms:"frizzy, downy, blurry",topic:"general",category:"vocab"},
+{phrase:"garment",meaning:"item of clothing",translation:"",synonyms:"article of clothing, apparel, attire",topic:"clothing",category:"vocab"},
+{phrase:"gauze",meaning:"thin transparent fabric",translation:"",synonyms:"mesh, netting, gossamer",topic:"clothing",category:"vocab"},
+{phrase:"gawky",meaning:"nervously awkward, without grace",translation:"",synonyms:"clumsy, ungainly, maladroit",topic:"military",category:"vocab"},
+{phrase:"giddy",meaning:"dizzy, light-headed",translation:"",synonyms:"vertiginous, woozy, flighty",topic:"body_health",category:"vocab"},
+{phrase:"gigantic",meaning:"huge, enormous",translation:"",synonyms:"colossal, massive, mammoth",topic:"general",category:"vocab"},
+{phrase:"give rise to",meaning:"cause something to happen",translation:"",synonyms:"produce, generate, prompt",topic:"general",category:"vocab"},
+{phrase:"glide",meaning:"move effortlessly",translation:"",synonyms:"slide, slip, sail",topic:"military",category:"vocab"},
+{phrase:"glistening",meaning:"shining, sparkling (something wet)",translation:"",synonyms:"gleaming, glittering, reflecting",topic:"general",category:"vocab"},
+{phrase:"globe",meaning:"literary the world",translation:"",synonyms:"earth, planet, sphere",topic:"general",category:"vocab"},
+{phrase:"gonk",meaning:"trademark egg-shaped doll with frizzy hair",translation:"",synonyms:"troll doll, novelty toy",topic:"food",category:"vocab"},
+{phrase:"goods",meaning:"objects to be sold",translation:"",synonyms:"merchandise, wares, products",topic:"society",category:"vocab"},
+{phrase:"government action",meaning:"intervention/punishment by the government",translation:"",synonyms:"state intervention, policy measure",topic:"society",category:"vocab"},
+{phrase:"grace",meaning:"love and kindness (of God)",translation:"",synonyms:"mercy, favor, blessing",topic:"emotions",category:"vocab"},
+{phrase:"graft",meaning:"here bribe(s)",translation:"",synonyms:"corruption, payoff, extortion",topic:"general",category:"vocab"},
+{phrase:"grain",meaning:"seed (here of wheat)",translation:"",synonyms:"kernel, cereal, particle",topic:"food",category:"vocab"},
+{phrase:"grand",meaning:"large, impressive",translation:"",synonyms:"magnificent, majestic, imposing",topic:"general",category:"vocab"},
+{phrase:"grandiose",meaning:"big, impressive",translation:"",synonyms:"pompous, ostentatious, extravagant",topic:"general",category:"vocab"},
+{phrase:"gratified",meaning:"formal pleased",translation:"",synonyms:"satisfied, delighted, thankful",topic:"emotions",category:"vocab"},
+{phrase:"gratitude",meaning:"feeling thankful",translation:"",synonyms:"appreciation, thankfulness, recognition",topic:"emotions",category:"vocab"},
+{phrase:"greens",meaning:"informal green vegetables",translation:"",synonyms:"leafy vegetables, foliage",topic:"food",category:"vocab"},
+{phrase:"grieve",meaning:"mourn, feel very sad because someone has died",translation:"",synonyms:"sorrow, lament, weep",topic:"emotions",category:"vocab"},
+{phrase:"grievance",meaning:"complaint",translation:"",synonyms:"grudge, injustice, objection",topic:"law",category:"vocab"},
+{phrase:"grifter",meaning:"AmE, informal person who gets money dishonestly",translation:"",synonyms:"con artist, swindler, fraud",topic:"society",category:"vocab"},
+{phrase:"groundsman",meaning:"BrE gardener, outdoor caretaker",translation:"",synonyms:"groundskeeper, custodian",topic:"home",category:"vocab"},
+{phrase:"growing season",meaning:"time of the year when rainfall and temperature allow plants to grow",translation:"",synonyms:"cultivation period",topic:"food",category:"vocab"},
+{phrase:"grudgingly",meaning:"not willingly",translation:"",synonyms:"reluctantly, resentfully, unenthusiastically",topic:"general",category:"vocab"},
+{phrase:"guardian",meaning:"person who guards something",translation:"",synonyms:"protector, custodian, keeper",topic:"general",category:"vocab"},
+{phrase:"gurgle",meaning:"make a bubbling sound",translation:"",synonyms:"babble, burble, splash",topic:"general",category:"vocab"},
+{phrase:"gush",meaning:"flood, spurt",translation:"",synonyms:"surge, stream, pour",topic:"general",category:"vocab"},
+{phrase:"gust",meaning:"sudden rush of wind",translation:"",synonyms:"flurry, blast, blow",topic:"nature",category:"vocab"},
+{phrase:"halfling",meaning:"offensive half-grown person",translation:"",synonyms:"runt, half-pint",topic:"general",category:"vocab"},
+{phrase:"hardship",meaning:"pain, suffering",translation:"",synonyms:"adversity, destitution, privation",topic:"body_health",category:"vocab"},
+{phrase:"harness",meaning:"control and make use of",translation:"",synonyms:"utilize, exploit, channel",topic:"general",category:"vocab"},
+{phrase:"hassle",meaning:"informal cause someone problems",translation:"",synonyms:"bother, annoy, badger",topic:"general",category:"vocab"},
+{phrase:"headlamps",meaning:"BrE front lights of a car",translation:"",synonyms:"headlights",topic:"body_health",category:"vocab"},
+{phrase:"hedgehog",meaning:"small wild animal with spikes on its back",translation:"",synonyms:"porcupine (similar)",topic:"nature",category:"vocab"},
+{phrase:"heed",meaning:"formal notice, pay attention to",translation:"",synonyms:"listen to, observe, regard",topic:"general",category:"vocab"},
+{phrase:"heir",meaning:"someone who will receive money, property, a title or a duty when another person dies",translation:"",synonyms:"successor, beneficiary, inheritor",topic:"society",category:"vocab"},
+{phrase:"hem",meaning:"bottom edge of a dress or skirt",translation:"",synonyms:"border, rim, fringe",topic:"clothing",category:"vocab"},
+{phrase:"heritage",meaning:"inheritance, tradition",translation:"",synonyms:"legacy, ancestry, birthright",topic:"history",category:"vocab"},
+{phrase:"hibernation",meaning:"a state like a deep sleep",translation:"",synonyms:"dormancy, torpor, sleep",topic:"body_health",category:"vocab"},
+{phrase:"high office",meaning:"leading position, top job",translation:"",synonyms:"senior post, executive position",topic:"society",category:"vocab"},
+{phrase:"hoarse",meaning:"rough and unclear",translation:"",synonyms:"raspy, gruff, croaky",topic:"body_health",category:"vocab"},
+{phrase:"hold court",meaning:"be the centre of attention among friends/admirers",translation:"",synonyms:"preside, dominate the conversation",topic:"law",category:"vocab"},
+{phrase:"hold office",meaning:"have an important job or position",translation:"",synonyms:"govern, rule, serve",topic:"society",category:"vocab"},
+{phrase:"hold true",meaning:"remain true/valid",translation:"",synonyms:"apply, endure, stand",topic:"general",category:"vocab"},
+{phrase:"holistic",meaning:"dealing with the whole of something, not just a part of it",translation:"",synonyms:"comprehensive, integrated, all-encompassing",topic:"general",category:"vocab"},
+{phrase:"horrendous",meaning:"terrible",translation:"",synonyms:"awful, dreadful, horrific",topic:"general",category:"vocab"},
+{phrase:"host",meaning:"receive and look after guests",translation:"",synonyms:"entertain, welcome, accommodate",topic:"general",category:"vocab"},
+{phrase:"howl",meaning:"here make a long wailing noise like the wind",translation:"",synonyms:"wail, bellow, cry",topic:"nature",category:"vocab"},
+{phrase:"huddle",meaning:"sit tight",translation:"",synonyms:"cluster, gather, curl up",topic:"general",category:"vocab"},
+{phrase:"hull",meaning:"body, exterior (part)",translation:"",synonyms:"framework, shell, casing",topic:"body_health",category:"vocab"},
+{phrase:"humanity",meaning:"sympathy towards other people",translation:"",synonyms:"compassion, kindness, benevolence",topic:"military",category:"vocab"},
+{phrase:"humbled",meaning:"made to feel less important",translation:"",synonyms:"subdued, modest, abashed",topic:"emotions",category:"vocab"},
+{phrase:"humility",meaning:"behaving in a humble way",translation:"",synonyms:"modesty, meekness, unpretentiousness",topic:"emotions",category:"vocab"},
+{phrase:"humming",meaning:"making a low continuous droning/whirring sound",translation:"",synonyms:"buzzing, purring, thrumming",topic:"society",category:"vocab"},
+{phrase:"husbandry",meaning:"farming",translation:"",synonyms:"agriculture, cultivation, livestock farming",topic:"body_health",category:"vocab"},
+{phrase:"hydrocarbon",meaning:"chemical substance made of hydrogen and carbon",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"hydrolysis",meaning:"chemical reaction in which one substance reacts with water to produce another",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"hydrolyze",meaning:"break down by chemical reaction with water (hydrolysis)",translation:"",synonyms:"dissolve (partially)",topic:"science",category:"vocab"},
+{phrase:"hypothermia",meaning:"a state in which body temperature has become dangerously low",translation:"",synonyms:"extreme coldness, overexposure",topic:"science",category:"vocab"},
+{phrase:"Ibo",meaning:"native language spoken in south-east Nigeria",translation:"",synonyms:"Igbo",topic:"general",category:"vocab"},
+{phrase:"idol",meaning:"here image of a god used for worship",translation:"",synonyms:"icon, statue, deity",topic:"religion",category:"vocab"},
+{phrase:"ill advised",meaning:"not sensible or wise",translation:"",synonyms:"foolish, misguided, imprudent",topic:"general",category:"vocab"},
+{phrase:"illicit = elicit",meaning:"formal manage to get a certain reaction/information from someone",translation:"",synonyms:"draw out, extract, prompt",topic:"general",category:"vocab"},
+{phrase:"immaculate",meaning:"totally perfect",translation:"",synonyms:"flawless, pristine, spotless",topic:"general",category:"vocab"},
+{phrase:"immense",meaning:"great, huge",translation:"",synonyms:"massive, colossal, vast",topic:"food",category:"vocab"},
+{phrase:"imminent",meaning:"happening very soon",translation:"",synonyms:"impending, approaching, looming",topic:"general",category:"vocab"},
+{phrase:"implore",meaning:"formal beg, plead with",translation:"",synonyms:"entreat, beseech, urge",topic:"general",category:"vocab"},
+{phrase:"imply",meaning:"suggest, indicate",translation:"",synonyms:"hint, insinuate, mean",topic:"general",category:"vocab"},
+{phrase:"in attendance",meaning:"formal present",translation:"",synonyms:"present, participating, observing",topic:"general",category:"vocab"},
+{phrase:"in relation",meaning:"compared to someone else, in comparison",translation:"",synonyms:"regarding, concerning, apropos",topic:"general",category:"vocab"},
+{phrase:"in spite of",meaning:"despite, regardless of",translation:"",synonyms:"notwithstanding, even with",topic:"general",category:"vocab"},
+{phrase:"in succession",meaning:"in a row, one after the other",translation:"",synonyms:"consecutively, sequentially",topic:"general",category:"vocab"},
+{phrase:"in the midst of",meaning:"formal in the middle of",translation:"",synonyms:"during, amidst, surrounded by",topic:"general",category:"vocab"},
+{phrase:"inaugural",meaning:"first, opening",translation:"",synonyms:"initial, introductory, maiden",topic:"general",category:"vocab"},
+{phrase:"indifference",meaning:"lack of interest/sympathy",translation:"",synonyms:"apathy, unconcern, detachment",topic:"general",category:"vocab"},
+{phrase:"induce",meaning:"cause something to happen",translation:"",synonyms:"prompt, instigate, provoke",topic:"general",category:"vocab"},
+{phrase:"indulgence",meaning:"pleasure",translation:"",synonyms:"luxury, treat, extravagance",topic:"general",category:"vocab"},
+{phrase:"infantry",meaning:"(group of) foot soldiers",translation:"",synonyms:"ground troops, footmen",topic:"military",category:"vocab"},
+{phrase:"infinitesimal",meaning:"formal tiny",translation:"",synonyms:"microscopic, minute, minuscule",topic:"general",category:"vocab"},
+{phrase:"infrequently",meaning:"rarely, not often",translation:"",synonyms:"seldom, occasionally, sparingly",topic:"general",category:"vocab"},
+{phrase:"ingenious",meaning:"very clever",translation:"",synonyms:"inventive, brilliant, shrewd",topic:"general",category:"vocab"},
+{phrase:"inhabit",meaning:"literary live in",translation:"",synonyms:"occupy, reside in, populate",topic:"general",category:"vocab"},
+{phrase:"inherent",meaning:"basic, integral, innate",translation:"",synonyms:"intrinsic, inborn, deep-rooted",topic:"general",category:"vocab"},
+{phrase:"inheritance",meaning:"money or property you receive from a person who has died",translation:"",synonyms:"legacy, bequest, heritage",topic:"society",category:"vocab"},
+{phrase:"initially",meaning:"at first, in the beginning",translation:"",synonyms:"originally, primarily, beforehand",topic:"general",category:"vocab"},
+{phrase:"insatiable",meaning:"limitless, cannot be satisfied",translation:"",synonyms:"unquenchable, ravenous, voracious",topic:"general",category:"vocab"},
+{phrase:"intention",meaning:"aim, purpose",translation:"",synonyms:"intent, objective, goal",topic:"general",category:"vocab"},
+{phrase:"intricate",meaning:"detailed, complex",translation:"",synonyms:"complicated, convoluted, elaborate",topic:"general",category:"vocab"},
+{phrase:"intrude",meaning:"here, formal force",translation:"",synonyms:"encroach, trespass, interrupt",topic:"science",category:"vocab"},
+{phrase:"inventive",meaning:"creative",translation:"",synonyms:"imaginative, innovative, resourceful",topic:"food",category:"vocab"},
+{phrase:"issue",meaning:"question, problem",translation:"",synonyms:"matter, topic, concern",topic:"general",category:"vocab"},
+{phrase:"jack up",meaning:"here, informal increase something by a large amount",translation:"",synonyms:"raise, hike, boost",topic:"general",category:"vocab"},
+{phrase:"jaded",meaning:"bored and tired, no longer enthusiastic",translation:"",synonyms:"cynical, weary, dulled",topic:"emotions",category:"vocab"},
+{phrase:"jarring",meaning:"upsetting, disturbing",translation:"",synonyms:"clashing, grating, shocking",topic:"general",category:"vocab"},
+{phrase:"jaunt",meaning:"short trip (for fun)",translation:"",synonyms:"outing, excursion, stroll",topic:"general",category:"vocab"},
+{phrase:"jelly sweet",meaning:"soft brightly coloured sweet with a fruit flavour",translation:"",synonyms:"gummy, gelatin candy",topic:"food",category:"vocab"},
+{phrase:"jerk",meaning:"make a quick, sharp, sudden movement",translation:"",synonyms:"yank, twitch, jolt",topic:"general",category:"vocab"},
+{phrase:"jettison",meaning:"throw away",translation:"",synonyms:"discard, dump, eject",topic:"sports",category:"vocab"},
+{phrase:"Johnson Space Center",meaning:"NASA centre in Houston, Texas",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"judge",meaning:"form an opinion about",translation:"",synonyms:"assess, evaluate, appraise",topic:"law",category:"vocab"},
+{phrase:"justification",meaning:"explanation, excuse",translation:"",synonyms:"reason, rationale, vindication",topic:"general",category:"vocab"},
+{phrase:"justness",meaning:"fairness",translation:"",synonyms:"justice, equity, righteousness",topic:"nature",category:"vocab"},
+{phrase:"kale",meaning:"a type of cabbage",translation:"",synonyms:"leaf cabbage",topic:"science",category:"vocab"},
+{phrase:"Karo syrup",meaning:"AmE, trademark brand of corn syrup",translation:"",synonyms:"corn syrup",topic:"science",category:"vocab"},
+{phrase:"kasha",meaning:"a cereal eaten in Russia",translation:"",synonyms:"buckwheat porridge",topic:"science",category:"vocab"},
+{phrase:"keen",meaning:"here intense, strong",translation:"",synonyms:"sharp, piercing, acute",topic:"general",category:"vocab"},
+{phrase:"keratin",meaning:"protein found in hair, nails, feathers etc.",translation:"",synonyms:"structural protein",topic:"science",category:"vocab"},
+{phrase:"kin",meaning:"one's family and relations",translation:"",synonyms:"relatives, kindred, family",topic:"society",category:"vocab"},
+{phrase:"Kiwi",meaning:"here person from New Zealand",translation:"",synonyms:"New Zealander",topic:"general",category:"vocab"},
+{phrase:"knack",meaning:"informal skill, ability",translation:"",synonyms:"talent, flair, gift",topic:"general",category:"vocab"},
+{phrase:"knowledgeable",meaning:"well-informed",translation:"",synonyms:"educated, learned, aware",topic:"general",category:"vocab"},
+{phrase:"lace-up boots",meaning:"boots fastened with laces",translation:"",synonyms:"combat boots, hiking boots",topic:"clothing",category:"vocab"},
+{phrase:"lander",meaning:"spacecraft designed to land on a planet/the moon",translation:"",synonyms:"space probe, landing module",topic:"science",category:"vocab"},
+{phrase:"landlord",meaning:"person you rent land or housing from",translation:"",synonyms:"owner, lessor, proprietor",topic:"home",category:"vocab"},
+{phrase:"lash",meaning:"strike sharply",translation:"",synonyms:"whip, beat, flog",topic:"general",category:"vocab"},
+{phrase:"latter (the)",meaning:"the second of two things mentioned",translation:"",synonyms:"last-mentioned, second",topic:"general",category:"vocab"},
+{phrase:"launch",meaning:"set in motion; here send into space",translation:"",synonyms:"initiate, propel, blast off",topic:"science",category:"vocab"},
+{phrase:"lead-free",meaning:"made without lead (a bluish-grey metallic chemical)",translation:"",synonyms:"unleaded",topic:"science",category:"vocab"},
+{phrase:"leader column",meaning:"BrE leading article in a newspaper written by the editor",translation:"",synonyms:"editorial, leading article",topic:"general",category:"vocab"},
+{phrase:"leaf mold",meaning:"AmE decomposing leaves",translation:"",synonyms:"compost, mulch",topic:"nature",category:"vocab"},
+{phrase:"leap (leapt, leapt)",meaning:"here jump over",translation:"",synonyms:"vault, spring, bound",topic:"sports",category:"vocab"},
+{phrase:"lease",meaning:"rent out",translation:"",synonyms:"let, hire, charter",topic:"home",category:"vocab"},
+{phrase:"legacy",meaning:"something that exists as a result of a past event/action",translation:"",synonyms:"heritage, inheritance, remnant",topic:"history",category:"vocab"},
+{phrase:"leisure",meaning:"free time",translation:"",synonyms:"relaxation, recreation, time off",topic:"general",category:"vocab"},
+{phrase:"lenient",meaning:"moderate, not severe",translation:"",synonyms:"forgiving, merciful, tolerant",topic:"general",category:"vocab"},
+{phrase:"levee",meaning:"a wall built to stop a river flooding",translation:"",synonyms:"embankment, dam, dike",topic:"nature",category:"vocab"},
+{phrase:"lever",meaning:"bar or handle used to control a machine etc.",translation:"",synonyms:"handle, switch, crowbar",topic:"body_health",category:"vocab"},
+{phrase:"Libby Prison",meaning:"Confederate prison at Richmond, Virginia during the American Civil War",translation:"",synonyms:"",topic:"history",category:"vocab"},
+{phrase:"limbs",meaning:"legs and arms",translation:"",synonyms:"appendages, extremities",topic:"body_health",category:"vocab"},
+{phrase:"limp",meaning:"here not firm or strong",translation:"",synonyms:"flabby, drooping, floppy",topic:"body_health",category:"vocab"},
+{phrase:"linoleum",meaning:"stiff flat material used to cover floors",translation:"",synonyms:"lino, floor covering",topic:"science",category:"vocab"},
+{phrase:"listing",meaning:"here advert, post",translation:"",synonyms:"directory entry, advertisement",topic:"general",category:"vocab"},
+{phrase:"lithe",meaning:"able to move easily and gracefully",translation:"",synonyms:"agile, supple, flexible",topic:"body_health",category:"vocab"},
+{phrase:"liver",meaning:"organ in the body that cleans the blood",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"locomotive",meaning:"railway engine",translation:"",synonyms:"train engine",topic:"science",category:"vocab"},
+{phrase:"loins",meaning:"literary sexual organs",translation:"",synonyms:"groin, genitals",topic:"science",category:"vocab"},
+{phrase:"loop",meaning:"here repeat, go around and around / circular movement",translation:"",synonyms:"circle, cycle, ring",topic:"food",category:"vocab"},
+{phrase:"LP",meaning:"abbrev. long-playing (vinyl) record",translation:"",synonyms:"record, vinyl, album",topic:"sports",category:"vocab"},
+{phrase:"lunar",meaning:"relating to the moon",translation:"",synonyms:"moonlike, celestial",topic:"science",category:"vocab"},
+{phrase:"lunge",meaning:"move forward with a sudden thrust of the body",translation:"",synonyms:"pounce, charge, dive",topic:"military",category:"vocab"},
+{phrase:"lurch",meaning:"move suddenly, jump",translation:"",synonyms:"stagger, pitch, stumble",topic:"sports",category:"vocab"},
+{phrase:"magnificent",meaning:"very impressive/beautiful",translation:"",synonyms:"splendid, glorious, grand",topic:"general",category:"vocab"},
+{phrase:"mail",meaning:"here armour",translation:"",synonyms:"chainmail, defense",topic:"body_health",category:"vocab"},
+{phrase:"maiden",meaning:"archaic unmarried girl/young woman",translation:"",synonyms:"damsel, virgin, lass",topic:"general",category:"vocab"},
+{phrase:"make it snappy",meaning:"informal do it quickly",translation:"",synonyms:"hurry up, be quick, step on it",topic:"general",category:"vocab"},
+{phrase:"makeshift",meaning:"temporary, improvised",translation:"",synonyms:"provisional, stopgap, ad hoc",topic:"home",category:"vocab"},
+{phrase:"mall",meaning:"promenade, public walkway",translation:"",synonyms:"plaza, concourse, shopping center",topic:"general",category:"vocab"},
+{phrase:"mammal",meaning:"warm-blooded animal whose babies drink its milk",translation:"",synonyms:"vertebrate",topic:"military",category:"vocab"},
+{phrase:"manor",meaning:"mansion, large country estate",translation:"",synonyms:"estate, hall, chateau",topic:"home",category:"vocab"},
+{phrase:"manure",meaning:"waste matter from animals",translation:"",synonyms:"fertilizer, dung, compost",topic:"science",category:"vocab"},
+{phrase:"martial law",meaning:"when an army controls an area instead of its usual leaders",translation:"",synonyms:"military rule",topic:"military",category:"vocab"},
+{phrase:"marvel",meaning:"be amazed",translation:"",synonyms:"wonder, gape, stare",topic:"general",category:"vocab"},
+{phrase:"mating",meaning:"sexual intercourse",translation:"",synonyms:"breeding, copulation, coupling",topic:"general",category:"vocab"},
+{phrase:"meditatively",meaning:"deep in thought",translation:"",synonyms:"thoughtfully, reflectively, contemplatively",topic:"general",category:"vocab"},
+{phrase:"megalomaniacal",meaning:"having a strong desire for power and control",translation:"",synonyms:"power-hungry, egomaniacal",topic:"emotions",category:"vocab"},
+{phrase:"mere",meaning:"simple",translation:"",synonyms:"bare, minor, trifling",topic:"general",category:"vocab"},
+{phrase:"mesh",meaning:"interlaced structure like a net",translation:"",synonyms:"netting, web, lattice",topic:"clothing",category:"vocab"},
+{phrase:"metabolism",meaning:"chemical processes which help the body to use food for energy and growth",translation:"",synonyms:"digestive process",topic:"science",category:"vocab"},
+{phrase:"meth",meaning:"informal methamphetamine – an addictive drug",translation:"",synonyms:"crystal meth, speed",topic:"general",category:"vocab"},
+{phrase:"Minié ball",meaning:"type of rifle bullet used in the 1800s",translation:"",synonyms:"musket ball, projectile",topic:"science",category:"vocab"},
+{phrase:"mock",meaning:"make fun of, tease",translation:"",synonyms:"ridicule, deride, taunt",topic:"general",category:"vocab"},
+{phrase:"momentary",meaning:"lasting a very short time",translation:"",synonyms:"brief, fleeting, transient",topic:"general",category:"vocab"},
+{phrase:"mooring",meaning:"place where something is fixed or tied",translation:"",synonyms:"anchorage, berth, dock",topic:"clothing",category:"vocab"},
+{phrase:"motion",meaning:"here wave, signal",translation:"",synonyms:"gesture, sign, beckon",topic:"science",category:"vocab"},
+{phrase:"mound",meaning:"pile",translation:"",synonyms:"heap, hillock, knoll",topic:"nature",category:"vocab"},
+{phrase:"MSG",meaning:"monosodium glutamate (chemical which improves flavour)",translation:"",synonyms:"flavor enhancer",topic:"science",category:"vocab"},
+{phrase:"multinational",meaning:"large international company",translation:"",synonyms:"conglomerate, corporation",topic:"society",category:"vocab"},
+{phrase:"murmur",meaning:"low continuous background noise",translation:"",synonyms:"mutter, whisper, hum",topic:"general",category:"vocab"},
+{phrase:"muse",meaning:"say thoughtfully / reflect, consider",translation:"",synonyms:"ponder, deliberate, ruminate",topic:"general",category:"vocab"},
+{phrase:"mutual",meaning:"shared",translation:"",synonyms:"reciprocal, common, joint",topic:"general",category:"vocab"},
+{phrase:"nagging",meaning:"persistent and worrying",translation:"",synonyms:"bothersome, unrelenting, irritating",topic:"emotions",category:"vocab"},
+{phrase:"NASA",meaning:"US agency for space exploration/research",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"nestle",meaning:"lie comfortably close",translation:"",synonyms:"snuggle, cuddle, burrow",topic:"military",category:"vocab"},
+{phrase:"neuronal",meaning:"related to a nerve cell or neuron (= a basic unit of a nerve cell)",translation:"",synonyms:"neural, nervous",topic:"science",category:"vocab"},
+{phrase:"neuroscience",meaning:"scientific study of the nervous system",translation:"",synonyms:"brain science, neurobiology",topic:"science",category:"vocab"},
+{phrase:"NGO",meaning:"non-governmental organization – an independent, non-profit organization funded by the government",translation:"",synonyms:"charity, nonprofit",topic:"science",category:"vocab"},
+{phrase:"night fighter",meaning:"Nigerian English prostitute",translation:"",synonyms:"sex worker, lady of the night",topic:"military",category:"vocab"},
+{phrase:"nitrogen",meaning:"a colourless gas that forms about 78% of Earth's atmosphere",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"nourish",meaning:"feed",translation:"",synonyms:"sustain, nurture, provide for",topic:"general",category:"vocab"},
+{phrase:"novel",meaning:"here new and original",translation:"",synonyms:"innovative, fresh, unique",topic:"general",category:"vocab"},
+{phrase:"nudge",meaning:"push or touch gently, prod",translation:"",synonyms:"poke, elbow, bump",topic:"general",category:"vocab"},
+{phrase:"numb",meaning:"unable to feel anything",translation:"",synonyms:"deadened, unfeeling, paralyzed",topic:"body_health",category:"vocab"},
+{phrase:"numerous",meaning:"several, many",translation:"",synonyms:"abundant, countless, myriad",topic:"general",category:"vocab"},
+{phrase:"nurture",meaning:"take care of",translation:"",synonyms:"raise, foster, tend",topic:"general",category:"vocab"},
+{phrase:"nutrient",meaning:"a substance that the body needs to live and grow",translation:"",synonyms:"sustenance, nourishment",topic:"science",category:"vocab"},
+{phrase:"nutrition",meaning:"the food needed for good health, and the science of this",translation:"",synonyms:"diet, nourishment",topic:"science",category:"vocab"},
+{phrase:"nutritionist",meaning:"expert on the science of food",translation:"",synonyms:"dietitian, food scientist",topic:"science",category:"vocab"},
+{phrase:"obtain",meaning:"get, achieve",translation:"",synonyms:"acquire, secure, procure",topic:"general",category:"vocab"},
+{phrase:"off the grid",meaning:"AmE living without basic services of electricity, water, gas etc.",translation:"",synonyms:"self-sufficient, disconnected",topic:"nature",category:"vocab"},
+{phrase:"ominous",meaning:"indicating that something bad might happen",translation:"",synonyms:"threatening, foreboding, sinister",topic:"clothing",category:"vocab"},
+{phrase:"on the instant",meaning:"archaic instantly, immediately",translation:"",synonyms:"forthwith, straightaway, at once",topic:"general",category:"vocab"},
+{phrase:"on the spot",meaning:"immediately, there and then",translation:"",synonyms:"instantly, directly, right away",topic:"general",category:"vocab"},
+{phrase:"oppressively",meaning:"here unpleasantly, harshly",translation:"",synonyms:"stiflingly, heavily, tyrannically",topic:"general",category:"vocab"},
+{phrase:"Orange County",meaning:"a county in California",translation:"",synonyms:"",topic:"history",category:"vocab"},
+{phrase:"ordnance",meaning:"weapons and ammunition",translation:"",synonyms:"artillery, munitions, arms",topic:"military",category:"vocab"},
+{phrase:"Orient (the)",meaning:"literary the countries of the East or the Far East",translation:"",synonyms:"the East, Asia",topic:"general",category:"vocab"},
+{phrase:"ornamental",meaning:"decorative, for show",translation:"",synonyms:"attractive, aesthetic, fancy",topic:"general",category:"vocab"},
+{phrase:"osmotic pressure",meaning:"pressure that is applied to desalinate a liquid",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"outcome",meaning:"final result",translation:"",synonyms:"consequence, conclusion, upshot",topic:"general",category:"vocab"},
+{phrase:"outskirts",meaning:"suburbs",translation:"",synonyms:"edges, fringes, borders",topic:"clothing",category:"vocab"},
+{phrase:"padded",meaning:"covered, filled",translation:"",synonyms:"cushioned, stuffed, lined",topic:"clothing",category:"vocab"},
+{phrase:"palatability",meaning:"how pleasant something tastes",translation:"",synonyms:"tastiness, flavorfulness",topic:"food",category:"vocab"},
+{phrase:"palatable",meaning:"pleasant to taste",translation:"",synonyms:"appetizing, delicious, edible",topic:"food",category:"vocab"},
+{phrase:"pale",meaning:"whitish, not strong in colour",translation:"",synonyms:"faded, light, washed-out",topic:"body_health",category:"vocab"},
+{phrase:"palely",meaning:"weakly",translation:"",synonyms:"faintly, dimly, wanly",topic:"body_health",category:"vocab"},
+{phrase:"pamphlet",meaning:"very thin book, brochure",translation:"",synonyms:"booklet, leaflet, flyer",topic:"general",category:"vocab"},
+{phrase:"paradigm shift",meaning:"formal a major change in ideas, methods, approach etc.",translation:"",synonyms:"sea change, revolution, transformation",topic:"nature",category:"vocab"},
+{phrase:"paradox",meaning:"contradiction",translation:"",synonyms:"anomaly, enigma, puzzle",topic:"general",category:"vocab"},
+{phrase:"parchment",meaning:"early form of paper made from animal skin",translation:"",synonyms:"scroll, vellum, manuscript",topic:"history",category:"vocab"},
+{phrase:"participant",meaning:"someone who takes part in something",translation:"",synonyms:"contributor, player, member",topic:"general",category:"vocab"},
+{phrase:"partly",meaning:"not completely, to some extent",translation:"",synonyms:"partially, somewhat, incompletely",topic:"general",category:"vocab"},
+{phrase:"patchwork",meaning:"something made up of many different parts",translation:"",synonyms:"medley, jumble, mishmash",topic:"general",category:"vocab"},
+{phrase:"patty",meaning:"flat, round piece of minced food",translation:"",synonyms:"burger, cake, disc",topic:"food",category:"vocab"},
+{phrase:"pedestal",meaning:"here base (of a statue)",translation:"",synonyms:"plinth, stand, foundation",topic:"general",category:"vocab"},
+{phrase:"pelvic",meaning:"related to the pelvis; lumbar",translation:"",synonyms:"hip, lower body",topic:"science",category:"vocab"},
+{phrase:"penalty",meaning:"here fine, charge",translation:"",synonyms:"punishment, sanction, forfeit",topic:"law",category:"vocab"},
+{phrase:"penchant",meaning:"formal liking, preference; tendency",translation:"",synonyms:"fondness, inclination, bias",topic:"society",category:"vocab"},
+{phrase:"pending",meaning:"formal until, awaiting",translation:"",synonyms:"imminent, unresolved, approaching",topic:"general",category:"vocab"},
+{phrase:"peoples",meaning:"nations",translation:"",synonyms:"populations, societies, cultures",topic:"society",category:"vocab"},
+{phrase:"percolate",meaning:"formal spread slowly",translation:"",synonyms:"filter, seep, permeate",topic:"general",category:"vocab"},
+{phrase:"peril",meaning:"literary danger, risk",translation:"",synonyms:"jeopardy, hazard, menace",topic:"emotions",category:"vocab"},
+{phrase:"petty",meaning:"unimportant",translation:"",synonyms:"trivial, minor, insignificant",topic:"general",category:"vocab"},
+{phrase:"pharmacological",meaning:"related to medical treatment using drugs",translation:"",synonyms:"medicinal, drug-related",topic:"science",category:"vocab"},
+{phrase:"phlegm",meaning:"mucus; slimy liquid in your nose and throat",translation:"",synonyms:"sputum, discharge",topic:"science",category:"vocab"},
+{phrase:"picket",meaning:"group of soldiers that guard troops from a surprise attack",translation:"",synonyms:"sentry, watch, guard",topic:"military",category:"vocab"},
+{phrase:"pin",meaning:"here attach, fasten",translation:"",synonyms:"secure, affix, clip",topic:"general",category:"vocab"},
+{phrase:"pipe dream",meaning:"wish that is very unlikely to come true",translation:"",synonyms:"fantasy, illusion, delusion",topic:"clothing",category:"vocab"},
+{phrase:"piston",meaning:"part of an engine that moves up and down to make power",translation:"",synonyms:"cylinder, plunger",topic:"science",category:"vocab"},
+{phrase:"plain",meaning:"not attractive",translation:"",synonyms:"ordinary, simple, unadorned",topic:"general",category:"vocab"},
+{phrase:"plantain",meaning:"type of banana used in African cooking",translation:"",synonyms:"cooking banana",topic:"science",category:"vocab"},
+{phrase:"plateau",meaning:"flat highland",translation:"",synonyms:"mesa, tableland, plain",topic:"nature",category:"vocab"},
+{phrase:"plead",meaning:"beg, ask desperately",translation:"",synonyms:"beseech, entreat, implore",topic:"general",category:"vocab"},
+{phrase:"pledge",meaning:"promise",translation:"",synonyms:"vow, oath, guarantee",topic:"general",category:"vocab"},
+{phrase:"plenty",meaning:"formal large quantities of food",translation:"",synonyms:"abundance, wealth, cornucopia",topic:"clothing",category:"vocab"},
+{phrase:"pluck (out)",meaning:"pull out, remove (hair, feather etc.)",translation:"",synonyms:"extract, snatch, tug",topic:"food",category:"vocab"},
+{phrase:"poised",meaning:"composed, graceful",translation:"",synonyms:"balanced, ready, dignified",topic:"religion",category:"vocab"},
+{phrase:"polymyalgia",meaning:"medical condition involving pain and stiffness of the muscles",translation:"",synonyms:"muscle pain",topic:"science",category:"vocab"},
+{phrase:"poor",meaning:"lacking, inadequate",translation:"",synonyms:"deficient, inferior, substandard",topic:"society",category:"vocab"},
+{phrase:"pores",meaning:"tiny holes in the skin",translation:"",synonyms:"openings, orifices",topic:"body_health",category:"vocab"},
+{phrase:"possessions",meaning:"belongings, things you own",translation:"",synonyms:"property, assets, goods",topic:"general",category:"vocab"},
+{phrase:"postapocalyptic",meaning:"after a worldwide catastrophe",translation:"",synonyms:"post-doomsday",topic:"general",category:"vocab"},
+{phrase:"pound",meaning:"1 pound = 0.454 kilograms",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"preceding",meaning:"previous, (the one) before",translation:"",synonyms:"prior, foregoing, earlier",topic:"general",category:"vocab"},
+{phrase:"precious",meaning:"valuable",translation:"",synonyms:"prized, cherished, expensive",topic:"general",category:"vocab"},
+{phrase:"predestined",meaning:"decided by fate",translation:"",synonyms:"fated, foreordained, preordained",topic:"general",category:"vocab"},
+{phrase:"predicated",meaning:"formal based, established",translation:"",synonyms:"founded, rooted, grounded",topic:"general",category:"vocab"},
+{phrase:"presidency",meaning:"the job, or period, of being president",translation:"",synonyms:"administration, term of office",topic:"society",category:"vocab"},
+{phrase:"preternatural",meaning:"formal supernatural",translation:"",synonyms:"unearthly, extraordinary, otherworldly",topic:"general",category:"vocab"},
+{phrase:"prim",meaning:"behaving in a formal and correct way; easily shocked by anything rude",translation:"",synonyms:"prudish, proper, straitlaced",topic:"clothing",category:"vocab"},
+{phrase:"primate",meaning:"group of mammals that includes humans, apes and monkeys",translation:"",synonyms:"ape, simian",topic:"clothing",category:"vocab"},
+{phrase:"prime",meaning:"of very high quality",translation:"",synonyms:"premium, superior, top-tier",topic:"clothing",category:"vocab"},
+{phrase:"primeval",meaning:"AmE sp., here primitive, natural / of the earliest time in history",translation:"",synonyms:"ancient, prehistoric, primordial",topic:"history",category:"vocab"},
+{phrase:"private",meaning:"low-ranking soldier",translation:"",synonyms:"enlisted man, grunt, infantryman",topic:"military",category:"vocab"},
+{phrase:"proclaim",meaning:"say something publicly",translation:"",synonyms:"announce, declare, broadcast",topic:"general",category:"vocab"},
+{phrase:"prolonged",meaning:"here extended, continuing for a long time",translation:"",synonyms:"lengthy, drawn-out, protracted",topic:"general",category:"vocab"},
+{phrase:"prose",meaning:"written or spoken language in its ordinary form",translation:"",synonyms:"text, writing, narrative",topic:"general",category:"vocab"},
+{phrase:"prosperous",meaning:"rich and successful",translation:"",synonyms:"wealthy, affluent, thriving",topic:"general",category:"vocab"},
+{phrase:"prosperity",meaning:"wealth",translation:"",synonyms:"success, affluence, riches",topic:"general",category:"vocab"},
+{phrase:"provided",meaning:"on condition (that), only if",translation:"",synonyms:"assuming, provided that, given that",topic:"clothing",category:"vocab"},
+{phrase:"provisions",meaning:"food and material necessities",translation:"",synonyms:"supplies, rations, stores",topic:"clothing",category:"vocab"},
+{phrase:"punctuate",meaning:"here occur regularly",translation:"",synonyms:"interrupt, intersperse, pepper",topic:"general",category:"vocab"},
+{phrase:"pursue",meaning:"try to achieve",translation:"",synonyms:"chase, seek, strive for",topic:"general",category:"vocab"},
+{phrase:"quartermaster",meaning:"officer responsible for providing soldiers with food, equipment and other necessities",translation:"",synonyms:"supply officer",topic:"military",category:"vocab"},
+{phrase:"quaver",meaning:"shake slightly",translation:"",synonyms:"tremble, vibrate, quiver",topic:"general",category:"vocab"},
+{phrase:"radical",meaning:"drastic, extreme",translation:"",synonyms:"revolutionary, thorough, profound",topic:"general",category:"vocab"},
+{phrase:"rage",meaning:"here continue with great violence",translation:"",synonyms:"storm, storm, blaze",topic:"food",category:"vocab"},
+{phrase:"raging",meaning:"forceful, violent",translation:"",synonyms:"furious, intense, wild",topic:"science",category:"vocab"},
+{phrase:"railing",meaning:"fence made from metal bars",translation:"",synonyms:"barrier, banister, handrail",topic:"general",category:"vocab"},
+{phrase:"ranching",meaning:"running a ranch (=large farm)",translation:"",synonyms:"farming, cattle-rearing",topic:"body_health",category:"vocab"},
+{phrase:"rapid",meaning:"quick",translation:"",synonyms:"fast, swift, speedy",topic:"general",category:"vocab"},
+{phrase:"raspy",meaning:"rough, hoarse",translation:"",synonyms:"scratchy, croaky, harsh",topic:"general",category:"vocab"},
+{phrase:"rationalism",meaning:"the belief in reason and logic",translation:"",synonyms:"logic, reason, objectivism",topic:"religion",category:"vocab"},
+{phrase:"ravine",meaning:"very narrow valley with steep sides",translation:"",synonyms:"gorge, canyon, chasm",topic:"nature",category:"vocab"},
+{phrase:"ravenous",meaning:"very hungry",translation:"",synonyms:"famished, starving, starved",topic:"general",category:"vocab"},
+{phrase:"raw",meaning:"very sore, painful",translation:"",synonyms:"tender, sensitive, inflamed",topic:"body_health",category:"vocab"},
+{phrase:"readily",meaning:"willingly",translation:"",synonyms:"eagerly, promptly, gladly",topic:"general",category:"vocab"},
+{phrase:"reaffirm",meaning:"state something again",translation:"",synonyms:"restate, confirm, validate",topic:"society",category:"vocab"},
+{phrase:"reams",meaning:"informal large quantity",translation:"",synonyms:"loads, masses, tons",topic:"general",category:"vocab"},
+{phrase:"reason",meaning:"the ability to think and make wise decisions",translation:"",synonyms:"intellect, logic, sanity",topic:"general",category:"vocab"},
+{phrase:"reassuringly",meaning:"in a comforting way",translation:"",synonyms:"encouragingly, soothingly",topic:"military",category:"vocab"},
+{phrase:"receiver",meaning:"here telephone handset",translation:"",synonyms:"earpiece, phone",topic:"body_health",category:"vocab"},
+{phrase:"reckoning",meaning:"opinion, judgement",translation:"",synonyms:"calculation, assessment, estimation",topic:"law",category:"vocab"},
+{phrase:"recriminations",meaning:"criticizing someone who has criticized you",translation:"",synonyms:"accusations, countercharges, bickering",topic:"society",category:"vocab"},
+{phrase:"refugee",meaning:"someone forced to leave their country because of war, politics etc.",translation:"",synonyms:"exile, asylum seeker, displaced person",topic:"science",category:"vocab"},
+{phrase:"refuse",meaning:"formal rubbish",translation:"",synonyms:"trash, waste, garbage",topic:"general",category:"vocab"},
+{phrase:"regime",meaning:"here programme",translation:"",synonyms:"routine, system, regimen",topic:"society",category:"vocab"},
+{phrase:"rehydrate",meaning:"restore water (to the body)",translation:"",synonyms:"replenish, moisten",topic:"science",category:"vocab"},
+{phrase:"relative to",meaning:"compared with, in relation to",translation:"",synonyms:"concerning, proportional to",topic:"general",category:"vocab"},
+{phrase:"release",meaning:"here document to say you give up certain rights, property, money etc.",translation:"",synonyms:"waiver, discharge, quitclaim",topic:"society",category:"vocab"},
+{phrase:"reliant",meaning:"dependent",translation:"",synonyms:"dependent, counting on, leaning on",topic:"general",category:"vocab"},
+{phrase:"rely upon",meaning:"need",translation:"",synonyms:"depend on, trust, count on",topic:"general",category:"vocab"},
+{phrase:"remains",meaning:"here parts of old buildings",translation:"",synonyms:"ruins, debris, remnants",topic:"general",category:"vocab"},
+{phrase:"remake",meaning:"make again, in a different way",translation:"",synonyms:"rebuild, overhaul, revamp",topic:"general",category:"vocab"},
+{phrase:"remembrance",meaning:"formal memory of an event",translation:"",synonyms:"memorial, commemoration, recollection",topic:"general",category:"vocab"},
+{phrase:"remit",meaning:"here pay back, settle",translation:"",synonyms:"refund, forward, dispatch",topic:"law",category:"vocab"},
+{phrase:"rend",meaning:"literary tear (into pieces)",translation:"",synonyms:"rip, split, sever",topic:"body_health",category:"vocab"},
+{phrase:"render",meaning:"formal provide, give",translation:"",synonyms:"supply, deliver, furnish",topic:"general",category:"vocab"},
+{phrase:"renowned",meaning:"famous",translation:"",synonyms:"celebrated, esteemed, distinguished",topic:"general",category:"vocab"},
+{phrase:"repatriate",meaning:"send someone back to their home country",translation:"",synonyms:"deport, send home",topic:"home",category:"vocab"},
+{phrase:"replicate",meaning:"here copy, reproduce",translation:"",synonyms:"duplicate, clone, recreate",topic:"food",category:"vocab"},
+{phrase:"report",meaning:"here, formal sudden loud noise; shot",translation:"",synonyms:"bang, blast, explosion",topic:"general",category:"vocab"},
+{phrase:"resident",meaning:"person who lives in a particular place",translation:"",synonyms:"inhabitant, citizen, local",topic:"clothing",category:"vocab"},
+{phrase:"resilience",meaning:"here ability to keep going despite setbacks",translation:"",synonyms:"toughness, endurance, perseverance",topic:"general",category:"vocab"},
+{phrase:"resilient",meaning:"hardy, strong",translation:"",synonyms:"robust, adaptable, durable",topic:"general",category:"vocab"},
+{phrase:"restore",meaning:"bring back, re-establish / here repair, refresh",translation:"",synonyms:"rejuvenate, refurbish, revive",topic:"nature",category:"vocab"},
+{phrase:"restorative",meaning:"formal making you feel strong and healthy",translation:"",synonyms:"healing, therapeutic, invigorating",topic:"body_health",category:"vocab"},
+{phrase:"retain",meaning:"keep",translation:"",synonyms:"hold onto, preserve, maintain",topic:"general",category:"vocab"},
+{phrase:"retiree",meaning:"AmE retired person",translation:"",synonyms:"pensioner, senior citizen",topic:"general",category:"vocab"},
+{phrase:"reverse",meaning:"turn back",translation:"",synonyms:"invert, overturn, undo",topic:"general",category:"vocab"},
+{phrase:"revoke",meaning:"cancel, withdraw",translation:"",synonyms:"repeal, annul, rescind",topic:"law",category:"vocab"},
+{phrase:"rib cage",meaning:"small bones around the chest",translation:"",synonyms:"thorax, chest cavity",topic:"science",category:"vocab"},
+{phrase:"ribbon",meaning:"here strip, small piece",translation:"",synonyms:"shred, band, sliver",topic:"general",category:"vocab"},
+{phrase:"rife",meaning:"very common, widespread",translation:"",synonyms:"abundant, rampant, ubiquitous",topic:"general",category:"vocab"},
+{phrase:"rig",meaning:"equipment",translation:"",synonyms:"apparatus, machinery, gear",topic:"general",category:"vocab"},
+{phrase:"rising tides of",meaning:"increases in",translation:"",synonyms:"surges, upsurges, waves",topic:"religion",category:"vocab"},
+{phrase:"roach",meaning:"type of freshwater fish; OR informal cockroach",translation:"",synonyms:"insect, pest",topic:"food",category:"vocab"},
+{phrase:"roaring",meaning:"here burning very brightly",translation:"",synonyms:"blazing, booming, raging",topic:"general",category:"vocab"},
+{phrase:"rock up",meaning:"informal arrive unannounced",translation:"",synonyms:"turn up, show up, appear",topic:"general",category:"vocab"},
+{phrase:"roll back",meaning:"AmE reduce",translation:"",synonyms:"decrease, cut back, reverse",topic:"general",category:"vocab"},
+{phrase:"roving",meaning:"here moving",translation:"",synonyms:"wandering, roaming, traveling",topic:"general",category:"vocab"},
+{phrase:"rugged",meaning:"literary difficult",translation:"",synonyms:"harsh, tough, uneven",topic:"general",category:"vocab"},
+{phrase:"rummage",meaning:"search for something (among a lot of other things)",translation:"",synonyms:"forage, ransack, root",topic:"body_health",category:"vocab"},
+{phrase:"rustle",meaning:"soft dry sound made by moving leaves, paper etc.",translation:"",synonyms:"whisper, swoosh, swish",topic:"general",category:"vocab"},
+{phrase:"RV",meaning:"recreational vehicle – large vehicle that you can travel and live in",translation:"",synonyms:"camper, motorhome, caravan",topic:"clothing",category:"vocab"},
+{phrase:"saber",meaning:"AmE sp. type of sword with a curved blade",translation:"",synonyms:"cutlass, blade, sword",topic:"military",category:"vocab"},
+{phrase:"sac",meaning:"part of an animal or plant that is like a bag and filled with liquid or air",translation:"",synonyms:"pouch, bladder, cyst",topic:"clothing",category:"vocab"},
+{phrase:"sake",meaning:"purpose, benefit",translation:"",synonyms:"behalf, advantage, interest",topic:"general",category:"vocab"},
+{phrase:"sap",meaning:"weaken",translation:"",synonyms:"drain, exhaust, deplete",topic:"general",category:"vocab"},
+{phrase:"satisfying",meaning:"pleasing",translation:"",synonyms:"fulfilling, rewarding, gratifying",topic:"emotions",category:"vocab"},
+{phrase:"savage",meaning:"dated, offensive uncivilized person",translation:"",synonyms:"barbarian, brute, beast",topic:"general",category:"vocab"},
+{phrase:"save",meaning:"here, formal but, except for",translation:"",synonyms:"aside from, excluding, barring",topic:"general",category:"vocab"},
+{phrase:"scepter",meaning:"AmE sp. decorated rod carried by a king or queen",translation:"",synonyms:"staff, wand, baton",topic:"military",category:"vocab"},
+{phrase:"scheme",meaning:"organized plan or system",translation:"",synonyms:"strategy, plot, blueprint",topic:"science",category:"vocab"},
+{phrase:"scrabble",meaning:"fumble, feel around",translation:"",synonyms:"scramble, grope, scratch",topic:"general",category:"vocab"},
+{phrase:"scraggly",meaning:"AmE thin and untidy",translation:"",synonyms:"scruffy, unkempt, ragged",topic:"general",category:"vocab"},
+{phrase:"scramble",meaning:"move hurriedly",translation:"",synonyms:"clamber, rush, hasten",topic:"general",category:"vocab"},
+{phrase:"Scripture",meaning:"the Bible",translation:"",synonyms:"Holy Book, sacred text, Gospel",topic:"history",category:"vocab"},
+{phrase:"seal",meaning:"shut, close (up)",translation:"",synonyms:"secure, fasten, plug",topic:"sports",category:"vocab"},
+{phrase:"season",meaning:"here time of year when a particular fruit, vegetable etc. is produced",translation:"",synonyms:"harvest time, crop period",topic:"food",category:"vocab"},
+{phrase:"secure",meaning:"here achieve, succeed in getting something",translation:"",synonyms:"obtain, acquire, guarantee",topic:"general",category:"vocab"},
+{phrase:"see-through",meaning:"transparent",translation:"",synonyms:"sheer, translucent, clear",topic:"clothing",category:"vocab"},
+{phrase:"self-help group",meaning:"people who provide support for each other in an informal way",translation:"",synonyms:"support group, community group",topic:"society",category:"vocab"},
+{phrase:"selflessness",meaning:"the opposite of being selfish",translation:"",synonyms:"altruism, generosity, magnanimity",topic:"food",category:"vocab"},
+{phrase:"setting",meaning:"here place",translation:"",synonyms:"environment, location, backdrop",topic:"clothing",category:"vocab"},
+{phrase:"settle for",meaning:"accept",translation:"",synonyms:"compromise on, make do with",topic:"general",category:"vocab"},
+{phrase:"severe",meaning:"here intense, great",translation:"",synonyms:"harsh, extreme, acute",topic:"food",category:"vocab"},
+{phrase:"sewage",meaning:"waste matter and dirty water from homes",translation:"",synonyms:"wastewater, effluent, muck",topic:"science",category:"vocab"},
+{phrase:"shaded",meaning:"protected from sunlight",translation:"",synonyms:"shadowed, covered, sheltered",topic:"nature",category:"vocab"},
+{phrase:"shear",meaning:"cut (off)",translation:"",synonyms:"clip, trim, snip",topic:"body_health",category:"vocab"},
+{phrase:"sheathed over",meaning:"covered, encased",translation:"",synonyms:"enveloped, wrapped, coated",topic:"food",category:"vocab"},
+{phrase:"shed (shed, shed)",meaning:"get rid of / lose/drop something in a natural way or by accident / small simple building",translation:"",synonyms:"discard, cast off / hut, outbuilding",topic:"sports",category:"vocab"},
+{phrase:"shielding",meaning:"protection",translation:"",synonyms:"armor, screening, cover",topic:"general",category:"vocab"},
+{phrase:"shores",meaning:"here edge",translation:"",synonyms:"banks, coast, borders",topic:"nature",category:"vocab"},
+{phrase:"shred",meaning:"cut/tear into thin strips",translation:"",synonyms:"rip, tear, slice",topic:"body_health",category:"vocab"},
+{phrase:"shudder",meaning:"shake, tremble",translation:"",synonyms:"quiver, shiver, vibrate",topic:"body_health",category:"vocab"},
+{phrase:"shuffle",meaning:"walk without lifting your feet",translation:"",synonyms:"scuff, drag, shamble",topic:"general",category:"vocab"},
+{phrase:"shutter",meaning:"AmE close (a business)",translation:"",synonyms:"board up, fold, shut down",topic:"society",category:"vocab"},
+{phrase:"sights",meaning:"here ambitions, expectations",translation:"",synonyms:"goals, targets, aspirations",topic:"general",category:"vocab"},
+{phrase:"silence",meaning:"here make quiet",translation:"",synonyms:"mute, hush, muffle",topic:"general",category:"vocab"},
+{phrase:"silkscreen",meaning:"type of print",translation:"",synonyms:"screenprint, serigraph",topic:"science",category:"vocab"},
+{phrase:"skedaddle",meaning:"informal run off",translation:"",synonyms:"flee, scram, bolt",topic:"sports",category:"vocab"},
+{phrase:"skeletal",meaning:"very thin",translation:"",synonyms:"emaciated, bony, gaunt",topic:"body_health",category:"vocab"},
+{phrase:"slab",meaning:"thick flat piece of a hard material",translation:"",synonyms:"chunk, block, wedge",topic:"general",category:"vocab"},
+{phrase:"slap",meaning:"here sharp sound",translation:"",synonyms:"smack, crack, clap",topic:"general",category:"vocab"},
+{phrase:"slash",meaning:"cut radically",translation:"",synonyms:"reduce, ax, chop",topic:"general",category:"vocab"},
+{phrase:"slay",meaning:"literary kill in a violent way",translation:"",synonyms:"murder, assassinate, butcher",topic:"general",category:"vocab"},
+{phrase:"sleep deprived",meaning:"suffering from a lack of sleep",translation:"",synonyms:"exhausted, sleep-starved",topic:"body_health",category:"vocab"},
+{phrase:"snaking",meaning:"twisting and turning",translation:"",synonyms:"winding, meandering, spiraling",topic:"society",category:"vocab"},
+{phrase:"sneer",meaning:"facial expression showing disrespect",translation:"",synonyms:"smirk, scoff, sneer",topic:"sports",category:"vocab"},
+{phrase:"snort",meaning:"make a short grunting sound to show disgust, surprise etc.",translation:"",synonyms:"grunt, scoff",topic:"sports",category:"vocab"},
+{phrase:"snowbird",meaning:"AmE, informal person who moves to a warmer climate in the winter",translation:"",synonyms:"winter resident, sunbird",topic:"military",category:"vocab"},
+{phrase:"snuffle",meaning:"sniff or breathe noisily",translation:"",synonyms:"sniffle, snort, wheeze",topic:"food",category:"vocab"},
+{phrase:"soar",meaning:"fly high in the air",translation:"",synonyms:"ascend, climb, glide",topic:"nature",category:"vocab"},
+{phrase:"social progress",meaning:"the improving of society",translation:"",synonyms:"societal advancement, development",topic:"society",category:"vocab"},
+{phrase:"social security",meaning:"money paid to people who are unemployed, ill or old",translation:"",synonyms:"welfare, state benefits, public assistance",topic:"society",category:"vocab"},
+{phrase:"society",meaning:"here, formal company, companionship",translation:"",synonyms:"fellowship, camaraderie, presence",topic:"society",category:"vocab"},
+{phrase:"sodium",meaning:"soft silver-white, alkaline metal",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"soil",meaning:"part of the earth where plants grow / earth",translation:"",synonyms:"dirt, ground, loam",topic:"food",category:"vocab"},
+{phrase:"soluble",meaning:"able to be dissolved (in water, fat/oils etc.)",translation:"",synonyms:"dissolvable",topic:"science",category:"vocab"},
+{phrase:"soothe",meaning:"calm, relax",translation:"",synonyms:"comfort, pacify, ease",topic:"emotions",category:"vocab"},
+{phrase:"sorcerer",meaning:"(evil) person with magical powers",translation:"",synonyms:"wizard, warlock, magician",topic:"religion",category:"vocab"},
+{phrase:"sow (sowed, sown)",meaning:"here create, introduce",translation:"",synonyms:"plant, scatter, spread",topic:"food",category:"vocab"},
+{phrase:"span of time",meaning:"period of time",translation:"",synonyms:"duration, stretch, interval",topic:"general",category:"vocab"},
+{phrase:"specter",meaning:"AmE sp. an unpleasant possibility",translation:"",synonyms:"threat, shadow, ghost",topic:"general",category:"vocab"},
+{phrase:"spinal column",meaning:"backbone",translation:"",synonyms:"spine, vertebrae",topic:"science",category:"vocab"},
+{phrase:"spirituality",meaning:"beliefs connected with the human spirit",translation:"",synonyms:"mysticism, faith, soulfulness",topic:"religion",category:"vocab"},
+{phrase:"spleen",meaning:"abdominal organ that produces and cleans the body's blood",translation:"",synonyms:"",topic:"science",category:"vocab"},
+{phrase:"sprout",meaning:"produce, grow",translation:"",synonyms:"germinate, shoot, bud",topic:"food",category:"vocab"},
+{phrase:"squat",meaning:"occupy land or property illegally",translation:"",synonyms:"trespass, occupy",topic:"body_health",category:"vocab"},
+{phrase:"stagnating",meaning:"here rotting, deteriorating",translation:"",synonyms:"decaying, languishing, declining",topic:"general",category:"vocab"},
+{phrase:"stain",meaning:"spot, mark",translation:"",synonyms:"blemish, smear, blot",topic:"general",category:"vocab"},
+{phrase:"stalk",meaning:"stem, trunk",translation:"",synonyms:"shoot, branch",topic:"nature",category:"vocab"},
+{phrase:"stamped on",meaning:"here imprinted on",translation:"",synonyms:"engraved, embossed, marked",topic:"general",category:"vocab"},
+{phrase:"stand pat",meaning:"AmE remain unchanged",translation:"",synonyms:"hold steady, stick to one's guns",topic:"general",category:"vocab"},
+{phrase:"stasis",meaning:"a period/state of inactivity, when nothing changes",translation:"",synonyms:"standstill, equilibrium, inertia",topic:"general",category:"vocab"},
+{phrase:"steam",meaning:"here give off steam (=hot water vapour)",translation:"",synonyms:"evaporate, vaporize, fume",topic:"science",category:"vocab"},
+{phrase:"steam shovel",meaning:"a digger powered by steam",translation:"",synonyms:"excavator, mechanical shovel",topic:"science",category:"vocab"},
+{phrase:"steel toe cap",meaning:"piece of metal covering the front part of a boot",translation:"",synonyms:"safety toe",topic:"clothing",category:"vocab"},
+{phrase:"steer",meaning:"young male cow raised for beef",translation:"",synonyms:"bullock, ox",topic:"food",category:"vocab"},
+{phrase:"stench",meaning:"very bad smell",translation:"",synonyms:"stink, reek, odor",topic:"general",category:"vocab"},
+{phrase:"stiff",meaning:"here high, steep",translation:"",synonyms:"severe, tough, heavy",topic:"body_health",category:"vocab"},
+{phrase:"stifling",meaning:"very hot and difficult to breathe",translation:"",synonyms:"suffocating, oppressive, sweltering",topic:"food",category:"vocab"},
+{phrase:"stitch",meaning:"sew, attach/join (by sewing) / here cramp in the side of your body",translation:"",synonyms:"seam, thread / spasm, twinge",topic:"clothing",category:"vocab"},
+{phrase:"stoop",meaning:"bend forward and down",translation:"",synonyms:"hunch, duck, bow",topic:"military",category:"vocab"},
+{phrase:"stores",meaning:"supplies of food and equipment used by an army",translation:"",synonyms:"provisions, stockpiles, reserves",topic:"military",category:"vocab"},
+{phrase:"strangle",meaning:"here stop something developing",translation:"",synonyms:"choke, stifle, suppress",topic:"general",category:"vocab"},
+{phrase:"streak",meaning:"part of someone's character, trait",translation:"",synonyms:"tendency, vein, element",topic:"general",category:"vocab"},
+{phrase:"stride",meaning:"walk with long confident steps",translation:"",synonyms:"march, pace, step",topic:"general",category:"vocab"},
+{phrase:"strike off",meaning:"here move away sharply and purposefully",translation:"",synonyms:"set off, depart, branch off",topic:"general",category:"vocab"},
+{phrase:"strip",meaning:"here remove, take away",translation:"",synonyms:"dismantle, bare, peel",topic:"general",category:"vocab"},
+{phrase:"strip light",meaning:"tube-shaped electric light usually fixed to the ceiling",translation:"",synonyms:"fluorescent light",topic:"clothing",category:"vocab"},
+{phrase:"strum",meaning:"move your fingers up and down the strings of an instrument",translation:"",synonyms:"pluck, play, pick",topic:"general",category:"vocab"},
+{phrase:"sturdy",meaning:"strong",translation:"",synonyms:"robust, durable, solid",topic:"general",category:"vocab"},
+{phrase:"sub-clinical",meaning:"not showing definite or observable symptoms",translation:"",synonyms:"asymptomatic, underlying",topic:"science",category:"vocab"},
+{phrase:"subject to",meaning:"dependent on, informed by",translation:"",synonyms:"conditional upon, prone to, contingent on",topic:"general",category:"vocab"},
+{phrase:"subliminal",meaning:"subconscious",translation:"",synonyms:"hidden, underlying, implicit",topic:"general",category:"vocab"},
+{phrase:"suffering",meaning:"pain",translation:"",synonyms:"agony, distress, misery",topic:"body_health",category:"vocab"},
+{phrase:"supple",meaning:"able to move and bend easily",translation:"",synonyms:"flexible, lithe, pliant",topic:"body_health",category:"vocab"},
+{phrase:"supply chain",meaning:"the processes involved in supplying a product to the buyer",translation:"",synonyms:"logistics network, distribution channel",topic:"society",category:"vocab"},
+{phrase:"supplementation",meaning:"adding to something in order to enhance it",translation:"",synonyms:"addition, augmentation, enrichment",topic:"body_health",category:"vocab"},
+{phrase:"supposed",meaning:"believed; hypothetical",translation:"",synonyms:"presumed, theoretical, alleged",topic:"general",category:"vocab"},
+{phrase:"sustainability",meaning:"the ability to keep something at a certain rate/level (without using up natural resources)",translation:"",synonyms:"viability, eco-friendliness, maintainability",topic:"food",category:"vocab"},
+{phrase:"sway",meaning:"move slowly and rhythmically from side to side",translation:"",synonyms:"swing, rock, undulate",topic:"general",category:"vocab"},
+{phrase:"sweatshop",meaning:"factory with bad working conditions",translation:"",synonyms:"exploitative factory, mill",topic:"food",category:"vocab"},
+{phrase:"swiftness",meaning:"quickness, speed",translation:"",synonyms:"rapidity, velocity, promptness",topic:"general",category:"vocab"},
+{phrase:"swig",meaning:"drink something in large mouthfuls",translation:"",synonyms:"gulp, chug, draft",topic:"food",category:"vocab"},
+{phrase:"swill",meaning:"liquid waste",translation:"",synonyms:"slop, wash, refuse",topic:"food",category:"vocab"},
+{phrase:"synaptic",meaning:"related to the junction between nerve cells",translation:"",synonyms:"neural connection",topic:"science",category:"vocab"},
+{phrase:"taint",meaning:"stain, defect",translation:"",synonyms:"contaminate, blemish, pollute",topic:"general",category:"vocab"},
+{phrase:"talkative",meaning:"chatty, talking a lot",translation:"",synonyms:"loquacious, garrulous, communicative",topic:"clothing",category:"vocab"},
+{phrase:"talon",meaning:"claw",translation:"",synonyms:"hook, nail",topic:"body_health",category:"vocab"},
+{phrase:"tangle",meaning:"untidy/confused mass, jumble",translation:"",synonyms:"knot, snarl, mess",topic:"general",category:"vocab"},
+{phrase:"tar",meaning:"asphalt",translation:"",synonyms:"pitch, bitumen",topic:"general",category:"vocab"},
+{phrase:"tattered",meaning:"old and torn / torn, shabby",translation:"",synonyms:"ragged, frayed, threadbare",topic:"clothing",category:"vocab"},
+{phrase:"taut",meaning:"tense, firm",translation:"",synonyms:"tight, rigid, stretched",topic:"society",category:"vocab"},
+{phrase:"tedious",meaning:"boring (for too long)",translation:"",synonyms:"monotonous, tiresome, dull",topic:"general",category:"vocab"},
+{phrase:"teem with",meaning:"be full of",translation:"",synonyms:"swarm with, overflow with, abound in",topic:"general",category:"vocab"},
+{phrase:"teeming",meaning:"crowded, full",translation:"",synonyms:"bustling, swarming, overflowing",topic:"general",category:"vocab"},
+{phrase:"temper",meaning:"formal make milder, less extreme",translation:"",synonyms:"moderate, mitigate, soften",topic:"general",category:"vocab"},
+{phrase:"temperament",meaning:"character",translation:"",synonyms:"disposition, nature, personality",topic:"general",category:"vocab"},
+{phrase:"temptress",meaning:"literary woman who tries to attract men sexually",translation:"",synonyms:"siren, seductress, vamp",topic:"general",category:"vocab"},
+{phrase:"tend to",meaning:"have a habit of; usually",translation:"",synonyms:"be inclined to, be prone to",topic:"general",category:"vocab"},
+{phrase:"tender",meaning:"here, literary young",translation:"",synonyms:"delicate, immature, youthful",topic:"general",category:"vocab"},
+{phrase:"thatch",meaning:"straw or reeds used to make roofs",translation:"",synonyms:"roofing straw",topic:"clothing",category:"vocab"},
+{phrase:"thermoregulation",meaning:"the ability to keep body temperature within certain boundaries",translation:"",synonyms:"temperature control",topic:"science",category:"vocab"},
+{phrase:"threadbare",meaning:"worn and shabby",translation:"",synonyms:"tattered, ragged, thread-worn",topic:"clothing",category:"vocab"},
+{phrase:"throttle",meaning:"choke, strangle",translation:"",synonyms:"asphyxiate, stifle, gag",topic:"general",category:"vocab"},
+{phrase:"tiara",meaning:"piece of jewellery like a small crown worn by women at very formal occasions",translation:"",synonyms:"diadem, circlet, crown",topic:"clothing",category:"vocab"},
+{phrase:"tile",meaning:"flat square piece",translation:"",synonyms:"slab, panel, square",topic:"home",category:"vocab"},
+{phrase:"time and again",meaning:"often, repeatedly",translation:"",synonyms:"frequently, constantly, consistently",topic:"food",category:"vocab"},
+{phrase:"tin",meaning:"a soft light silver metal, or a container made of this",translation:"",synonyms:"can, canister, receptacle",topic:"general",category:"vocab"},
+{phrase:"tinned",meaning:"BrE preserved in a can",translation:"",synonyms:"canned, preserved",topic:"general",category:"vocab"},
+{phrase:"tissue",meaning:"here a group of cells in the body",translation:"",synonyms:"flesh, organic matter",topic:"science",category:"vocab"},
+{phrase:"to the letter",meaning:"exactly",translation:"",synonyms:"strictly, precisely, verbatim",topic:"general",category:"vocab"},
+{phrase:"toil",meaning:"literary work hard",translation:"",synonyms:"labor, strive, slog",topic:"food",category:"vocab"},
+{phrase:"token",meaning:"formal evidence, symbol",translation:"",synonyms:"sign, emblem, badge",topic:"law",category:"vocab"},
+{phrase:"tonnage",meaning:"very heavy weight",translation:"",synonyms:"burden, weightiness, mass",topic:"general",category:"vocab"},
+{phrase:"top off",meaning:"AmE add to, complete",translation:"",synonyms:"cap, finish, crown",topic:"general",category:"vocab"},
+{phrase:"torpor",meaning:"a state of being inactive mentally or physically",translation:"",synonyms:"lethargy, sluggishness, inertia",topic:"body_health",category:"vocab"},
+{phrase:"trace mineral",meaning:"a chemical element necessary for nutrition",translation:"",synonyms:"micronutrient",topic:"science",category:"vocab"},
+{phrase:"trailer",meaning:"long container with wheels that is pulled by a vehicle",translation:"",synonyms:"caravan, mobile home, camper",topic:"clothing",category:"vocab"},
+{phrase:"transient",meaning:"staying only for a short time",translation:"",synonyms:"temporary, fleeting, ephemeral",topic:"general",category:"vocab"},
+{phrase:"transition",meaning:"process of change",translation:"",synonyms:"shift, alteration, conversion",topic:"general",category:"vocab"},
+{phrase:"translucent",meaning:"semi-transparent",translation:"",synonyms:"clear, sheer, lucid",topic:"general",category:"vocab"},
+{phrase:"treat",meaning:"here apply a process to something to give it particular qualities",translation:"",synonyms:"process, prepare, cure",topic:"clothing",category:"vocab"},
+{phrase:"tremble",meaning:"shake slightly, quaver",translation:"",synonyms:"shiver, quiver, shudder",topic:"body_health",category:"vocab"},
+{phrase:"tremoring",meaning:"shaking",translation:"",synonyms:"quivering, vibrating, trembling",topic:"society",category:"vocab"},
+{phrase:"trim",meaning:"thin and healthy-looking",translation:"",synonyms:"fit, slender, sleek",topic:"body_health",category:"vocab"},
+{phrase:"trunkless",meaning:"without a torso",translation:"",synonyms:"bodiless",topic:"sports",category:"vocab"},
+{phrase:"tuck",meaning:"here fold, gather",translation:"",synonyms:"pleat, hem, bundle",topic:"clothing",category:"vocab"},
+{phrase:"turn a blind eye",meaning:"ignore, pretend not to see",translation:"",synonyms:"overlook, disregard, neglect",topic:"body_health",category:"vocab"},
+{phrase:"turnstile",meaning:"narrow gate with metal bars that you push round to enter an area",translation:"",synonyms:"gate, barrier, entrance",topic:"clothing",category:"vocab"},
+{phrase:"twirl",meaning:"turn around and around",translation:"",synonyms:"spin, whirl, pivot",topic:"general",category:"vocab"},
+{phrase:"twitch",meaning:"make a sudden short movement",translation:"",synonyms:"jerk, spasm, flutter",topic:"body_health",category:"vocab"},
+{phrase:"tyrant",meaning:"bully, dictator",translation:"",synonyms:"oppressor, despot, autocrat",topic:"society",category:"vocab"},
+{phrase:"unbearable",meaning:"intolerable, horrible",translation:"",synonyms:"insufferable, oppressive, unendurable",topic:"body_health",category:"vocab"},
+{phrase:"unblemished",meaning:"having no faults",translation:"",synonyms:"flawless, perfect, spotless",topic:"general",category:"vocab"},
+{phrase:"unclench",meaning:"here open",translation:"",synonyms:"relax, loosen, uncurl",topic:"body_health",category:"vocab"},
+{phrase:"undiminished",meaning:"not reduced",translation:"",synonyms:"unimpaired, unreduced, intact",topic:"general",category:"vocab"},
+{phrase:"undulate",meaning:"literary move gently up and down like waves on the sea",translation:"",synonyms:"ripple, billow, swell",topic:"general",category:"vocab"},
+{phrase:"Union",meaning:"belonging to the group of northern states that fought together in the American Civil War",translation:"",synonyms:"Northern (historical)",topic:"history",category:"vocab"},
+{phrase:"unlace",meaning:"undo",translation:"",synonyms:"untie, unfasten, loosen",topic:"clothing",category:"vocab"},
+{phrase:"unobjectionable",meaning:"inoffensive, agreeable",translation:"",synonyms:"acceptable, harmless, unexceptional",topic:"general",category:"vocab"},
+{phrase:"unwind (unwound, unwound)",meaning:"unwrap, unravel",translation:"",synonyms:"untangle, undo, unroll",topic:"body_health",category:"vocab"},
+{phrase:"USDA",meaning:"United States Department of Agriculture",translation:"",synonyms:"",topic:"society",category:"vocab"},
+{phrase:"valve",meaning:"tap, regulator",translation:"",synonyms:"controller, stopcock, spigot",topic:"general",category:"vocab"},
+{phrase:"varnish",meaning:"liquid that gives a shiny protective surface",translation:"",synonyms:"glaze, lacquer, polish",topic:"science",category:"vocab"},
+{phrase:"vast",meaning:"enormous, extensive / very large",translation:"",synonyms:"immense, boundless, sweeping",topic:"general",category:"vocab"},
+{phrase:"venue",meaning:"place for organized events",translation:"",synonyms:"location, setting, site",topic:"science",category:"vocab"},
+{phrase:"verdict",meaning:"judgement, conclusion",translation:"",synonyms:"decision, ruling, finding",topic:"law",category:"vocab"},
+{phrase:"victuals",meaning:"dated food",translation:"",synonyms:"provisions, rations, grub",topic:"food",category:"vocab"},
+{phrase:"virgin",meaning:"here not yet used",translation:"",synonyms:"untouched, pure, pristine",topic:"general",category:"vocab"},
+{phrase:"virtue",meaning:"good personal qualities",translation:"",synonyms:"morality, righteousness, merit",topic:"clothing",category:"vocab"},
+{phrase:"visage",meaning:"literary face, facial expression",translation:"",synonyms:"countenance, features, mug",topic:"general",category:"vocab"},
+{phrase:"void",meaning:"completely empty space",translation:"",synonyms:"vacuum, chasm, nothingness",topic:"science",category:"vocab"},
+{phrase:"voucher",meaning:"ticket that can be used instead of money",translation:"",synonyms:"coupon, token, chit",topic:"clothing",category:"vocab"},
+{phrase:"vulture",meaning:"large bird that eats dead animals",translation:"",synonyms:"scavenger, buzzard",topic:"clothing",category:"vocab"},
+{phrase:"wahala",meaning:"Nigerian English trouble",translation:"",synonyms:"problem, issue, stress",topic:"general",category:"vocab"},
+{phrase:"want",meaning:"here lack",translation:"",synonyms:"need, deficiency, absence",topic:"general",category:"vocab"},
+{phrase:"warily",meaning:"carefully, cautiously",translation:"",synonyms:"suspiciously, prudently, guardedly",topic:"military",category:"vocab"},
+{phrase:"waver",meaning:"hesitate, weaken",translation:"",synonyms:"falter, vacillate, flicker",topic:"general",category:"vocab"},
+{phrase:"wax",meaning:"literary grow, become larger",translation:"",synonyms:"increase, expand, swell",topic:"general",category:"vocab"},
+{phrase:"weakling",meaning:"weak person",translation:"",synonyms:"wimp, coward, runt",topic:"general",category:"vocab"},
+{phrase:"weapons-grade",meaning:"suitable for making nuclear weapons",translation:"",synonyms:"military-grade, enriched",topic:"military",category:"vocab"},
+{phrase:"wearily",meaning:"in a tired way",translation:"",synonyms:"exhaustedly, sleepily, sluggishly",topic:"body_health",category:"vocab"},
+{phrase:"weed",meaning:"wild plant / wild/unwanted plant",translation:"",synonyms:"invasive plant, undergrowth",topic:"nature",category:"vocab"},
+{phrase:"Weh!",meaning:"informal, here You must be joking!",translation:"",synonyms:"No way!, Wow!",topic:"society",category:"vocab"},
+{phrase:"whirl",meaning:"spin around in circles",translation:"",synonyms:"twirl, rotate, revolve",topic:"general",category:"vocab"},
+{phrase:"whole",meaning:"here processed or refined as little as possible",translation:"",synonyms:"unrefined, intact, natural",topic:"general",category:"vocab"},
+{phrase:"wield",meaning:"use",translation:"",synonyms:"brandish, handle, exert",topic:"general",category:"vocab"},
+{phrase:"wiggle",meaning:"wave/shake in short quick movements",translation:"",synonyms:"wriggle, squirm, jiggle",topic:"general",category:"vocab"},
+{phrase:"wilderness",meaning:"wild uninhabited area",translation:"",synonyms:"wasteland, wilds, outback",topic:"nature",category:"vocab"},
+{phrase:"wind (wound, wound)",meaning:"wrap (around)",translation:"",synonyms:"coil, loop, entwine",topic:"nature",category:"vocab"},
+{phrase:"wing",meaning:"here additional (protruding) part of a building",translation:"",synonyms:"annex, extension, section",topic:"sports",category:"vocab"},
+{phrase:"wingnut",meaning:"AmE, informal mad or crazy person",translation:"",synonyms:"crackpot, eccentric, lunatic",topic:"sports",category:"vocab"},
+{phrase:"wire",meaning:"cable",translation:"",synonyms:"cord, line, thread",topic:"general",category:"vocab"},
+{phrase:"without regard to",meaning:"without considering",translation:"",synonyms:"regardless of, ignoring, notwithstanding",topic:"general",category:"vocab"},
+{phrase:"womb",meaning:"organ in a female body where a baby grows before birth",translation:"",synonyms:"uterus",topic:"science",category:"vocab"},
+{phrase:"wondrous",meaning:"literary exciting, marvellous",translation:"",synonyms:"amazing, magnificent, breathtaking",topic:"general",category:"vocab"},
+{phrase:"wood pulp",meaning:"substance used to make paper",translation:"",synonyms:"cellulose",topic:"nature",category:"vocab"},
+{phrase:"woodland",meaning:"forest, wood",translation:"",synonyms:"timberland, grove, copse",topic:"nature",category:"vocab"},
+{phrase:"worldly possessions",meaning:"everything you own",translation:"",synonyms:"belongings, assets, earthly goods",topic:"general",category:"vocab"},
+{phrase:"wreck",meaning:"something badly damaged or destroyed",translation:"",synonyms:"ruin, debris, mess",topic:"general",category:"vocab"},
+{phrase:"wrench",meaning:"pull hard, yank",translation:"",synonyms:"twist, tug, jerk",topic:"general",category:"vocab"},
+{phrase:"Yankee",meaning:"name used by some for soldiers belonging to the Union Army in the American Civil War",translation:"",synonyms:"Northerner (historical)",topic:"history",category:"vocab"},
+{phrase:"ye Mighty",meaning:"you who are powerful",translation:"",synonyms:"the strong, the great",topic:"general",category:"vocab"},
+{phrase:"yurt",meaning:"circular tent",translation:"",synonyms:"nomad tent, dwelling",topic:"home",category:"vocab"}
+];
+
+let fullOrder = data.map((_,i)=>i);
+let flashOrder = [...fullOrder];
+let flashIdx = 0;
+let quizOrder = []; let quizIdx = 0; let quizScore = 0; let quizAnswered = false;
+let quizMistakes = [];
+let showQuizRus = false;
+let matchLeft = []; let matchRight = []; let matchSelected = null; let matchRus = false;
+
+// Confetti
+function burstConfetti(x,y){
+  const colors = ['#c084fc','#a855f7','#4fc3f7','#81c784','#ffd54f','#e94560','#fff'];
+  for(let i=0;i<50;i++){
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.left = (x + (Math.random()-0.5)*120)+'px';
+    el.style.top = (y + (Math.random()-0.5)*60)+'px';
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.animationDuration = (0.8 + Math.random()*0.8)+'s';
+    el.style.animationDelay = (Math.random()*0.3)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),2000);
+  }
+}
+
+// Score messages
+const scoreMessages = {
+  perfect:['Flawless victory, babe! You absolutely crushed it.','100%! Okay, color me impressed. You are officially a genius.','Perfection! Drop the mic, because you just nailed every single one.','A perfect score! Pop the champagne, babe, you literally couldn\'t do any better.'],
+  high:['So close it hurts! You\'re practically an expert, babe.','Almost perfect! Just a tiny slip-up or two, but I am incredibly proud of you.','Wow, look at you go! Next time, we are getting that flawless score.','Oof, brilliant work! You are basically a genius, babe. Let\'s get 100% next round!'],
+  medium:['Ooh, getting hot! You\'re so close to the top, babe.','Okay, brainiac in training! You\'re doing amazing, but let\'s push for those 80s.','Seventy-plus! I see you working hard. Just a little more practice and you\'ll dominate this.','Looking good! You\'ve definitely got the hang of it, just a few details to iron out.'],
+  low:['Not bad! You\'re building a solid foundation, keep at it.','Getting there! Every round makes you stronger.','Solid effort! A few more rounds and you\'ll see big improvements.'],
+  fail:['Oof, rough round babe! Dust yourself off and let\'s try that again.','Not your best work, but that\'s what practice is for! I believe in you.','Hey, we all start somewhere! Let\'s review and crush it on the next try.']
+};
+function getScoreMessage(pct){
+  let tier;
+  if(pct===100) tier='perfect';
+  else if(pct>=80) tier='high';
+  else if(pct>=70) tier='medium';
+  else if(pct>=50) tier='low';
+  else tier='fail';
+  const msgs = scoreMessages[tier];
+  return msgs[Math.floor(Math.random()*msgs.length)];
+}
+
+// Stats
+function loadStats(){
+  try{return JSON.parse(localStorage.getItem('exlearn_stats'))||{quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}};}
+  catch(e){return{quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}};}
+}
+function saveStats(s){localStorage.setItem('exlearn_stats',JSON.stringify(s));}
+function getSRS(i){
+  const s=loadStats();
+  if(!s.srs[i]) return{correct:0,incorrect:0,interval:0,lastSeen:0,level:0};
+  return s.srs[i];
+}
+function updateSRS(i,correct){
+  const s=loadStats();
+  if(!s.srs[i]) s.srs[i]={correct:0,incorrect:0,interval:0,lastSeen:0,level:0};
+  const card=s.srs[i];
+  if(correct){
+    card.correct++;
+    card.level=Math.min(card.level+1,5);
+    const intervals=[0,1,3,7,14,30];
+    card.interval=intervals[card.level]||30;
+  }else{
+    card.incorrect++;
+    card.level=Math.max(card.level-1,0);
+    card.interval=1;
+  }
+  card.lastSeen=Date.now();
+  saveStats(s);
+}
+function renderDashboard(){
+  const s = loadStats();
+  const q = s.quiz;
+  const total = q.totalCorrect+q.totalIncorrect;
+  const avg = total>0 ? Math.round(q.totalCorrect/total*100) : 0;
+  const srsKeys = Object.keys(s.srs||{});
+  const studied = srsKeys.length;
+  const mastered = srsKeys.filter(k => (s.srs[k].level||0) >= 4).length;
+  const learning = srsKeys.filter(k => { const l = s.srs[k].level||0; return l>=1 && l<4; }).length;
+  const newWords = srsKeys.filter(k => !s.srs[k].lastSeen).length;
+  const now = Date.now();
+  const due = srsKeys.filter(k => {
+    const c = s.srs[k];
+    if(!c.lastSeen) return true;
+    return (now - c.lastSeen) >= (c.interval||0) * 86400000;
+  }).length;
+  document.getElementById('dashGrid').innerHTML =
+    '<div class="dash-card"><h3>🧠 Spaced Repetition</h3>'+
+      '<div class="dash-row"><span>Words Studied</span><span class="dash-val">'+studied+'</span></div>'+
+      '<div class="dash-row"><span>Mastered (Level 4+)</span><span class="dash-val">'+mastered+'</span></div>'+
+      '<div class="dash-row"><span>Learning</span><span class="dash-val">'+learning+'</span></div>'+
+      '<div class="dash-row"><span>Due for Review</span><span class="dash-val">'+due+'</span></div>'+
+    '</div>'+
+    '<div class="dash-card"><h3>📝 Quiz</h3>'+
+      '<div class="dash-row"><span>Quizzes Taken</span><span class="dash-val">'+q.taken+'</span></div>'+
+      '<div class="dash-row"><span>Best Score</span><span class="dash-val">'+q.best+'%</span></div>'+
+      '<div class="dash-row"><span>Average Score</span><span class="dash-val">'+avg+'%</span></div>'+
+      '<div class="dash-row"><span>Last Score</span><span class="dash-val">'+q.lastScore+'%</span></div>'+
+      '<div class="dash-row"><span>Total Correct</span><span class="dash-val">'+q.totalCorrect+' / '+total+'</span></div>'+
+    '</div>'+
+    '<div class="dash-card"><h3>🔗 Match</h3>'+
+      '<div class="dash-row"><span>Rounds Completed</span><span class="dash-val">'+s.match.rounds+'</span></div>'+
+    '</div>'+
+    '<div class="dash-card" style="text-align:center"><button class="dash-reset-btn" id="resetStatsBtn">Reset All Data</button></div>';
+  document.getElementById('resetStatsBtn').addEventListener('click',()=>{
+    if(confirm('Reset all stats?')){saveStats({quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}});renderDashboard();}
+  });
+}
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+    if(tab.dataset.tab==='browse') renderBrowse();
+    if(tab.dataset.tab==='flash') renderFlash();
+    if(tab.dataset.tab==='quiz') initQuiz();
+    if(tab.dataset.tab==='match') initMatch();
+    if(tab.dataset.tab==='study') initStudy();
+    if(tab.dataset.tab==='dashboard') renderDashboard();
+  });
+});
+
+// Topics
+const topicNames = {
+  science:'Science',history:'History',military:'Military',clothing:'Clothing',
+  food:'Food',body_health:'Body/Health',emotions:'Emotions',nature:'Nature',
+  society:'Society','Nigerian English':'Nigerian English',home:'Home',
+  religion:'Religion',law:'Law',sports:'Sports',general:'General'
+};
+
+// A-Z Index
+function renderAZBar(){
+  const az = document.getElementById('azBar');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const active = document.querySelector('.az-item.active');
+  const cur = active ? active.dataset.letter : '';
+  az.innerHTML = '<button class="az-item'+(cur===''?' active':'')+'" data-letter="">All</button>'+
+    letters.map(l => '<button class="az-item'+(cur===l?' active':'')+'" data-letter="'+l+'">'+l+'</button>').join('');
+  az.querySelectorAll('.az-item').forEach(el => {
+    el.addEventListener('click', () => {
+      az.querySelectorAll('.az-item').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      renderBrowse();
+    });
+  });
+}
+
+// Topic Filters
+function renderTopicFilters(){
+  const row = document.getElementById('topicFilterRow');
+  const cat = document.querySelector('.filter-btn.active').dataset.filter;
+  if(cat!=='vocab' && cat!=='all'){ row.innerHTML=''; return; }
+  const topics = [...new Set(data.filter(i=>i.topic && i.category==='vocab').map(i=>i.topic))].sort();
+  const active = document.querySelector('.topic-btn.active');
+  const cur = active ? active.dataset.topic : '';
+  row.innerHTML = '<button class="topic-btn'+(cur===''?' active':'')+'" data-topic="">All Topics</button>'+
+    topics.map(t => '<button class="topic-btn'+(cur===t?' active':'')+'" data-topic="'+t+'">'+(topicNames[t]||t)+'</button>').join('');
+  row.querySelectorAll('.topic-btn').forEach(el => {
+    el.addEventListener('click', () => {
+      row.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      renderBrowse();
+    });
+  });
+}
+
+// Browse
+function renderBrowse(){
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  const cat = document.querySelector('.filter-btn.active').dataset.filter;
+  const topicEl = document.querySelector('.topic-btn.active');
+  const topic = topicEl ? topicEl.dataset.topic : '';
+  const azEl = document.querySelector('.az-item.active');
+  const azLetter = azEl ? azEl.dataset.letter : '';
+  renderAZBar();
+  renderTopicFilters();
+  let items = data;
+  if(cat!=='all') items = items.filter(i=>i.category===cat);
+  if(topic && cat!=='phrasal' && cat!=='expression') items = items.filter(i=>i.topic===topic);
+  if(azLetter) items = items.filter(i=>i.phrase.toLowerCase().startsWith(azLetter.toLowerCase()));
+  if(q) items = items.filter(i=>i.phrase.toLowerCase().includes(q)||i.meaning.toLowerCase().includes(q)||i.translation.toLowerCase().includes(q)||(i.synonyms&&i.synonyms.toLowerCase().includes(q)));
+  document.getElementById('countLabel').textContent = 'Showing '+items.length+' items';
+  if(!items.length){
+    document.getElementById('cardGrid').innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No matching vocabulary found</div><div class="empty-sub">Try adjusting your search or filter</div></div>';
+    return;
+  }
+  document.getElementById('cardGrid').innerHTML = items.map(i=>{
+    const catLabel = i.category==='phrasal'?'Phrasal Verb':i.category==='expression'?'Fixed Expression':'General Vocab';
+    const synHTML = i.synonyms ? '<div class="synonyms">'+i.synonyms+'</div>' : '';
+    const topicHTML = i.topic && i.category==='vocab' ? '<span class="topic-tag">'+(topicNames[i.topic]||i.topic)+'</span>' : '';
+    return '<div class="vocab-card">'+
+      '<div class="phrase">'+i.phrase+'</div>'+
+      '<span class="cat-tag cat-'+i.category+'">'+catLabel+'</span>'+
+      topicHTML+
+      '<div class="meaning">'+i.meaning+'</div>'+
+      synHTML+
+      (i.translation ? '<div class="translation">'+i.translation+'</div>' : '')+
+    '</div>';
+  }).join('');
+}
+document.getElementById('searchBox').addEventListener('input',renderBrowse);
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderBrowse();
+  });
+});
+
+// Flashcards
+function renderFlash(){
+  const item = data[flashOrder[flashIdx]];
+  document.getElementById('fPhrase').textContent = item.phrase;
+  document.getElementById('fCategory').textContent = item.category==='phrasal'?'Phrasal Verb':item.category==='expression'?'Fixed Expression':'General Vocab';
+  document.getElementById('fMeaning').textContent = item.meaning;
+  document.getElementById('fSynonyms').textContent = item.synonyms ? 'Synonyms: '+item.synonyms : '';
+  document.getElementById('fRussian').textContent = item.translation;
+  document.getElementById('flashIdx').textContent = flashIdx+1;
+  document.getElementById('flashTotal').textContent = flashOrder.length;
+  document.getElementById('flashBar').style.width = ((flashIdx+1)/flashOrder.length*100)+'%';
+  document.getElementById('flashCard').classList.remove('flipped');
+  document.getElementById('prevBtn').disabled = flashIdx===0;
+  document.getElementById('nextBtn').disabled = flashIdx===flashOrder.length-1;
+}
+document.getElementById('flashCard').addEventListener('click',()=>{
+  document.getElementById('flashCard').classList.toggle('flipped');
+});
+document.getElementById('prevBtn').addEventListener('click',()=>{if(flashIdx>0){flashIdx--;renderFlash();}});
+document.getElementById('nextBtn').addEventListener('click',()=>{if(flashIdx<flashOrder.length-1){flashIdx++;renderFlash();}});
+document.getElementById('shuffleBtn').addEventListener('click',()=>{
+  for(let i=flashOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[flashOrder[i],flashOrder[j]]=[flashOrder[j],flashOrder[i]];}
+  flashIdx=0;renderFlash();
+});
+document.getElementById('flashCount').addEventListener('change',()=>{
+  const count = parseInt(document.getElementById('flashCount').value);
+  let pool = [...fullOrder];
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  flashOrder = count>0 ? pool.slice(0,count) : pool;
+  flashIdx=0;
+  renderFlash();
+});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('tab-flash').classList.contains('active')) return;
+  if(e.key==='ArrowLeft'&&flashIdx>0){flashIdx--;renderFlash();}
+  if(e.key==='ArrowRight'&&flashIdx<flashOrder.length-1){flashIdx++;renderFlash();}
+  if(e.key===' '){e.preventDefault();document.getElementById('flashCard').classList.toggle('flipped');}
+});
+
+// Quiz
+document.getElementById('quizCount').addEventListener('change',initQuiz);
+document.getElementById('quizRusBtn').addEventListener('click',()=>{
+  showQuizRus = !showQuizRus;
+  document.getElementById('quizRusBtn').classList.toggle('active');
+  renderQuiz();
+});
+
+function initQuiz(){
+  showQuizRus = false;
+  document.getElementById('quizRusBtn').textContent = 'Show Russian';
+  document.getElementById('quizRusBtn').classList.remove('active');
+  document.getElementById('qLabel').textContent = 'Choose the correct meaning:';
+  const count = parseInt(document.getElementById('quizCount').value) || data.length;
+  let pool = data.map((_,i)=>i);
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  quizOrder = pool.slice(0,count);
+  quizIdx=0;quizScore=0;quizAnswered=false;quizMistakes=[];
+  document.getElementById('quizArea').style.display='block';
+  document.getElementById('quizResult').style.display='none';
+  document.getElementById('quizTotal').textContent = quizOrder.length;
+  renderQuiz();
+}
+
+document.getElementById('quizNext').addEventListener('click',()=>{quizIdx++;renderQuiz();});
+document.getElementById('quizRestart').addEventListener('click',initQuiz);
+function showQuizResult(){
+  document.getElementById('quizArea').style.display='none';
+  document.getElementById('quizResult').style.display='block';
+  const pct = Math.round(quizScore/quizOrder.length*100);
+  document.getElementById('finalScore').textContent = quizScore+'/'+quizOrder.length;
+  document.getElementById('finalPct').textContent = pct+'%';
+  document.getElementById('quizMsg').textContent = getScoreMessage(pct);
+  // Review mistakes
+  const reviewEl = document.getElementById('quizReview');
+  if(quizMistakes.length){
+    reviewEl.innerHTML = '<div class="review-title">✗ Review Mistakes ('+quizMistakes.length+')</div>'+
+      quizMistakes.map(m=>'<div class="review-card"><div class="r-phrase">'+m.phrase+'</div><div class="r-meaning">'+m.meaning+'</div><div class="r-translation">'+m.translation+'</div></div>').join('');
+  } else {
+    reviewEl.innerHTML = '';
+  }
+  // Save stats
+  const s = loadStats();
+  s.quiz.taken++;
+  s.quiz.totalCorrect += quizScore;
+  s.quiz.totalIncorrect += (quizOrder.length - quizScore);
+  if(pct>s.quiz.best) s.quiz.best = pct;
+  s.quiz.lastScore = pct;
+  saveStats(s);
+}
+
+// Match
+document.getElementById('matchRusBtn').addEventListener('click',()=>{
+  matchRus = !matchRus;
+  document.getElementById('matchRusBtn').classList.toggle('active');
+  renderMatch();
+});
+document.getElementById('matchSize').addEventListener('change',initMatch);
+document.getElementById('matchNext').addEventListener('click',()=>{document.getElementById('matchResult').classList.remove('show');initMatch();});
+
+function initMatch(){
+  const size = parseInt(document.getElementById('matchSize').value);
+  let pool = data.map((_,i)=>i);
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  const chosen = pool.slice(0,size);
+  matchLeft = chosen.map(i=>({text:data[i].phrase,id:i,matched:false,item:data[i]}));
+  matchRight = chosen.map(i=>({text:data[i].meaning,id:i,paired:false,item:data[i]}));
+  for(let i=matchRight.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[matchRight[i],matchRight[j]]=[matchRight[j],matchRight[i]];}
+  matchSelected=null;
+  document.getElementById('matchStatus').textContent = '0 / '+size+' matched';
+  renderMatch();
+}
+function renderMatch(){
+  document.getElementById('matchLeft').innerHTML = '<h3>Phrases</h3>'+matchLeft.map((m,i)=>{
+    let cls = m.matched?'match-item matched':'match-item';
+    if(matchSelected&&matchSelected.side==='left'&&matchSelected.idx===i) cls+=' selected';
+    const sub = m.item.translation;
+    return '<div class="'+cls+'" data-side="left" data-idx="'+i+'" data-id="'+m.id+'">'+m.text+'<div class="sub'+(matchRus?' show':'')+'">'+sub+'</div></div>';
+  }).join('');
+  document.getElementById('matchRight').innerHTML = '<h3>Meanings</h3>'+matchRight.map((m,i)=>{
+    let cls = m.paired?'match-item matched':'match-item';
+    if(matchSelected&&matchSelected.side==='right'&&matchSelected.idx===i) cls+=' selected';
+    const sub = m.item.translation;
+    return '<div class="'+cls+'" data-side="right" data-idx="'+i+'" data-id="'+m.id+'">'+m.text+'<div class="sub'+(matchRus?' show':'')+'">'+sub+'</div></div>';
+  }).join('');
+
+  const matched = matchLeft.filter(m=>m.matched).length;
+  const total = matchLeft.length;
+  document.getElementById('matchStatus').textContent = matched+' / '+total+' matched';
+
+  if(matched===total){
+    const pct = Math.round(matched/total*100);
+    document.getElementById('matchScore').textContent = matched+' / '+total+' — '+pct+'%';
+    document.getElementById('matchMsg').textContent = getScoreMessage(pct);
+    document.getElementById('matchResult').classList.add('show');
+    const s = loadStats();
+    s.match.rounds++;
+    saveStats(s);
+    return;
+  }
+
+  document.querySelectorAll('#matchGrid .match-item:not(.matched)').forEach(el=>{
+    el.addEventListener('click',()=>handleMatchClick(el.dataset.side,parseInt(el.dataset.idx),parseInt(el.dataset.id)));
+  });
+}
+function handleMatchClick(side,idx,id){
+  if(!matchSelected){
+    if(side==='left'&&!matchLeft[idx].matched){matchSelected={side,idx,id};renderMatch();}
+    else if(side==='right'&&!matchRight[idx].paired){matchSelected={side,idx,id};renderMatch();}
+  } else {
+    if(side===matchSelected.side){matchSelected={side,idx,id};renderMatch();return;}
+    let li,ri;
+    if(matchSelected.side==='left'){li=matchSelected.idx;ri=idx;}
+    else{li=idx;ri=matchSelected.idx;}
+    if(matchLeft[li].matched||matchRight[ri].paired){matchSelected=null;renderMatch();return;}
+    if(matchLeft[li].id===matchRight[ri].id){
+      matchLeft[li].matched=true;matchRight[ri].paired=true;
+    } else {
+      const el = document.querySelector('.match-item[data-side="right"][data-idx="'+ri+'"]');
+      if(el){el.classList.add('wrong');setTimeout(()=>el.classList.remove('wrong'),400);}
+      const el2 = document.querySelector('.match-item[data-side="left"][data-idx="'+li+'"]');
+      if(el2){el2.classList.add('wrong');setTimeout(()=>el2.classList.remove('wrong'),400);}
+    }
+    matchSelected=null;
+    renderMatch();
+  }
+}
+
+// Typing Quiz
+let typingMode = false;
+document.getElementById('quizTypeBtn').addEventListener('click', () => {
+  typingMode = !typingMode;
+  document.getElementById('quizTypeBtn').classList.toggle('active');
+  document.getElementById('quizTypeBtn').textContent = typingMode ? '☑ Multiple Choice' : '✍ Type Mode';
+  initQuiz();
+});
+function renderQuizType(){
+  if(quizIdx>=quizOrder.length){showQuizResult();return;}
+  const item = data[quizOrder[quizIdx]];
+  document.getElementById('qPhrase').textContent = item.phrase;
+  document.getElementById('qCategory').textContent = item.category==='phrasal'?'Phrasal Verb':item.category==='expression'?'Fixed Expression':'General Vocab';
+  document.getElementById('quizIdx').textContent = quizIdx+1;
+  document.getElementById('quizBar').style.width = (quizIdx/quizOrder.length*100)+'%';
+  document.getElementById('quizNext').disabled = true;
+  document.getElementById('quizOptions').style.display='none';
+  document.getElementById('quizTypingArea').style.display='block';
+  document.getElementById('typingInput').value = '';
+  document.getElementById('typingFeedback').innerHTML = '';
+  document.getElementById('typingFeedback').className = 'typing-feedback';
+  document.getElementById('typingCheck').disabled = false;
+  document.getElementById('typingInput').disabled = false;
+  document.getElementById('typingInput').focus();
+  quizAnswered = false;
+}
+document.getElementById('typingCheck').addEventListener('click', checkTypingAnswer);
+document.getElementById('typingInput').addEventListener('keydown', e => {
+  if(e.key === 'Enter') checkTypingAnswer();
+});
+function checkTypingAnswer(){
+  if(quizAnswered) return;
+  const item = data[quizOrder[quizIdx]];
+  const answer = document.getElementById('typingInput').value.trim().toLowerCase();
+  const correct = item.meaning.toLowerCase();
+  const fb = document.getElementById('typingFeedback');
+  const words = correct.split(' ').filter(w => w.length > 3);
+  const matched = words.filter(w => answer.includes(w)).length;
+  const ratio = words.length > 0 ? matched / words.length : 0;
+  quizAnswered = true;
+  document.getElementById('typingCheck').disabled = true;
+  document.getElementById('typingInput').disabled = true;
+  if(ratio >= 0.6 || answer === correct){
+    fb.className = 'typing-feedback correct';
+    fb.innerHTML = '✓ Correct!';
+    quizScore++;
+    const r = document.getElementById('typingInput').getBoundingClientRect();
+    burstConfetti(r.left + r.width/2, r.top);
+  } else {
+    fb.className = 'typing-feedback wrong';
+    fb.innerHTML = '✗ Not quite<div class="expected">Expected: '+item.meaning+'</div>';
+    quizMistakes.push({phrase:item.phrase,meaning:item.meaning,translation:item.translation});
+  }
+  document.getElementById('quizNext').disabled = false;
+}
+function renderQuiz(){
+  if(typingMode){ renderQuizType(); return; }
+  if(quizIdx>=quizOrder.length){showQuizResult();return;}
+  const item = data[quizOrder[quizIdx]];
+  document.getElementById('qPhrase').textContent = item.phrase;
+  document.getElementById('qCategory').textContent = item.category==='phrasal'?'Phrasal Verb':item.category==='expression'?'Fixed Expression':'General Vocab';
+  document.getElementById('quizIdx').textContent = quizIdx+1;
+  document.getElementById('quizBar').style.width = (quizIdx/quizOrder.length*100)+'%';
+  document.getElementById('quizNext').disabled = true;
+  document.getElementById('quizOptions').style.display='';
+  document.getElementById('quizTypingArea').style.display='none';
+  let opts = [{text:item.meaning, translation:item.translation}];
+  let others = data.filter(i=>i.meaning!==item.meaning);
+  for(let i=others.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[others[i],others[j]]=[others[j],others[i]];}
+  for(let i=0;i<3;i++) opts.push({text:others[i].meaning, translation:others[i].translation});
+  for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]];}
+  const letters = ['A','B','C','D'];
+  const container = document.getElementById('quizOptions');
+  container.innerHTML = opts.map((o,i)=>'<button class="quiz-opt" data-val="'+o.text.replace(/"/g,'&quot;')+'"><span class="opt-letter">'+letters[i]+'</span>'+o.text+'<div class="sub'+(showQuizRus?' show':'')+'">'+o.translation+'</div></button>').join('');
+  quizAnswered = false;
+  document.querySelectorAll('.quiz-opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(quizAnswered) return;
+      quizAnswered = true;
+      document.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+      if(btn.dataset.val===item.meaning){btn.classList.add('correct');quizScore++;const r=btn.getBoundingClientRect();burstConfetti(r.left+r.width/2,r.top+r.height/2);}
+      else{btn.classList.add('wrong');quizMistakes.push({phrase:item.phrase,meaning:item.meaning,translation:item.translation});document.querySelectorAll('.quiz-opt').forEach(b=>{if(b.dataset.val===item.meaning)b.classList.add('reveal');});}
+      document.getElementById('quizNext').disabled = false;
+    });
+  });
+}
+
+// Study (Spaced Repetition)
+let studyOrder = [];
+let studyIdx = 0;
+let studyMode = 'all';
+
+function initStudy(){
+  const mode = document.querySelector('.study-mode-btn.active');
+  studyMode = mode ? mode.dataset.smode : 'all';
+  const s = loadStats();
+  let pool = data.map((_,i)=>i);
+  if(studyMode === 'new') pool = pool.filter(i => !s.srs[i]);
+  else if(studyMode === 'due'){
+    const now = Date.now();
+    pool = pool.filter(i => {
+      const c = s.srs[i];
+      if(!c) return false;
+      return (now - c.lastSeen) >= (c.interval || 0) * 86400000;
+    });
+  } else if(studyMode === 'struggling'){
+    pool = pool.filter(i => {
+      const c = s.srs[i];
+      if(!c) return false;
+      const total = c.correct + c.incorrect;
+      return total > 0 && c.correct / total < 0.6;
+    });
+  }
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  studyOrder = pool;
+  studyIdx = 0;
+  document.getElementById('studyArea').style.display = studyOrder.length ? '' : 'none';
+  document.getElementById('studyEmpty').style.display = studyOrder.length ? 'none' : '';
+  renderStudy();
+}
+
+function renderStudy(){
+  if(!studyOrder.length || studyIdx >= studyOrder.length) {
+    document.getElementById('studyArea').style.display='none';
+    document.getElementById('studyEmpty').style.display='';
+    return;
+  }
+  const item = data[studyOrder[studyIdx]];
+  document.getElementById('sPhrase').textContent = item.phrase;
+  document.getElementById('sCategory').textContent = item.category==='phrasal'?'Phrasal Verb':item.category==='expression'?'Fixed Expression':'General Vocab';
+  document.getElementById('sMeaning').textContent = item.meaning;
+  document.getElementById('sSynonyms').textContent = item.synonyms ? 'Synonyms: '+item.synonyms : '';
+  document.getElementById('sRussian').textContent = item.translation;
+  document.getElementById('studyIdx').textContent = studyIdx+1;
+  document.getElementById('studyTotal').textContent = studyOrder.length;
+  document.getElementById('studyBar').style.width = ((studyIdx+1)/studyOrder.length*100)+'%';
+  document.getElementById('studyCard').classList.remove('flipped');
+  // Due stats
+  const s = loadStats();
+  const now = Date.now();
+  const due = Object.keys(s.srs||{}).filter(k => {
+    const c = s.srs[k];
+    if(!c.lastSeen) return true;
+    return (now - c.lastSeen) >= (c.interval||0) * 86400000;
+  }).length;
+  const newCount = Object.keys(s.srs||{}).length;
+  document.getElementById('studyDue').innerHTML =
+    '<span>📚 <strong>'+studyOrder.length+'</strong> cards in this session</span>'+
+    '<span>🧠 <strong>'+newCount+'</strong> words studied</span>'+
+    '<span>⏰ <strong>'+due+'</strong> due for review</span>';
+}
+
+document.getElementById('studyCard').addEventListener('click', () => {
+  document.getElementById('studyCard').classList.toggle('flipped');
+});
+
+document.getElementById('studyHard').addEventListener('click', () => {
+  updateSRS(studyOrder[studyIdx], false);
+  studyIdx++;
+  renderStudy();
+});
+document.getElementById('studyGood').addEventListener('click', () => {
+  updateSRS(studyOrder[studyIdx], true);
+  studyIdx++;
+  renderStudy();
+});
+document.getElementById('studyEasy').addEventListener('click', () => {
+  updateSRS(studyOrder[studyIdx], true);
+  updateSRS(studyOrder[studyIdx], true);
+  studyIdx++;
+  renderStudy();
+});
+
+document.querySelectorAll('.study-mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.study-mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    initStudy();
+  });
+});
+
+renderBrowse();
+renderFlash();
+renderDashboard();
+
+// Service Worker registration
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
