@@ -1,4 +1,4 @@
-const CACHE = 'exlearn-v1';
+const CACHE = 'exlearn-v2';
 
 const PRECACHE = [
   'index.html',
@@ -24,7 +24,9 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
-    event.respondWith(caches.match('index.html'));
+    event.respondWith(
+      caches.match('index.html').then(cached => cached || fetch(event.request).catch(() => new Response('Offline', {status: 503})))
+    );
     return;
   }
   event.respondWith(
@@ -33,6 +35,6 @@ self.addEventListener('fetch', event => {
         cache.put(event.request, response.clone());
         return response;
       });
-    }))
+    }).catch(() => caches.match('index.html')))
   );
 });
