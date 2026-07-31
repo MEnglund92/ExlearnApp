@@ -1,4 +1,4 @@
-const CACHE = 'exlearn-v7';
+const CACHE = 'exlearn-v8';
 
 const PRECACHE = [
   'index.html',
