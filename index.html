@@ -1389,6 +1389,11 @@ function renderDashboard(){
   const q = s.quiz;
   const total = q.totalCorrect+q.totalIncorrect;
   const avg = total>0 ? Math.round(q.totalCorrect/total*100) : 0;
+  const s1 = s01GetStats();
+  const s01Total = s1.totalCorrect+s1.totalIncorrect;
+  const s01Avg = s01Total>0 ? Math.round(s1.totalCorrect/s01Total*100) : 0;
+  const s01notes = s01GetNotes();
+  const s01Filled = s01Data.filter(it=>s01notes[it.w]&&s01notes[it.w].trim()).length;
   const srsKeys = Object.keys(s.srs||{});
   const studied = srsKeys.length;
   const mastered = srsKeys.filter(k => (s.srs[k].level||0) >= 4).length;
@@ -1417,9 +1422,17 @@ function renderDashboard(){
     '<div class="dash-card"><h3>🔗 Match</h3>'+
       '<div class="dash-row"><span>Rounds Completed</span><span class="dash-val">'+s.match.rounds+'</span></div>'+
     '</div>'+
+    '<div class="dash-card"><h3>🎬 S01</h3>'+
+      '<div class="dash-row"><span>My Notes Filled</span><span class="dash-val">'+s01Filled+' / '+s01Data.length+'</span></div>'+
+      '<div class="dash-row"><span>Quizzes Taken</span><span class="dash-val">'+s1.taken+'</span></div>'+
+      '<div class="dash-row"><span>Best Score</span><span class="dash-val">'+s1.best+'%</span></div>'+
+      '<div class="dash-row"><span>Average Score</span><span class="dash-val">'+s01Avg+'%</span></div>'+
+      '<div class="dash-row"><span>Last Score</span><span class="dash-val">'+s1.lastScore+'%</span></div>'+
+      '<div class="dash-row"><span>Total Correct</span><span class="dash-val">'+s1.totalCorrect+' / '+s01Total+'</span></div>'+
+    '</div>'+
     '<div class="dash-card" style="text-align:center"><button class="dash-reset-btn" id="resetStatsBtn">Reset All Data</button></div>';
   document.getElementById('resetStatsBtn').addEventListener('click',()=>{
-    if(confirm('Reset all stats?')){saveStats({quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}});renderDashboard();}
+    if(confirm('Reset all stats (including S01 notes and scores)?')){saveStats({quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}});s01SaveNotes({});s01SaveStats({taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0});renderDashboard();}
   });
 }
 
@@ -1877,7 +1890,6 @@ document.querySelectorAll('.study-mode-btn').forEach(btn => {
 
 renderBrowse();
 renderFlash();
-renderDashboard();
 
 // Service Worker registration
 if('serviceWorker' in navigator){
@@ -2424,6 +2436,9 @@ const s01letters = ['A','B','C','D','E','F'];
 
 function s01GetNotes(){ try{ return JSON.parse(localStorage.getItem(s01NotesKey))||{}; }catch(e){ return {}; } }
 function s01SaveNotes(n){ try{ localStorage.setItem(s01NotesKey, JSON.stringify(n)); }catch(e){} }
+const s01StatsKey = 'exlearn_s01_stats';
+function s01GetStats(){ try{ return JSON.parse(localStorage.getItem(s01StatsKey))||{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0}; }catch(e){ return {taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0}; } }
+function s01SaveStats(s){ try{ localStorage.setItem(s01StatsKey, JSON.stringify(s)); }catch(e){} }
 function s01esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 function s01shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 function s01norm(s){ return String(s).toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim(); }
@@ -2562,6 +2577,13 @@ function s01RenderQResult(){
   if(!body) return;
   const total = s01QuizOrder.length || 1;
   const pct = Math.round(s01QScore/total*100);
+  const st = s01GetStats();
+  st.taken++;
+  st.lastScore = pct;
+  if(pct > st.best) st.best = pct;
+  st.totalCorrect += s01QScore;
+  st.totalIncorrect += (s01QuizOrder.length - s01QScore);
+  s01SaveStats(st);
   let html = '<div class="quiz-result"><h2>'+(pct>=90?'Amazing!':pct>=70?'Great job!':pct>=50?'Good effort!':'Keep practicing!')+'</h2>'+
     '<div class="score">'+s01QScore+' / '+s01QuizOrder.length+'</div>'+
     '<p>'+pct+'% correct</p>';
@@ -2613,6 +2635,8 @@ document.querySelectorAll('[data-s01mode]').forEach(b=>{
     initS01();
   });
 });
+
+renderDashboard();
 
 </script></body>
 </html>
