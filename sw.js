@@ -1,8 +1,9 @@
-const CACHE = 'exlearn-v8';
+const CACHE = 'exlearn-v9';
 
 const PRECACHE = [
   'index.html',
   'manifest.json',
+  'img/congrats.webp',
   'icons/icon-180.png',
   'icons/icon-192.png',
   'icons/icon-512.png'
