@@ -2467,8 +2467,8 @@ function renderS01Cards(){
   area.innerHTML =
     '<div class="flash-progress"><span>'+(s01Idx+1)+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+Math.round((s01Idx+1)/s01Order.length*100)+'%"></div></div><span>'+s01Order.length+'</span></div>'+
     '<div class="flash-card" id="s01Card"><div class="flash-card-inner">'+
-      '<div class="flash-front"><div class="phrase">'+s01esc(item.w)+'</div><button class="s01-speak" data-i="'+s01Order[s01Idx]+'" type="button">🔊</button><div class="category">S01 Vocabulary</div></div>'+
-      '<div class="flash-back"><div class="meaning">'+s01esc(item.e)+'</div>'+(note?'<div class="synonyms">📝 '+s01esc(note)+'</div>':'')+'<button class="s01-speak" data-i="'+s01Order[s01Idx]+'" type="button">🔊</button></div>'+
+      '<div class="flash-front"><div class="phrase">'+s01esc(item.w)+'</div><button class="s01-speak" data-i="'+s01Order[s01Idx]+'" data-f="w" type="button">🔊</button><div class="category">S01 Vocabulary</div></div>'+
+      '<div class="flash-back"><div class="meaning">'+s01esc(item.e)+'</div>'+(note?'<div class="synonyms">📝 '+s01esc(note)+'</div>':'')+'<button class="s01-speak" data-i="'+s01Order[s01Idx]+'" data-f="e" type="button">🔊</button></div>'+
     '</div></div>'+
     '<div class="flash-hint">Tap card to flip</div>'+
     '<div class="flash-nav"><button id="s01Prev">← Prev</button><button id="s01Shuffle" class="shuffle-btn">Shuffle</button><button id="s01Next">Next →</button></div>';
@@ -2477,7 +2477,7 @@ function renderS01Cards(){
   document.getElementById('s01Next').addEventListener('click',()=>{ if(s01Idx<s01Order.length-1){ s01Idx++; renderS01Cards(); } });
   document.getElementById('s01Shuffle').addEventListener('click',()=>{ s01Order = s01shuffle(s01Data.map((_,i)=>i)); s01Idx = 0; renderS01Cards(); });
   document.querySelectorAll('#s01Card .s01-speak').forEach(b=>{
-    b.addEventListener('click',e=>{ e.stopPropagation(); s01Speak(parseInt(b.dataset.i)); });
+    b.addEventListener('click',e=>{ e.stopPropagation(); s01Speak(parseInt(b.dataset.i), b.dataset.f); });
   });
 }
 
@@ -2651,13 +2651,28 @@ function renderS01Notes(){
   document.getElementById('s01NoteSearch').addEventListener('input',draw);
 }
 
-function s01Speak(i){
-  const w = s01Data[i] && s01Data[i].w;
-  if(!w) return;
-  const a = new Audio('audio/s01/'+('0000'+String(i+1)).slice(-4)+'.wav');
+let s01CurAudio = null;
+function s01Speak(i, field){
+  const text = s01Data[i] && s01Data[i][field || 'w'];
+  if(!text) return;
+  const url = (field === 'e' ? 'audio/s01/e/' : 'audio/s01/') + ('0000'+String(i+1)).slice(-4) + '.wav';
+  if(s01CurAudio){
+    const same = s01CurAudio._s01url === url;
+    s01CurAudio.pause();
+    s01CurAudio.currentTime = 0;
+    s01CurAudio = null;
+    if(same) return;
+  }
+  const a = new Audio(url);
+  a._s01url = url;
+  const clear = ()=>{ if(s01CurAudio === a) s01CurAudio = null; };
+  a.addEventListener('ended', clear);
+  a.addEventListener('error', clear);
+  s01CurAudio = a;
   a.play().catch(()=>{
+    clear();
     if('speechSynthesis' in window){
-      const u = new SpeechSynthesisUtterance(w);
+      const u = new SpeechSynthesisUtterance(text);
       u.lang = 'en-US';
       window.speechSynthesis.speak(u);
     }
