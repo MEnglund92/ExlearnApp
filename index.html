@@ -269,6 +269,11 @@ header h1{margin:0}
 .s01-note-input{flex:1;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);color:#e0e0e0;font-size:0.82rem;outline:none;transition:all .25s}
 .s01-note-input:focus{border-color:#c084fc;box-shadow:0 0 16px rgba(192,132,252,0.3)}
 .s01-note-input::placeholder{color:#555}
+.s01-speak{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.2);border-radius:50%;width:44px;height:44px;font-size:1.05rem;cursor:pointer;margin:10px auto 6px;display:block;color:#fff;transition:all .25s}
+.s01-speak:hover{background:rgba(192,132,252,0.25);box-shadow:0 0 18px rgba(192,132,252,0.4);transform:translateY(-1px)}
+.s01-speak:active{transform:scale(.92)}
+.s01-quiz-speak{background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.2);border-radius:50%;width:36px;height:36px;font-size:.9rem;cursor:pointer;color:#fff;transition:all .25s;vertical-align:middle;margin-left:8px}
+.s01-quiz-speak:hover{background:rgba(192,132,252,0.25);box-shadow:0 0 14px rgba(192,132,252,0.4)}
 @media(max-width:480px){.s01-note-row{flex-wrap:wrap}.s01-note-word{flex-basis:100%}}
 </style>
 
@@ -448,6 +453,7 @@ header h1{margin:0}
   <div class="study-mode-toggle">
     <button class="study-mode-btn active" data-s01mode="cards">🎴 Flashcards</button>
     <button class="study-mode-btn" data-s01mode="quiz">📝 Quiz</button>
+    <button class="study-mode-btn" data-s01mode="match">🔗 Match</button>
     <button class="study-mode-btn" data-s01mode="notes">✍️ My Notes</button>
   </div>
   <div id="s01Area"></div>
@@ -1429,10 +1435,11 @@ function renderDashboard(){
       '<div class="dash-row"><span>Average Score</span><span class="dash-val">'+s01Avg+'%</span></div>'+
       '<div class="dash-row"><span>Last Score</span><span class="dash-val">'+s1.lastScore+'%</span></div>'+
       '<div class="dash-row"><span>Total Correct</span><span class="dash-val">'+s1.totalCorrect+' / '+s01Total+'</span></div>'+
+      '<div class="dash-row"><span>Match Rounds</span><span class="dash-val">'+(s1.matchRounds||0)+'</span></div>'+
     '</div>'+
     '<div class="dash-card" style="text-align:center"><button class="dash-reset-btn" id="resetStatsBtn">Reset All Data</button></div>';
   document.getElementById('resetStatsBtn').addEventListener('click',()=>{
-    if(confirm('Reset all stats (including S01 notes and scores)?')){saveStats({quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}});s01SaveNotes({});s01SaveStats({taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0});renderDashboard();}
+    if(confirm('Reset all stats (including S01 notes and scores)?')){saveStats({quiz:{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0},match:{rounds:0},srs:{}});s01SaveNotes({});s01SaveStats({taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0,matchRounds:0});renderDashboard();}
   });
 }
 
@@ -1936,7 +1943,7 @@ const s01Data = [
 {w:"legacy",e:"something that exists as a result of a past event/action"},
 {w:"forge",e:"develop, create"},
 {w:"foe",e:"literary: enemy"},
-{w:"roll back",e:"AmE: reduce Page 2"},
+{w:"roll back",e:"AmE: reduce"},
 {w:"waver",e:"hesitate, weaken"},
 {w:"patchwork",e:"something made up of many different parts"},
 {w:"swill",e:"liquid waste"},
@@ -1966,7 +1973,7 @@ const s01Data = [
 {w:"frown",e:"moving together of the eyebrows to show worry, irritation or concentration"},
 {w:"sneer",e:"facial expression showing disrespect"},
 {w:"wreck",e:"something badly damaged or destroyed"},
-{w:"boundless",e:"without an end Page 3"},
+{w:"boundless",e:"without an end"},
 {w:"unobjectionable",e:"inoffensive, agreeable"},
 {w:"pending",e:"formal: until, awaiting"},
 {w:"rig",e:"equipment"},
@@ -1995,7 +2002,7 @@ const s01Data = [
 {w:"shielding",e:"protection"},
 {w:"crow",e:"say with pride or triumph"},
 {w:"batch",e:"an amount of something"},
-{w:"justification",e:"explanation, excuse Page 4"},
+{w:"justification",e:"explanation, excuse"},
 {w:"jarring",e:"upsetting, disturbing"},
 {w:"tedious",e:"boring (for too long)"},
 {w:"stasis",e:"a period/state of inactivity, when nothing changes"},
@@ -2026,7 +2033,7 @@ const s01Data = [
 {w:"roaring",e:"here: burning very brightly"},
 {w:"sway",e:"move slowly and rhythmically from side to side"},
 {w:"padded",e:"covered, filled"},
-{w:"spinal column",e:"backbone Page 5"},
+{w:"spinal column",e:"backbone"},
 {w:"murmur",e:"low continuous background noise"},
 {w:"wilderness",e:"wild uninhabited area"},
 {w:"fern",e:"flowerless plant with leaves shaped like feathers"},
@@ -2080,7 +2087,7 @@ const s01Data = [
 {w:"gauze",e:"thin transparent fabric"},
 {w:"spleen",e:"abdominal organ that produces and cleans the body's blood"},
 {w:"locomotive",e:"railway engine"},
-{w:"steam shovel",e:"a digger powered by steam Page 6"},
+{w:"steam shovel",e:"a digger powered by steam"},
 {w:"valve",e:"tap, regulator"},
 {w:"tonnage",e:"very heavy weight"},
 {w:"mooring",e:"place where something is fixed or tied"},
@@ -2124,7 +2131,7 @@ const s01Data = [
 {w:"radical",e:"drastic, extreme"},
 {w:"streak",e:"part of someone's character, trait"},
 {w:"inherent",e:"basic, integral, innate"},
-{w:"go through the roof",e:"informal: rise to a very high level Page 7"},
+{w:"go through the roof",e:"informal: rise to a very high level"},
 {w:"commodity",e:"something basic to be bought and sold"},
 {w:"soluble",e:"able to be dissolved (in water, fat/oils etc.)"},
 {w:"day of reckoning",e:"here: judgement day, turning point"},
@@ -2146,7 +2153,7 @@ const s01Data = [
 {w:"savage",e:"dated, offensive: uncivilized person"},
 {w:"bleach",e:"strong chemical used to clean or colour things white"},
 {w:"garment",e:"item of clothing"},
-{w:"brassiere",e:"formal: bra Page 8"},
+{w:"brassiere",e:"formal: bra"},
 {w:"enchanted",e:"magical"},
 {w:"tinned",e:"BrE: preserved in a can"},
 {w:"ravenous",e:"very hungry"},
@@ -2175,7 +2182,7 @@ const s01Data = [
 {w:"snowbird",e:"AmE, informal: person who moves to a warmer climate in the winter"},
 {w:"grifter",e:"AmE, informal: person who gets money dishonestly"},
 {w:"squat",e:"occupy land or property illegally"},
-{w:"digs",e:"informal: rented accommodation Page 9"},
+{w:"digs",e:"informal: rented accommodation"},
 {w:"beat-up",e:"informal: old and in bad condition"},
 {w:"stake out",e:"claim, mark out"},
 {w:"makeshift",e:"temporary, improvised"},
@@ -2217,7 +2224,7 @@ const s01Data = [
 {w:"picket",e:"group of soldiers that guard troops from a surprise attack"},
 {w:"endeavour",e:"formal: try hard"},
 {w:"ordnance",e:"weapons and ammunition"},
-{w:"quartermaster",e:"officer responsible for providing soldiers with food, equipment and other necessities Page 10"},
+{w:"quartermaster",e:"officer responsible for providing soldiers with food, equipment and other necessities"},
 {w:"dispatch",e:"message, report"},
 {w:"clipping",e:"article or picture cut from a newspaper"},
 {w:"skedaddle",e:"informal: run off"},
@@ -2261,7 +2268,7 @@ const s01Data = [
 {w:"ornamental",e:"decorative, for show"},
 {w:"foray",e:"expedition, short journey"},
 {w:"court",e:"disaster: risk something unpleasant"},
-{w:"the converse",e:"formal: the opposite Page 11"},
+{w:"the converse",e:"formal: the opposite"},
 {w:"hold true",e:"remain true/valid"},
 {w:"duress",e:"formal: threat, force"},
 {w:"revel in",e:"enjoy very much"},
@@ -2302,7 +2309,7 @@ const s01Data = [
 {w:"aptitude",e:"natural skill/ability"},
 {w:"psychology",e:"here: mental characteristics"},
 {w:"clump",e:"here: walk noisily and heavily"},
-{w:"magnify",e:"enlarge, make bigger Page 12"},
+{w:"magnify",e:"enlarge, make bigger"},
 {w:"full steam",e:"at full speed"},
 {w:"starry(-eyed)",e:"dreamy, optimistic"},
 {w:"eclipse",e:"overpower, overshadow"},
@@ -2336,7 +2343,7 @@ const s01Data = [
 {w:"graphic",e:"detailed, explicit (usually in a negative sense)"},
 {w:"upside",e:"advantage"},
 {w:"domain",e:"area, sphere"},
-{w:"slaughter",e:"kill violently Page 13"},
+{w:"slaughter",e:"kill violently"},
 {w:"constitute",e:"formal: be; make up, amount to"},
 {w:"fallacy",e:"false belief"},
 {w:"at close quarters",e:"close by, (from) a short distance away"},
@@ -2375,7 +2382,7 @@ const s01Data = [
 {w:"convey",e:"communicate, express"},
 {w:"disillusionment",e:"disappointment, cynicism"},
 {w:"foresee",e:"(foresaw, foreseen) predict, expect"},
-{w:"gloomy",e:"miserable, depressing Page 14"},
+{w:"gloomy",e:"miserable, depressing"},
 {w:"peer",e:"here: person with the same rank, social standing, abilities etc."},
 {w:"perception",e:"the way we understand or think about something"},
 {w:"unify",e:"combine, join"},
@@ -2388,7 +2395,7 @@ const s01Data = [
 {w:"evolve",e:"gradually change and develop"},
 {w:"make a killing",e:"informal: make a lot of money very quickly"},
 {w:"imply",e:"(strongly) suggest"},
-{w:"decay",e:"decompose, crumble Page 15"},
+{w:"decay",e:"decompose, crumble"},
 {w:"recurring",e:"happening again and again"},
 {w:"apparition",e:"formal: vision"},
 {w:"seep",e:"leak, gradually spread"},
@@ -2432,12 +2439,13 @@ let s01QScore = 0;
 let s01QAnswered = false;
 let s01QMistakes = [];
 let s01QuizType = 'choice';
+let s01Reverse = false;
 const s01letters = ['A','B','C','D','E','F'];
 
 function s01GetNotes(){ try{ return JSON.parse(localStorage.getItem(s01NotesKey))||{}; }catch(e){ return {}; } }
 function s01SaveNotes(n){ try{ localStorage.setItem(s01NotesKey, JSON.stringify(n)); }catch(e){} }
 const s01StatsKey = 'exlearn_s01_stats';
-function s01GetStats(){ try{ return JSON.parse(localStorage.getItem(s01StatsKey))||{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0}; }catch(e){ return {taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0}; } }
+function s01GetStats(){ try{ return JSON.parse(localStorage.getItem(s01StatsKey))||{taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0,matchRounds:0}; }catch(e){ return {taken:0,best:0,totalCorrect:0,totalIncorrect:0,lastScore:0,matchRounds:0}; } }
 function s01SaveStats(s){ try{ localStorage.setItem(s01StatsKey, JSON.stringify(s)); }catch(e){} }
 function s01esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 function s01shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
@@ -2446,6 +2454,7 @@ function s01norm(s){ return String(s).toLowerCase().replace(/[^a-z0-9\s]/g,'').r
 function initS01(){
   if(s01Mode==='cards') renderS01Cards();
   else if(s01Mode==='quiz') renderS01Quiz();
+  else if(s01Mode==='match') renderS01Match();
   else renderS01Notes();
 }
 
@@ -2457,8 +2466,8 @@ function renderS01Cards(){
   area.innerHTML =
     '<div class="flash-progress"><span>'+(s01Idx+1)+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+Math.round((s01Idx+1)/s01Order.length*100)+'%"></div></div><span>'+s01Order.length+'</span></div>'+
     '<div class="flash-card" id="s01Card"><div class="flash-card-inner">'+
-      '<div class="flash-front"><div class="phrase">'+s01esc(item.w)+'</div><div class="category">S01 Vocabulary</div></div>'+
-      '<div class="flash-back"><div class="meaning">'+s01esc(item.e)+'</div>'+(note?'<div class="synonyms">📝 '+s01esc(note)+'</div>':'')+'</div>'+
+      '<div class="flash-front"><div class="phrase">'+s01esc(item.w)+'</div><button class="s01-speak" data-i="'+s01Order[s01Idx]+'" type="button">🔊</button><div class="category">S01 Vocabulary</div></div>'+
+      '<div class="flash-back"><div class="meaning">'+s01esc(item.e)+'</div>'+(note?'<div class="synonyms">📝 '+s01esc(note)+'</div>':'')+'<button class="s01-speak" data-i="'+s01Order[s01Idx]+'" type="button">🔊</button></div>'+
     '</div></div>'+
     '<div class="flash-hint">Tap card to flip</div>'+
     '<div class="flash-nav"><button id="s01Prev">← Prev</button><button id="s01Shuffle" class="shuffle-btn">Shuffle</button><button id="s01Next">Next →</button></div>';
@@ -2466,6 +2475,9 @@ function renderS01Cards(){
   document.getElementById('s01Prev').addEventListener('click',()=>{ if(s01Idx>0){ s01Idx--; renderS01Cards(); } });
   document.getElementById('s01Next').addEventListener('click',()=>{ if(s01Idx<s01Order.length-1){ s01Idx++; renderS01Cards(); } });
   document.getElementById('s01Shuffle').addEventListener('click',()=>{ s01Order = s01shuffle(s01Data.map((_,i)=>i)); s01Idx = 0; renderS01Cards(); });
+  document.querySelectorAll('#s01Card .s01-speak').forEach(b=>{
+    b.addEventListener('click',e=>{ e.stopPropagation(); s01Speak(parseInt(b.dataset.i)); });
+  });
 }
 
 function renderS01Quiz(){
@@ -2476,11 +2488,17 @@ function renderS01Quiz(){
       '<option value="5">5</option><option value="10" selected>10</option>'+
       '<option value="15">15</option><option value="20">20</option><option value="0">All</option></select>'+
       '<button class="quiz-rus-btn" id="s01TypeBtn">✍ Type Mode</button>'+
+      '<button class="quiz-rus-btn" id="s01RevBtn">↔️ Reverse</button>'+
     '</div><div id="s01QuizBody"></div>';
   document.getElementById('s01Count').addEventListener('change',s01StartQuiz);
   document.getElementById('s01TypeBtn').addEventListener('click',()=>{
     s01QuizType = s01QuizType==='choice'?'type':'choice';
     document.getElementById('s01TypeBtn').textContent = s01QuizType==='choice'?'✍ Type Mode':'☑ Choice Mode';
+    s01StartQuiz();
+  });
+  document.getElementById('s01RevBtn').addEventListener('click',()=>{
+    s01Reverse = !s01Reverse;
+    document.getElementById('s01RevBtn').classList.toggle('active',s01Reverse);
     s01StartQuiz();
   });
   s01StartQuiz();
@@ -2494,13 +2512,12 @@ function s01StartQuiz(){
   s01RenderQ();
 }
 
-function s01Distractors(wi){
-  const ex = s01Data[wi].e;
-  const pool = s01shuffle(s01Data.map((_,i)=>i).filter(i=>s01Data[i].e!==ex));
+function s01Distractors(field,val){
+  const pool = s01shuffle(s01Data.map((_,i)=>i).filter(i=>s01Data[i][field]!==val));
   const out = [];
   for(const i of pool){
     if(out.length>=3) break;
-    if(!out.includes(s01Data[i].e)) out.push(s01Data[i].e);
+    if(!out.includes(s01Data[i][field])) out.push(s01Data[i][field]);
   }
   return out;
 }
@@ -2512,31 +2529,36 @@ function s01RenderQ(){
   const item = s01Data[wi];
   const pct = Math.round(s01QIdx/s01QuizOrder.length*100);
   const head = '<div class="quiz-progress"><span>'+(s01QIdx+1)+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%"></div></div><span>'+s01QuizOrder.length+'</span></div>';
+  const qField = s01Reverse ? 'e' : 'w';
+  const aField = s01Reverse ? 'w' : 'e';
+  const qText = item[qField];
+  const aText = item[aField];
+  const speak = '<button class="s01-quiz-speak" id="s01QSpeak" type="button">🔊</button>';
   if(s01QuizType==='choice'){
-    const opts = s01shuffle([item.e].concat(s01Distractors(wi)));
+    const opts = s01shuffle([aText].concat(s01Distractors(aField,aText)));
     body.innerHTML = head+
-      '<div class="quiz-question"><div class="q-label">Choose the correct explanation:</div><div class="q-phrase">'+s01esc(item.w)+'</div><div class="q-category">S01 Vocabulary</div></div>'+
+      '<div class="quiz-question"><div class="q-label">'+(s01Reverse?'Choose the correct word:':'Choose the correct explanation:')+'</div><div class="q-phrase">'+s01esc(qText)+speak+'</div><div class="q-category">S01 Vocabulary</div></div>'+
       '<div class="quiz-options">'+opts.map((o,i)=>'<button class="quiz-opt" data-val="'+s01esc(o)+'"><span class="opt-letter">'+s01letters[i]+'</span>'+s01esc(o)+'</button>').join('')+'</div>';
     body.querySelectorAll('.quiz-opt').forEach(btn=>{
       btn.addEventListener('click',()=>{
         if(s01QAnswered) return;
         s01QAnswered = true;
         body.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
-        if(btn.dataset.val===item.e){
+        if(btn.dataset.val===aText){
           s01QScore++;
           btn.classList.add('correct');
         }else{
           s01QMistakes.push({w:item.w,e:item.e});
           btn.classList.add('wrong');
-          body.querySelectorAll('.quiz-opt').forEach(b=>{ if(b.dataset.val===item.e) b.classList.add('reveal'); });
+          body.querySelectorAll('.quiz-opt').forEach(b=>{ if(b.dataset.val===aText) b.classList.add('reveal'); });
         }
         s01NextQBtn();
       });
     });
   }else{
     body.innerHTML = head+
-      '<div class="quiz-question"><div class="q-label">Type the explanation:</div><div class="q-phrase">'+s01esc(item.w)+'</div><div class="q-category">S01 Vocabulary</div></div>'+
-      '<input type="text" class="typing-input" id="s01TypeInput" placeholder="Type the explanation..." autocomplete="off">'+
+      '<div class="quiz-question"><div class="q-label">'+(s01Reverse?'Type the word:':'Type the explanation:')+'</div><div class="q-phrase">'+s01esc(qText)+speak+'</div><div class="q-category">S01 Vocabulary</div></div>'+
+      '<input type="text" class="typing-input" id="s01TypeInput" placeholder="'+(s01Reverse?'Type the word...':'Type the explanation...')+'" autocomplete="off">'+
       '<button class="typing-check-btn" id="s01TypeCheck">Check ✓</button>'+
       '<div class="typing-feedback" id="s01TypeFb"></div>';
     const check = ()=>{
@@ -2544,14 +2566,14 @@ function s01RenderQ(){
       s01QAnswered = true;
       const g = document.getElementById('s01TypeInput').value;
       const fb = document.getElementById('s01TypeFb');
-      if(s01norm(g)===s01norm(item.e)){
+      if(s01norm(g)===s01norm(aText)){
         s01QScore++;
         fb.className = 'typing-feedback correct';
         fb.innerHTML = '✅ Correct!';
       }else{
         s01QMistakes.push({w:item.w,e:item.e});
         fb.className = 'typing-feedback wrong';
-        fb.innerHTML = '❌ Wrong. <div class="expected">Answer: <strong>'+s01esc(item.e)+'</strong></div>';
+        fb.innerHTML = '❌ Wrong. <div class="expected">Answer: <strong>'+s01esc(aText)+'</strong></div>';
       }
       document.getElementById('s01TypeCheck').disabled = true;
       s01NextQBtn();
@@ -2559,6 +2581,7 @@ function s01RenderQ(){
     document.getElementById('s01TypeCheck').addEventListener('click',check);
     document.getElementById('s01TypeInput').addEventListener('keydown',e=>{ if(e.key==='Enter') check(); });
   }
+  document.getElementById('s01QSpeak').addEventListener('click',()=>s01Speak(wi));
 }
 
 function s01NextQBtn(){
@@ -2625,6 +2648,94 @@ function renderS01Notes(){
   };
   draw();
   document.getElementById('s01NoteSearch').addEventListener('input',draw);
+}
+
+function s01Speak(i){
+  const w = s01Data[i] && s01Data[i].w;
+  if(!w) return;
+  const a = new Audio('audio/s01/'+('0000'+String(i+1)).slice(-4)+'.wav');
+  a.play().catch(()=>{
+    if('speechSynthesis' in window){
+      const u = new SpeechSynthesisUtterance(w);
+      u.lang = 'en-US';
+      window.speechSynthesis.speak(u);
+    }
+  });
+}
+
+let s01MatchLeft = []; let s01MatchRight = []; let s01MatchSel = null;
+
+function renderS01Match(){
+  const area = document.getElementById('s01Area');
+  area.innerHTML =
+    '<div class="match-controls">'+
+      '<label>Pairs:</label><select id="s01MatchSize"><option value="3">3</option><option value="5" selected>5</option><option value="10">10</option></select>'+
+    '</div>'+
+    '<div class="match-setup">Match each word with its explanation</div>'+
+    '<div class="match-grid"><div class="match-col" id="s01MatchLeft"><h3>Words</h3></div><div class="match-col" id="s01MatchRight"><h3>Explanations</h3></div></div>'+
+    '<div class="match-status" id="s01MatchStatus">0 / 5 matched</div>'+
+    '<div class="match-result-overlay" id="s01MatchResult"><div class="score" id="s01MatchScore"></div><div class="result-msg" id="s01MatchMsg"></div><button class="dash-reset-btn" id="s01MatchAgain">Play Again</button></div>';
+  document.getElementById('s01MatchSize').addEventListener('change',s01StartMatch);
+  document.getElementById('s01MatchAgain').addEventListener('click',s01StartMatch);
+  s01StartMatch();
+}
+
+function s01StartMatch(){
+  const size = parseInt(document.getElementById('s01MatchSize').value)||5;
+  const pool = s01shuffle(s01Data.map((_,i)=>i)).slice(0,Math.min(size,s01Data.length));
+  s01MatchLeft = pool.map((id,i)=>({text:s01Data[id].w,id:i,matched:false}));
+  s01MatchRight = s01shuffle(pool.map((id,i)=>({text:s01Data[id].e,id:i,paired:false})));
+  s01MatchSel = null;
+  document.getElementById('s01MatchResult').classList.remove('show');
+  document.getElementById('s01MatchStatus').textContent = '0 / '+pool.length+' matched';
+  s01RenderMatchGrid();
+}
+
+function s01RenderMatchGrid(){
+  document.getElementById('s01MatchLeft').innerHTML = '<h3>Words</h3>'+s01MatchLeft.map((m,i)=>{
+    let cls = m.matched?'match-item matched':'match-item';
+    if(s01MatchSel&&s01MatchSel.side==='left'&&s01MatchSel.idx===i) cls+=' selected';
+    return '<div class="'+cls+'" data-side="left" data-idx="'+i+'" data-id="'+m.id+'">'+s01esc(m.text)+'</div>';
+  }).join('');
+  document.getElementById('s01MatchRight').innerHTML = '<h3>Explanations</h3>'+s01MatchRight.map((m,i)=>{
+    let cls = m.paired?'match-item matched':'match-item';
+    if(s01MatchSel&&s01MatchSel.side==='right'&&s01MatchSel.idx===i) cls+=' selected';
+    return '<div class="'+cls+'" data-side="right" data-idx="'+i+'" data-id="'+m.id+'">'+s01esc(m.text)+'</div>';
+  }).join('');
+  const matched = s01MatchLeft.filter(m=>m.matched).length;
+  const total = s01MatchLeft.length;
+  document.getElementById('s01MatchStatus').textContent = matched+' / '+total+' matched';
+  if(matched===total){
+    const pct = Math.round(matched/total*100);
+    document.getElementById('s01MatchScore').textContent = matched+' / '+total+' — '+pct+'%';
+    document.getElementById('s01MatchMsg').textContent = getScoreMessage(pct);
+    document.getElementById('s01MatchResult').classList.add('show');
+    const st = s01GetStats();
+    st.matchRounds = (st.matchRounds||0)+1;
+    s01SaveStats(st);
+    return;
+  }
+  document.querySelectorAll('#s01MatchLeft .match-item:not(.matched), #s01MatchRight .match-item:not(.paired)').forEach(el=>{
+    el.addEventListener('click',()=>s01HandleMatchClick(el.dataset.side,parseInt(el.dataset.idx),parseInt(el.dataset.id)));
+  });
+}
+
+function s01HandleMatchClick(side,idx,id){
+  if(side==='left'){
+    if(s01MatchLeft[idx].matched) return;
+    s01MatchSel = {side,idx,id};
+  }else{
+    if(s01MatchRight[idx].paired) return;
+    if(!s01MatchSel || s01MatchSel.side!=='left'){ s01MatchSel = {side,idx,id}; }
+    else{
+      if(s01MatchSel.id===id){
+        s01MatchLeft[s01MatchSel.idx].matched = true;
+        s01MatchRight[idx].paired = true;
+      }
+      s01MatchSel = null;
+    }
+  }
+  s01RenderMatchGrid();
 }
 
 document.querySelectorAll('[data-s01mode]').forEach(b=>{
