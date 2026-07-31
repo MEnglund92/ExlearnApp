@@ -263,7 +263,15 @@ header h1{margin:0}
   .quiz-match-grid{grid-template-columns:1fr;gap:8px}
   *{-webkit-tap-highlight-color:transparent}
 }
+.s01-notes{display:flex;flex-direction:column;gap:6px;max-width:560px;margin:0 auto}
+.s01-note-row{display:flex;gap:10px;align-items:center;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.12);border-radius:10px;padding:8px 12px}
+.s01-note-word{flex:0 0 150px;font-size:0.85rem;font-weight:600;color:#fff;word-break:break-word}
+.s01-note-input{flex:1;min-width:0;padding:8px 12px;border-radius:8px;border:1px solid rgba(192,132,252,0.15);background:rgba(192,132,252,0.06);color:#e0e0e0;font-size:0.82rem;outline:none;transition:all .25s}
+.s01-note-input:focus{border-color:#c084fc;box-shadow:0 0 16px rgba(192,132,252,0.3)}
+.s01-note-input::placeholder{color:#555}
+@media(max-width:480px){.s01-note-row{flex-wrap:wrap}.s01-note-word{flex-basis:100%}}
 </style>
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Exlearn">
@@ -288,6 +296,7 @@ header h1{margin:0}
   <button class="tab" data-tab="match">🔗 Match</button>
   <button class="tab" data-tab="study">🧠 Study</button>
   <button class="tab" data-tab="dashboard">📊 Dashboard</button>
+  <button class="tab" data-tab="s01">🎬 S01</button>
 </div>
 
 <div class="tab-container">
@@ -433,6 +442,15 @@ header h1{margin:0}
 
 <div class="tab-panel" id="tab-dashboard">
   <div class="dashboard-grid" id="dashGrid"></div>
+</div>
+
+<div class="tab-panel" id="tab-s01">
+  <div class="study-mode-toggle">
+    <button class="study-mode-btn active" data-s01mode="cards">🎴 Flashcards</button>
+    <button class="study-mode-btn" data-s01mode="quiz">📝 Quiz</button>
+    <button class="study-mode-btn" data-s01mode="notes">✍️ My Notes</button>
+  </div>
+  <div id="s01Area"></div>
 </div>
 </div>
 </div>
@@ -1418,6 +1436,7 @@ document.querySelectorAll('.tab').forEach(tab=>{
     if(tab.dataset.tab==='match') initMatch();
     if(tab.dataset.tab==='study') initStudy();
     if(tab.dataset.tab==='dashboard') renderDashboard();
+    if(tab.dataset.tab==='s01') initS01();
   });
 });
 
@@ -1866,6 +1885,734 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });
 }
-</script>
-</body>
+const s01Data = [
+{w:"penchant",e:"formal: liking, preference; tendency"},
+{w:"knack",e:"informal: skill, ability"},
+{w:"humbled",e:"made to feel less important"},
+{w:"bestow",e:"formal: give"},
+{w:"rising tides of",e:"increases in"},
+{w:"amidst",e:"literary: in the middle of"},
+{w:"in the midst of",e:"formal: in the middle of"},
+{w:"far-reaching",e:"having a great effect"},
+{w:"shutter",e:"AmE: close (a business)"},
+{w:"span of time",e:"period of time"},
+{w:"recriminations",e:"criticizing someone who has criticized you"},
+{w:"dogma",e:"belief, principle"},
+{w:"strangle",e:"here: stop something developing"},
+{w:"reaffirm",e:"state something again"},
+{w:"enduring",e:"lasting"},
+{w:"settle for",e:"accept"},
+{w:"faint-hearted",e:"not brave"},
+{w:"doer",e:"an active person who achieves things"},
+{w:"rugged",e:"literary: difficult"},
+{w:"toil",e:"literary: work hard"},
+{w:"time and again",e:"often, repeatedly"},
+{w:"raw",e:"very sore, painful"},
+{w:"undiminished",e:"not reduced"},
+{w:"stand pat",e:"AmE: remain unchanged"},
+{w:"wield",e:"use"},
+{w:"harness",e:"control and make use of"},
+{w:"peril",e:"literary: danger, risk"},
+{w:"draft",e:"write"},
+{w:"expedience",e:"formal: doing what is easy rather than morally right"},
+{w:"sturdy",e:"strong"},
+{w:"emanate from",e:"formal: come from"},
+{w:"justness",e:"fairness"},
+{w:"cause",e:"here: aim, principle"},
+{w:"temper",e:"formal: make milder, less extreme"},
+{w:"humility",e:"behaving in a humble way"},
+{w:"legacy",e:"something that exists as a result of a past event/action"},
+{w:"forge",e:"develop, create"},
+{w:"foe",e:"literary: enemy"},
+{w:"roll back",e:"AmE: reduce Page 2"},
+{w:"waver",e:"hesitate, weaken"},
+{w:"patchwork",e:"something made up of many different parts"},
+{w:"swill",e:"liquid waste"},
+{w:"deceit",e:"dishonesty, tricking people"},
+{w:"dissent",e:"strong disagreement with general opinion"},
+{w:"pledge",e:"promise"},
+{w:"without regard to",e:"without considering"},
+{w:"embody",e:"be a symbol of"},
+{w:"determination",e:"pursuing a goal without giving up"},
+{w:"rely upon",e:"need"},
+{w:"levee",e:"a wall built to stop a river flooding"},
+{w:"nurture",e:"take care of"},
+{w:"grudgingly",e:"not willingly"},
+{w:"creed",e:"formal: a set of beliefs"},
+{w:"virtue",e:"good personal qualities"},
+{w:"hardship",e:"pain, suffering"},
+{w:"rationalism",e:"the belief in reason and logic"},
+{w:"preceding",e:"previous, (the one) before"},
+{w:"based on",e:"practical experience and experiments (refers to empiricism line)"},
+{w:"horrendous",e:"terrible"},
+{w:"fulfilment",e:"feeling of happiness and satisfaction"},
+{w:"burgeoning",e:"growing, flourishing"},
+{w:"renowned",e:"famous"},
+{w:"pamphlet",e:"very thin book, brochure"},
+{w:"vast",e:"very large"},
+{w:"visage",e:"literary: face, facial expression"},
+{w:"frown",e:"moving together of the eyebrows to show worry, irritation or concentration"},
+{w:"sneer",e:"facial expression showing disrespect"},
+{w:"wreck",e:"something badly damaged or destroyed"},
+{w:"boundless",e:"without an end Page 3"},
+{w:"unobjectionable",e:"inoffensive, agreeable"},
+{w:"pending",e:"formal: until, awaiting"},
+{w:"rig",e:"equipment"},
+{w:"megalomaniacal",e:"having a strong desire for power and control"},
+{w:"sprout",e:"produce, grow"},
+{w:"wondrous",e:"literary: exciting, marvellous"},
+{w:"husbandry",e:"farming"},
+{w:"steer",e:"young male cow raised for beef"},
+{w:"derive",e:"get, obtain"},
+{w:"fabricate",e:"construct, produce"},
+{w:"jettison",e:"throw away"},
+{w:"envision",e:"imagine"},
+{w:"enrich",e:"make better by adding something"},
+{w:"palatability",e:"how pleasant something tastes"},
+{w:"victuals",e:"dated: food"},
+{w:"balk at",e:"refuse to do something"},
+{w:"muse",e:"say thoughtfully"},
+{w:"edible",e:"can be eaten"},
+{w:"palatable",e:"pleasant to taste"},
+{w:"constituent",e:"part, component"},
+{w:"ominous",e:"indicating that something bad might happen"},
+{w:"patty",e:"flat, round piece of minced food"},
+{w:"ill advised",e:"not sensible or wise"},
+{w:"cache",e:"a (hidden) store of things"},
+{w:"seal",e:"shut, close (up)"},
+{w:"shielding",e:"protection"},
+{w:"crow",e:"say with pride or triumph"},
+{w:"batch",e:"an amount of something"},
+{w:"justification",e:"explanation, excuse Page 4"},
+{w:"jarring",e:"upsetting, disturbing"},
+{w:"tedious",e:"boring (for too long)"},
+{w:"stasis",e:"a period/state of inactivity, when nothing changes"},
+{w:"hugely",e:"very much, widely"},
+{w:"replicate",e:"here: copy, reproduce"},
+{w:"obtain",e:"get, achieve"},
+{w:"sleep deprived",e:"suffering from a lack of sleep"},
+{w:"kin",e:"one's family and relations"},
+{w:"induce",e:"cause something to happen"},
+{w:"retain",e:"keep"},
+{w:"dissect",e:"here: analyse in detail"},
+{w:"quaver",e:"shake slightly"},
+{w:"momentary",e:"lasting a very short time"},
+{w:"phlegm",e:"mucus; slimy liquid in your nose and throat"},
+{w:"disobey",e:"refuse to follow instructions, defy"},
+{w:"stiff",e:"here: high, steep"},
+{w:"tangle",e:"untidy/confused mass, jumble"},
+{w:"snaking",e:"twisting and turning"},
+{w:"humming",e:"making a low continuous droning/whirring sound"},
+{w:"flicker",e:"shine unsteadily, twinkle"},
+{w:"parchment",e:"early form of paper made from animal skin"},
+{w:"on the instant",e:"archaic: instantly, immediately"},
+{w:"to the letter",e:"exactly"},
+{w:"char",e:"partially burned material"},
+{w:"custom",e:"here: tradition, norm"},
+{w:"flush",e:"blush, go red (in the face)"},
+{w:"twitch",e:"make a sudden short movement"},
+{w:"roaring",e:"here: burning very brightly"},
+{w:"sway",e:"move slowly and rhythmically from side to side"},
+{w:"padded",e:"covered, filled"},
+{w:"spinal column",e:"backbone Page 5"},
+{w:"murmur",e:"low continuous background noise"},
+{w:"wilderness",e:"wild uninhabited area"},
+{w:"fern",e:"flowerless plant with leaves shaped like feathers"},
+{w:"tar",e:"asphalt"},
+{w:"finicky",e:"requiring or showing great attention to detail"},
+{w:"roach",e:"type of freshwater fish; OR informal: cockroach"},
+{w:"annihilate",e:"destroy"},
+{w:"snort",e:"make a short grunting sound to show disgust, surprise etc."},
+{w:"vulture",e:"large bird that eats dead animals"},
+{w:"boil down to",e:"be the main reason for something"},
+{w:"boar",e:"wild pig"},
+{w:"expendable",e:"disposable, of little importance"},
+{w:"loins",e:"literary: sexual organs"},
+{w:"slay",e:"literary: kill in a violent way"},
+{w:"throttle",e:"choke, strangle"},
+{w:"womb",e:"organ in a female body where a baby grows before birth"},
+{w:"wax",e:"literary: grow, become larger"},
+{w:"teeming",e:"crowded, full"},
+{w:"far-flung",e:"widespread; far away"},
+{w:"rustle",e:"soft dry sound made by moving leaves, paper etc."},
+{w:"correlate",e:"formal: establish a connection between two things; coordinate"},
+{w:"palely",e:"weakly"},
+{w:"soar",e:"fly high in the air"},
+{w:"cavernous",e:"giving an impression of vast dark depths"},
+{w:"delirium",e:"fever, hallucination"},
+{w:"stride",e:"walk with long confident steps"},
+{w:"sheathed over",e:"covered, encased"},
+{w:"mesh",e:"interlaced structure like a net"},
+{w:"coil",e:"curl, twist"},
+{w:"pelvic",e:"related to the pelvis; lumbar"},
+{w:"poised",e:"composed, graceful"},
+{w:"warily",e:"carefully, cautiously"},
+{w:"jerk",e:"make a quick, sharp, sudden movement"},
+{w:"cap gun",e:"toy pistol"},
+{w:"crusted",e:"having a hard outer layer"},
+{w:"undulate",e:"literary: move gently up and down like waves on the sea"},
+{w:"numb",e:"unable to feel anything"},
+{w:"shuffle",e:"walk without lifting your feet"},
+{w:"lunge",e:"move forward with a sudden thrust of the body"},
+{w:"engulf",e:"sweep over, cover"},
+{w:"stench",e:"very bad smell"},
+{w:"lever",e:"bar or handle used to control a machine etc."},
+{w:"lash",e:"strike sharply"},
+{w:"boulder-stone",e:"large smooth rock"},
+{w:"wrench",e:"pull hard, yank"},
+{w:"fount",e:"literary: fountain, spring"},
+{w:"sac",e:"part of an animal or plant that is like a bag and filled with liquid or air"},
+{w:"gush",e:"flood, spurt"},
+{w:"drench",e:"soak, wet thoroughly"},
+{w:"glistening",e:"shining, sparkling (something wet)"},
+{w:"gauze",e:"thin transparent fabric"},
+{w:"spleen",e:"abdominal organ that produces and cleans the body's blood"},
+{w:"locomotive",e:"railway engine"},
+{w:"steam shovel",e:"a digger powered by steam Page 6"},
+{w:"valve",e:"tap, regulator"},
+{w:"tonnage",e:"very heavy weight"},
+{w:"mooring",e:"place where something is fixed or tied"},
+{w:"wearily",e:"in a tired way"},
+{w:"stagnating",e:"here: rotting, deteriorating"},
+{w:"mound",e:"pile"},
+{w:"fumble",e:"move your hands around clumsily"},
+{w:"tremoring",e:"shaking"},
+{w:"nudge",e:"push or touch gently, prod"},
+{w:"taint",e:"stain, defect"},
+{w:"subliminal",e:"subconscious"},
+{w:"clod",e:"lump"},
+{w:"embedded",e:"fixed/set in a surrounding mass"},
+{w:"exquisite",e:"very beautiful and delicate"},
+{w:"weakling",e:"weak person"},
+{w:"scrabble",e:"fumble, feel around"},
+{w:"plead",e:"beg, ask desperately"},
+{w:"beefcake",e:"informal: attractive man with large muscles"},
+{w:"blond",e:"with fair/light hair (male)"},
+{w:"grieve",e:"mourn, feel very sad because someone has died"},
+{w:"enable",e:"allow, permit"},
+{w:"retailer",e:"person/company that sells goods directly to the public"},
+{w:"supply chain",e:"the processes involved in supplying a product to the buyer"},
+{w:"percolate",e:"formal: spread slowly"},
+{w:"insatiable",e:"limitless, cannot be satisfied"},
+{w:"discarded",e:"rejected, thrown away"},
+{w:"estimated",e:"guessed, reckoned"},
+{w:"paradigm shift",e:"formal: a major change in ideas, methods, approach etc."},
+{w:"garment",e:"item of clothing"},
+{w:"fad",e:"short-lived trend"},
+{w:"predicated",e:"formal: based, established"},
+{w:"pipe dream",e:"wish that is very unlikely to come true"},
+{w:"deliberation",e:"discussion, debate; consideration"},
+{w:"imply",e:"suggest, indicate"},
+{w:"attainable",e:"possible, achievable"},
+{w:"elicit",e:"formal: manage to get a certain reaction/information from someone"},
+{w:"reliant",e:"dependent"},
+{w:"aspiration",e:"ambition, goal"},
+{w:"hedonistic",e:"self-indulgent, pleasure-seeking"},
+{w:"turn a blind eye",e:"ignore, pretend not to see"},
+{w:"radical",e:"drastic, extreme"},
+{w:"streak",e:"part of someone's character, trait"},
+{w:"inherent",e:"basic, integral, innate"},
+{w:"go through the roof",e:"informal: rise to a very high level Page 7"},
+{w:"commodity",e:"something basic to be bought and sold"},
+{w:"soluble",e:"able to be dissolved (in water, fat/oils etc.)"},
+{w:"day of reckoning",e:"here: judgement day, turning point"},
+{w:"fickle",e:"always changing your mind about who/what you like"},
+{w:"thatch",e:"straw or reeds used to make roofs"},
+{w:"disguise oneself (as)",e:"modify one's appearance"},
+{w:"sorcerer",e:"(evil) person with magical powers"},
+{w:"shed",e:"(shed, shed) lose/drop something in a natural way or by accident"},
+{w:"leap",e:"(leapt, leapt) here: jump over"},
+{w:"turnstile",e:"narrow gate with metal bars that you push round to enter an area"},
+{w:"tiara",e:"piece of jewellery like a small crown worn by women at very formal occasions"},
+{w:"fuzzy",e:"tightly curled"},
+{w:"ensemble",e:"set of clothes, outfit"},
+{w:"desirable",e:"wanted, desired"},
+{w:"heir",e:"someone who will receive money, property, a title or a duty when another person dies"},
+{w:"foresee",e:"(foresaw, foreseen) predict, expect"},
+{w:"varnish",e:"liquid that gives a shiny protective surface"},
+{w:"railing",e:"fence made from metal bars"},
+{w:"savage",e:"dated, offensive: uncivilized person"},
+{w:"bleach",e:"strong chemical used to clean or colour things white"},
+{w:"garment",e:"item of clothing"},
+{w:"brassiere",e:"formal: bra Page 8"},
+{w:"enchanted",e:"magical"},
+{w:"tinned",e:"BrE: preserved in a can"},
+{w:"ravenous",e:"very hungry"},
+{w:"steel toe cap",e:"piece of metal covering the front part of a boot"},
+{w:"unwind",e:"(unwound, unwound) unwrap, unravel"},
+{w:"back and fro",e:"repeatedly backward and forward"},
+{w:"giddy",e:"dizzy, light-headed"},
+{w:"strip light",e:"tube-shaped electric light usually fixed to the ceiling"},
+{w:"captivity",e:"imprisonment, confinement"},
+{w:"threadbare",e:"worn and shabby"},
+{w:"halfling",e:"offensive: half-grown person"},
+{w:"plantain",e:"type of banana used in African cooking"},
+{w:"implore",e:"formal: beg, plead with"},
+{w:"pluck (out)",e:"pull out, remove (hair, feather etc.)"},
+{w:"defy",e:"refuse to obey, rebel against"},
+{w:"slab",e:"thick flat piece of a hard material"},
+{w:"off the grid",e:"AmE: living without basic services of electricity, water, gas etc."},
+{w:"flicker",e:"shine unsteadily"},
+{w:"entwined",e:"twisted together"},
+{w:"adorn",e:"decorate"},
+{w:"intricate",e:"detailed, complex"},
+{w:"stifling",e:"very hot and difficult to breathe"},
+{w:"adobe",e:"building material made with sun-dried earth and straw"},
+{w:"transient",e:"staying only for a short time"},
+{w:"retiree",e:"AmE: retired person"},
+{w:"snowbird",e:"AmE, informal: person who moves to a warmer climate in the winter"},
+{w:"grifter",e:"AmE, informal: person who gets money dishonestly"},
+{w:"squat",e:"occupy land or property illegally"},
+{w:"digs",e:"informal: rented accommodation Page 9"},
+{w:"beat-up",e:"informal: old and in bad condition"},
+{w:"stake out",e:"claim, mark out"},
+{w:"makeshift",e:"temporary, improvised"},
+{w:"sewage",e:"waste matter and dirty water from homes"},
+{w:"disposal",e:"getting rid of something"},
+{w:"scraggly",e:"AmE: thin and untidy"},
+{w:"swig",e:"drink something in large mouthfuls"},
+{w:"lithe",e:"able to move easily and gracefully"},
+{w:"strum",e:"move your fingers up and down the strings of an instrument"},
+{w:"nestle",e:"lie comfortably close"},
+{w:"tattered",e:"old and torn"},
+{w:"canvas",e:"cloth used to make tents, sails etc."},
+{w:"rock up",e:"informal: arrive unannounced"},
+{w:"shaded",e:"protected from sunlight"},
+{w:"tin",e:"a soft light silver metal, or a container made of this"},
+{w:"ingenious",e:"very clever"},
+{w:"resilience",e:"here: ability to keep going despite setbacks"},
+{w:"rife",e:"very common, widespread"},
+{w:"fill someone in (on)",e:"informal: provide someone with facts/information"},
+{w:"prim",e:"behaving in a formal and correct way; easily shocked by anything rude"},
+{w:"clipboard",e:"portable writing board"},
+{w:"hassle",e:"informal: cause someone problems"},
+{w:"reams",e:"informal: large quantity"},
+{w:"host",e:"receive and look after guests"},
+{w:"dirtbag",e:"informal: unpleasant and dishonest person"},
+{w:"jaded",e:"bored and tired, no longer enthusiastic"},
+{w:"anticipation",e:"expectation"},
+{w:"lease",e:"rent out"},
+{w:"drifter",e:"person who doesn't stay in one place for long"},
+{w:"top off",e:"AmE: add to, complete"},
+{w:"muse",e:"reflect, consider"},
+{w:"on the spot",e:"immediately, there and then"},
+{w:"lenient",e:"moderate, not severe"},
+{w:"temptress",e:"literary: woman who tries to attract men sexually"},
+{w:"imminent",e:"happening very soon"},
+{w:"martial law",e:"when an army controls an area instead of its usual leaders"},
+{w:"in succession",e:"in a row, one after the other"},
+{w:"roving",e:"here: moving"},
+{w:"picket",e:"group of soldiers that guard troops from a surprise attack"},
+{w:"endeavour",e:"formal: try hard"},
+{w:"ordnance",e:"weapons and ammunition"},
+{w:"quartermaster",e:"officer responsible for providing soldiers with food, equipment and other necessities Page 10"},
+{w:"dispatch",e:"message, report"},
+{w:"clipping",e:"article or picture cut from a newspaper"},
+{w:"skedaddle",e:"informal: run off"},
+{w:"provided",e:"on condition (that), only if"},
+{w:"consequential",e:"formal: important"},
+{w:"bonnet",e:"hat worn by a woman with ribbons tied under the chin"},
+{w:"lurch",e:"move suddenly, jump"},
+{w:"immaculate",e:"totally perfect"},
+{w:"coax",e:"gently push, urge"},
+{w:"foghorn",e:"device that makes a sound to warn ships in fog"},
+{w:"shear",e:"cut (off)"},
+{w:"preternatural",e:"formal: supernatural"},
+{w:"limbs",e:"legs and arms"},
+{w:"marvel",e:"be amazed"},
+{w:"bound",e:"run or jump with large steps"},
+{w:"agility",e:"ability to move quickly and easily"},
+{w:"dash",e:"run quickly"},
+{w:"approbation",e:"formal: approval, support"},
+{w:"private",e:"low-ranking soldier"},
+{w:"infantry",e:"(group of) foot soldiers"},
+{w:"glide",e:"move effortlessly"},
+{w:"ravine",e:"very narrow valley with steep sides"},
+{w:"heed",e:"formal: notice, pay attention to"},
+{w:"maiden",e:"archaic: unmarried girl/young woman"},
+{w:"supple",e:"able to move and bend easily"},
+{w:"dare",e:"have the courage to do something"},
+{w:"raspy",e:"rough, hoarse"},
+{w:"gust",e:"sudden rush of wind"},
+{w:"dip",e:"slope, hollow"},
+{w:"gratified",e:"formal: pleased"},
+{w:"disastrous",e:"extremely bad"},
+{w:"casualties",e:"people hurt or killed"},
+{w:"hold court",e:"be the centre of attention among friends/admirers"},
+{w:"aflame",e:"literary: showing strong emotion; on fire"},
+{w:"stoop",e:"bend forward and down"},
+{w:"crimson",e:"deep red colour"},
+{w:"crumpled",e:"crushed, creased"},
+{w:"render",e:"formal: provide, give"},
+{w:"inevitable",e:"impossible to avoid"},
+{w:"bulrush",e:"BrE: tall plant that grows near water"},
+{w:"ornamental",e:"decorative, for show"},
+{w:"foray",e:"expedition, short journey"},
+{w:"court",e:"disaster: risk something unpleasant"},
+{w:"the converse",e:"formal: the opposite Page 11"},
+{w:"hold true",e:"remain true/valid"},
+{w:"duress",e:"formal: threat, force"},
+{w:"revel in",e:"enjoy very much"},
+{w:"teem with",e:"be full of"},
+{w:"ravine",e:"very narrow valley with steep sides"},
+{w:"token",e:"formal: evidence, symbol"},
+{w:"caked",e:"thickly covered"},
+{w:"grain",e:"seed (here of wheat)"},
+{w:"rend",e:"literary: tear (into pieces)"},
+{w:"gonk",e:"trademark: egg-shaped doll with frizzy hair"},
+{w:"bulge",e:"swell, stick out"},
+{w:"corduroy",e:"thick material with raised lines"},
+{w:"snuffle",e:"sniff or breathe noisily"},
+{w:"refuse",e:"formal: rubbish"},
+{w:"tattered",e:"torn, shabby"},
+{w:"gawky",e:"nervously awkward, without grace"},
+{w:"taut",e:"tense, firm"},
+{w:"crotch",e:"area between the legs at the bottom of the torso"},
+{w:"trim",e:"thin and healthy-looking"},
+{w:"commute",e:"travel regularly to and from work"},
+{w:"jaunt",e:"short trip (for fun)"},
+{w:"gurgle",e:"make a bubbling sound"},
+{w:"plash",e:"make a splashing sound"},
+{w:"sheen",e:"soft shine"},
+{w:"meander",e:"wind, snake"},
+{w:"omnipresent",e:"formal: ever-present, everywhere"},
+{w:"unkempt",e:"dirty and untidy"},
+{w:"tangible",e:"formal: able to be touched; real, concrete"},
+{w:"black out",e:"sudden loss of consciousness; when everything goes dark"},
+{w:"tide",e:"rise and fall of the sea; wave(s)"},
+{w:"chip away at",e:"gradually make something weaker"},
+{w:"infatuated",e:"deeply in love"},
+{w:"glimmer",e:"soft weak light"},
+{w:"do one's utmost",e:"try as hard as you can"},
+{w:"acutely",e:"extremely, intensely"},
+{w:"inferiority",e:"state of not being (or not thinking you are) as good as others"},
+{w:"aggravated",e:"severe, serious"},
+{w:"aptitude",e:"natural skill/ability"},
+{w:"psychology",e:"here: mental characteristics"},
+{w:"clump",e:"here: walk noisily and heavily"},
+{w:"magnify",e:"enlarge, make bigger Page 12"},
+{w:"full steam",e:"at full speed"},
+{w:"starry(-eyed)",e:"dreamy, optimistic"},
+{w:"eclipse",e:"overpower, overshadow"},
+{w:"peal",e:"sound (of loud laughter or ringing bells)"},
+{w:"menagerie",e:"collection of wild animals kept for show"},
+{w:"cut the rug",e:"AmE, informal: dance"},
+{w:"budge",e:"move"},
+{w:"a blessing in disguise",e:"something bad that results in something good"},
+{w:"jar",e:"here: shake"},
+{w:"abashed",e:"embarrassed"},
+{w:"husky",e:"low and rough (voice)"},
+{w:"tumultuous",e:"literary: noisy and excited"},
+{w:"stumblejohn",e:"clumsy person"},
+{w:"gingerly",e:"carefully, cautiously"},
+{w:"decorous",e:"formal: polite and controlled"},
+{w:"perturbation",e:"formal: worry, uneasiness"},
+{w:"make a clean breast of it",e:"tell the truth about something"},
+{w:"have no call",e:"have no right/reason"},
+{w:"gay",e:"here, dated: happy and lively"},
+{w:"go steady",e:"informal, dated: be in a romantic relationship with someone"},
+{w:"enrapt",e:"literary: caught up, enthralled"},
+{w:"abate",e:"formal: become less strong"},
+{w:"flop",e:"fall or drop heavily"},
+{w:"snuff out",e:"put out (a flame)"},
+{w:"desolation",e:"great sadness and emptiness"},
+{w:"unsteadily",e:"here: shakily"},
+{w:"pitcher",e:"AmE: jug"},
+{w:"realm",e:"area of interest or activity"},
+{w:"refute",e:"formal: reject, deny"},
+{w:"escapism",e:"seeking entertainment or other pleasant experiences to forget about uninteresting/unpleasant aspects of life"},
+{w:"graphic",e:"detailed, explicit (usually in a negative sense)"},
+{w:"upside",e:"advantage"},
+{w:"domain",e:"area, sphere"},
+{w:"slaughter",e:"kill violently Page 13"},
+{w:"constitute",e:"formal: be; make up, amount to"},
+{w:"fallacy",e:"false belief"},
+{w:"at close quarters",e:"close by, (from) a short distance away"},
+{w:"indistinct",e:"unclear"},
+{w:"ambient",e:"existing/present all around you"},
+{w:"flare",e:"a sudden burst; OR a shape that becomes wider at one end (e.g. the end of a trumpet or trombone)"},
+{w:"keenly",e:"intensely, acutely"},
+{w:"morph",e:"change into something else"},
+{w:"percussive",e:"sounding like drum beats"},
+{w:"serene",e:"peaceful, calm"},
+{w:"oblivious",e:"not aware of or concerned about"},
+{w:"stark",e:"extreme and obvious"},
+{w:"swell",e:"here: gradual increase in sound"},
+{w:"imply",e:"suggest something without saying it directly"},
+{w:"otherness",e:"the quality or fact of being different"},
+{w:"entail",e:"formal: mean, involve"},
+{w:"anecdotally",e:"based on reports or observations by unscientific observers"},
+{w:"colloquially",e:"in everyday language"},
+{w:"ambiguity",e:"something that is unclear because it has different meanings"},
+{w:"rousing",e:"exciting, stimulating"},
+{w:"quest",e:"mission, aim; long difficult search"},
+{w:"repress",e:"hold back, keep down"},
+{w:"define",e:"describe, identify"},
+{w:"diverge",e:"go in separate directions"},
+{w:"undergrowth",e:"mass of small bushes or plants growing under trees"},
+{w:"hence",e:"formal, here: from this time"},
+{w:"fledgling",e:"recently formed, new"},
+{w:"prevalent",e:"common, widespread"},
+{w:"setting",e:"here: location, place"},
+{w:"prolific",e:"productive, producing a lot"},
+{w:"keenness",e:"enthusiasm, eagerness"},
+{w:"showcase",e:"show the best qualities of something"},
+{w:"give rise to",e:"create, lead to"},
+{w:"transcendental",e:"relating to a spiritual life, not understood in ordinary ways"},
+{w:"exert",e:"formal, here: apply, (put into) use"},
+{w:"convey",e:"communicate, express"},
+{w:"disillusionment",e:"disappointment, cynicism"},
+{w:"foresee",e:"(foresaw, foreseen) predict, expect"},
+{w:"gloomy",e:"miserable, depressing Page 14"},
+{w:"peer",e:"here: person with the same rank, social standing, abilities etc."},
+{w:"perception",e:"the way we understand or think about something"},
+{w:"unify",e:"combine, join"},
+{w:"indistinguishable",e:"identical, impossible to tell apart"},
+{w:"crockery",e:"cups, plates, bowls etc. often made of china"},
+{w:"entropy",e:"a lack of order in a system"},
+{w:"intact",e:"complete, not broken"},
+{w:"readily",e:"freely, easily"},
+{w:"expand",e:"increase, become larger"},
+{w:"evolve",e:"gradually change and develop"},
+{w:"make a killing",e:"informal: make a lot of money very quickly"},
+{w:"imply",e:"(strongly) suggest"},
+{w:"decay",e:"decompose, crumble Page 15"},
+{w:"recurring",e:"happening again and again"},
+{w:"apparition",e:"formal: vision"},
+{w:"seep",e:"leak, gradually spread"},
+{w:"disconsolate",e:"hopelessly unhappy"},
+{w:"utility pole",e:"tall wooden pole used to support telephone and electrical wires"},
+{w:"garish",e:"bright and colourful in an ugly way; gaudy"},
+{w:"contingency",e:"emergency, something (bad) that might happen in the future"},
+{w:"graph",e:"chart, diagram"},
+{w:"tentative",e:"hesitant, not confident"},
+{w:"weighted",e:"biased"},
+{w:"offspring",e:"child, baby; here: product, result"},
+{w:"eddy",e:"fast circular movement; whirl, vortex"},
+{w:"intercept",e:"cross, interrupt"},
+{w:"indulgent",e:"kind, tolerant"},
+{w:"eccentricity",e:"unconventional behaviour, oddness"},
+{w:"eminently",e:"formal: highly, extremely"},
+{w:"impending",e:"imminent, happening very soon"},
+{w:"bulk",e:"large mass/shape; majority"},
+{w:"sloping",e:"slanted, inclined"},
+{w:"steel oneself",e:"mentally prepare oneself to do something difficult"},
+{w:"haze",e:"mist, fog"},
+{w:"discernible",e:"able to be seen, visible"},
+{w:"bifurcate",e:"formal: divide into two separate parts; fork"},
+{w:"jab",e:"prod, poke"},
+{w:"incongruous",e:"formal: odd, not in harmony with surroundings"},
+{w:"subsequent",e:"formal: following, later"},
+{w:"astounded",e:"astonished, very surprised"},
+{w:"stagger",e:"stumble, walk unsteadily"},
+{w:"demarcation",e:"formal: limit, boundary"},
+{w:"foreboding",e:"ominous feeling, sense that something bad is going to happen"},
+{w:"munch",e:"chew noisily"},
+];
+
+const s01NotesKey = 'exlearn_s01_notes';
+let s01Mode = 'cards';
+let s01Order = [];
+let s01Idx = 0;
+let s01QuizOrder = [];
+let s01QIdx = 0;
+let s01QScore = 0;
+let s01QAnswered = false;
+let s01QMistakes = [];
+let s01QuizType = 'choice';
+const s01letters = ['A','B','C','D','E','F'];
+
+function s01GetNotes(){ try{ return JSON.parse(localStorage.getItem(s01NotesKey))||{}; }catch(e){ return {}; } }
+function s01SaveNotes(n){ try{ localStorage.setItem(s01NotesKey, JSON.stringify(n)); }catch(e){} }
+function s01esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function s01shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function s01norm(s){ return String(s).toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim(); }
+
+function initS01(){
+  if(s01Mode==='cards') renderS01Cards();
+  else if(s01Mode==='quiz') renderS01Quiz();
+  else renderS01Notes();
+}
+
+function renderS01Cards(){
+  const area = document.getElementById('s01Area');
+  if(!s01Order.length){ s01Order = s01Data.map((_,i)=>i); s01Idx = 0; }
+  const item = s01Data[s01Order[s01Idx]];
+  const note = s01GetNotes()[item.w]||'';
+  area.innerHTML =
+    '<div class="flash-progress"><span>'+(s01Idx+1)+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+Math.round((s01Idx+1)/s01Order.length*100)+'%"></div></div><span>'+s01Order.length+'</span></div>'+
+    '<div class="flash-card" id="s01Card"><div class="flash-card-inner">'+
+      '<div class="flash-front"><div class="phrase">'+s01esc(item.w)+'</div><div class="category">S01 Vocabulary</div></div>'+
+      '<div class="flash-back"><div class="meaning">'+s01esc(item.e)+'</div>'+(note?'<div class="synonyms">📝 '+s01esc(note)+'</div>':'')+'</div>'+
+    '</div></div>'+
+    '<div class="flash-hint">Tap card to flip</div>'+
+    '<div class="flash-nav"><button id="s01Prev">← Prev</button><button id="s01Shuffle" class="shuffle-btn">Shuffle</button><button id="s01Next">Next →</button></div>';
+  document.getElementById('s01Card').addEventListener('click',()=>document.getElementById('s01Card').classList.toggle('flipped'));
+  document.getElementById('s01Prev').addEventListener('click',()=>{ if(s01Idx>0){ s01Idx--; renderS01Cards(); } });
+  document.getElementById('s01Next').addEventListener('click',()=>{ if(s01Idx<s01Order.length-1){ s01Idx++; renderS01Cards(); } });
+  document.getElementById('s01Shuffle').addEventListener('click',()=>{ s01Order = s01shuffle(s01Data.map((_,i)=>i)); s01Idx = 0; renderS01Cards(); });
+}
+
+function renderS01Quiz(){
+  const area = document.getElementById('s01Area');
+  area.innerHTML =
+    '<div class="quiz-controls">'+
+      '<label>Questions:</label><select id="s01Count">'+
+      '<option value="5">5</option><option value="10" selected>10</option>'+
+      '<option value="15">15</option><option value="20">20</option><option value="0">All</option></select>'+
+      '<button class="quiz-rus-btn" id="s01TypeBtn">✍ Type Mode</button>'+
+    '</div><div id="s01QuizBody"></div>';
+  document.getElementById('s01Count').addEventListener('change',s01StartQuiz);
+  document.getElementById('s01TypeBtn').addEventListener('click',()=>{
+    s01QuizType = s01QuizType==='choice'?'type':'choice';
+    document.getElementById('s01TypeBtn').textContent = s01QuizType==='choice'?'✍ Type Mode':'☑ Choice Mode';
+    s01StartQuiz();
+  });
+  s01StartQuiz();
+}
+
+function s01StartQuiz(){
+  const sel = document.getElementById('s01Count');
+  const count = sel ? parseInt(sel.value)||s01Data.length : 10;
+  s01QuizOrder = s01shuffle(s01Data.map((_,i)=>i)).slice(0,Math.min(count,s01Data.length));
+  s01QIdx = 0; s01QScore = 0; s01QAnswered = false; s01QMistakes = [];
+  s01RenderQ();
+}
+
+function s01Distractors(wi){
+  const ex = s01Data[wi].e;
+  const pool = s01shuffle(s01Data.map((_,i)=>i).filter(i=>s01Data[i].e!==ex));
+  const out = [];
+  for(const i of pool){
+    if(out.length>=3) break;
+    if(!out.includes(s01Data[i].e)) out.push(s01Data[i].e);
+  }
+  return out;
+}
+
+function s01RenderQ(){
+  const body = document.getElementById('s01QuizBody');
+  if(!body || s01QIdx>=s01QuizOrder.length){ s01RenderQResult(); return; }
+  const wi = s01QuizOrder[s01QIdx];
+  const item = s01Data[wi];
+  const pct = Math.round(s01QIdx/s01QuizOrder.length*100);
+  const head = '<div class="quiz-progress"><span>'+(s01QIdx+1)+'</span><div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%"></div></div><span>'+s01QuizOrder.length+'</span></div>';
+  if(s01QuizType==='choice'){
+    const opts = s01shuffle([item.e].concat(s01Distractors(wi)));
+    body.innerHTML = head+
+      '<div class="quiz-question"><div class="q-label">Choose the correct explanation:</div><div class="q-phrase">'+s01esc(item.w)+'</div><div class="q-category">S01 Vocabulary</div></div>'+
+      '<div class="quiz-options">'+opts.map((o,i)=>'<button class="quiz-opt" data-val="'+s01esc(o)+'"><span class="opt-letter">'+s01letters[i]+'</span>'+s01esc(o)+'</button>').join('')+'</div>';
+    body.querySelectorAll('.quiz-opt').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        if(s01QAnswered) return;
+        s01QAnswered = true;
+        body.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+        if(btn.dataset.val===item.e){
+          s01QScore++;
+          btn.classList.add('correct');
+        }else{
+          s01QMistakes.push({w:item.w,e:item.e});
+          btn.classList.add('wrong');
+          body.querySelectorAll('.quiz-opt').forEach(b=>{ if(b.dataset.val===item.e) b.classList.add('reveal'); });
+        }
+        s01NextQBtn();
+      });
+    });
+  }else{
+    body.innerHTML = head+
+      '<div class="quiz-question"><div class="q-label">Type the explanation:</div><div class="q-phrase">'+s01esc(item.w)+'</div><div class="q-category">S01 Vocabulary</div></div>'+
+      '<input type="text" class="typing-input" id="s01TypeInput" placeholder="Type the explanation..." autocomplete="off">'+
+      '<button class="typing-check-btn" id="s01TypeCheck">Check ✓</button>'+
+      '<div class="typing-feedback" id="s01TypeFb"></div>';
+    const check = ()=>{
+      if(s01QAnswered) return;
+      s01QAnswered = true;
+      const g = document.getElementById('s01TypeInput').value;
+      const fb = document.getElementById('s01TypeFb');
+      if(s01norm(g)===s01norm(item.e)){
+        s01QScore++;
+        fb.className = 'typing-feedback correct';
+        fb.innerHTML = '✅ Correct!';
+      }else{
+        s01QMistakes.push({w:item.w,e:item.e});
+        fb.className = 'typing-feedback wrong';
+        fb.innerHTML = '❌ Wrong. <div class="expected">Answer: <strong>'+s01esc(item.e)+'</strong></div>';
+      }
+      document.getElementById('s01TypeCheck').disabled = true;
+      s01NextQBtn();
+    };
+    document.getElementById('s01TypeCheck').addEventListener('click',check);
+    document.getElementById('s01TypeInput').addEventListener('keydown',e=>{ if(e.key==='Enter') check(); });
+  }
+}
+
+function s01NextQBtn(){
+  const body = document.getElementById('s01QuizBody');
+  if(document.getElementById('s01NextQ')) return;
+  const n = document.createElement('button');
+  n.className = 'typing-check-btn';
+  n.id = 's01NextQ';
+  n.textContent = 'Next →';
+  n.addEventListener('click',()=>{ s01QIdx++; s01QAnswered = false; s01RenderQ(); });
+  body.appendChild(n);
+}
+
+function s01RenderQResult(){
+  const body = document.getElementById('s01QuizBody');
+  if(!body) return;
+  const total = s01QuizOrder.length || 1;
+  const pct = Math.round(s01QScore/total*100);
+  let html = '<div class="quiz-result"><h2>'+(pct>=90?'Amazing!':pct>=70?'Great job!':pct>=50?'Good effort!':'Keep practicing!')+'</h2>'+
+    '<div class="score">'+s01QScore+' / '+s01QuizOrder.length+'</div>'+
+    '<p>'+pct+'% correct</p>';
+  if(s01QMistakes.length){
+    html += '<div class="quiz-review"><div class="review-title">Review your mistakes:</div>'+
+      s01QMistakes.map(m=>'<div class="review-card"><div class="r-phrase">'+s01esc(m.w)+'</div><div class="r-meaning">'+s01esc(m.e)+'</div></div>').join('')+
+      '</div>';
+  }
+  html += '<button id="s01Retry">Try Again</button></div>';
+  body.innerHTML = html;
+  document.getElementById('s01Retry').addEventListener('click',s01StartQuiz);
+}
+
+function renderS01Notes(){
+  const area = document.getElementById('s01Area');
+  const notes = s01GetNotes();
+  const filled = s01Data.filter(it=>notes[it.w]&&notes[it.w].trim()).length;
+  area.innerHTML =
+    '<div class="study-due">'+
+      '<span>✍️ <strong>'+filled+'</strong> / '+s01Data.length+' explained</span>'+
+      '<span>💾 Saved on this device</span>'+
+    '</div>'+
+    '<input type="text" class="search-box" id="s01NoteSearch" placeholder="Search words..." autocomplete="off">'+
+    '<div class="s01-notes" id="s01NotesList"></div>';
+  const list = document.getElementById('s01NotesList');
+  const draw = ()=>{
+    const q = document.getElementById('s01NoteSearch').value.toLowerCase();
+    list.innerHTML = s01Data.filter(it=>!q||it.w.toLowerCase().includes(q)).map(it=>{
+      const v = notes[it.w]||'';
+      return '<div class="s01-note-row"><div class="s01-note-word">'+s01esc(it.w)+'</div><input type="text" class="s01-note-input" data-w="'+s01esc(it.w)+'" value="'+s01esc(v)+'" placeholder="Your explanation..." autocomplete="off"></div>';
+    }).join('');
+    list.querySelectorAll('.s01-note-input').forEach(inp=>{
+      inp.addEventListener('input',()=>{
+        const n = s01GetNotes();
+        n[inp.dataset.w] = inp.value;
+        s01SaveNotes(n);
+      });
+    });
+  };
+  draw();
+  document.getElementById('s01NoteSearch').addEventListener('input',draw);
+}
+
+document.querySelectorAll('[data-s01mode]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-s01mode]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    s01Mode = b.dataset.s01mode;
+    initS01();
+  });
+});
+
+</script></body>
 </html>
