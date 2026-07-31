@@ -1,4 +1,4 @@
-const CACHE = 'exlearn-v9';
+const CACHE = 'exlearn-v10';
 
 const PRECACHE = [
   'index.html',
@@ -11,7 +11,9 @@ const PRECACHE = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(cache =>
+      Promise.allSettled(PRECACHE.map(url => cache.add(url)))
+    ).then(() => self.skipWaiting())
   );
 });
 
@@ -26,7 +28,11 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
     event.respondWith(
-      caches.match('index.html').then(cached => cached || fetch(event.request).catch(() => new Response('Offline', {status: 503})))
+      fetch(event.request).then(response => {
+        const copy = response.clone();
+        caches.open(CACHE).then(cache => cache.put('index.html', copy));
+        return response;
+      }).catch(() => caches.match('index.html').then(cached => cached || new Response('Offline', {status: 503})))
     );
     return;
   }
